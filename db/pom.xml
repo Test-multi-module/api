@@ -9,31 +9,35 @@
         <artifactId>server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.server</groupId>
+
+    <groupId>com.db</groupId>
     <artifactId>db</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>db</name>
     <description>db</description>
 
     <modules>
-        <module>db-schema</module>
-        <module>db-ds</module>
-        <module>db-model</module>
+        <module>schema</module>
+        <module>ds</module>
+        <module>model</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>42.7.2</version>
-                <scope>runtime</scope>
+                <groupId>com.db</groupId>
+                <artifactId>ds</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.30</version>
-                <scope>provided</scope>
+                <groupId>com.db</groupId>
+                <artifactId>model</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.db</groupId>
+                <artifactId>schema</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.jooq</groupId>
@@ -47,33 +51,6 @@
                 <version>3.16.10</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>5.3.31</version>
-                <scope>provided</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>enforce-maven-version</id>
-                        <goals><goal>enforce</goal></goals>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion><version>[3.8.7,)</version></requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>

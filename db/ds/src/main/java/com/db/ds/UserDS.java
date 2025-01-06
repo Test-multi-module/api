@@ -1,0 +1,35 @@
+package com.db.ds;
+
+import com.db.model.User;
+import com.db.ds.UserDS;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import org.jooq.DSLContext;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import static com.db.schema.generated.Tables.REVIEW;
+
+@Service
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class UserDS {
+    protected final DSLContext jooq;
+
+    public List<User> list() {
+        return null;
+    }
+
+    public User findById(int prdId){
+        return null;
+    }
+    public void addReview(User review){}
+
+    public User findByUsername(String username) {//todo
+        return null;
+    }
+
+    public List<User> getReviewsForProduct(int prdId){
+        return jooq.select().from(REVIEW).where(REVIEW.PRODUCT_ID.eq(prdId)).fetchInto(User.class);
+    }
+}

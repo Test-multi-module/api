@@ -1,8 +1,8 @@
-spring: #TODO set it according to your data. it is only template now!
+spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/auth-db
-    username: auth-admin
-    password: auth-admin
+    url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres?sslmode=require
+    username: adm
+    password: 24o62o!!
     driver-class-name: org.postgresql.Driver
   server:
     port: 8080

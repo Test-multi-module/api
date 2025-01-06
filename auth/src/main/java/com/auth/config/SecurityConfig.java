@@ -1,6 +1,8 @@
 package com.auth.config;
 
 
+import com.auth.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,11 +10,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -21,6 +20,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
+    private final CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
     @Bean//настройка http безопасности для auth-сервера
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -43,18 +48,20 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
-
-    @Bean public UserDetailsService userDetailsService() {
-        var user = User.withUsername("user").password(passwordEncoder().encode("password"))
-                .roles("USER").build();
-        return new InMemoryUserDetailsManager(user);
+    @Bean public PasswordEncoder passwordEncoder() {
+        //BCryptPasswordEncoder будет использоваться для:
+        // Шифрования паролей: когда пользователь регистрируется или меняет свой пароль, пароль будет зашифрован с
+        // использованием алгоритма bcrypt, чтобы он не сохранялся в базе данных в открытом виде.
+        // Проверки паролей: при попытке входа в систему, введённый пользователем пароль будет зашифрован и проверен
+        // против уже зашифрованного пароля в базе данных.
+        return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(this.customUserDetailsService).passwordEncoder(passwordEncoder());
         return authenticationManagerBuilder.build();
     }
 }
