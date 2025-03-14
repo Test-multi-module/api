@@ -5,9 +5,8 @@ import io.beanmapper.config.BeanMapperBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
 @Configuration
-@ComponentScan(basePackages = {"com.api", "com.db"})
+@ComponentScan(basePackages = {"com.api", "com.db", "com.db.schema"})
 public class ApiBeanConfig {
     @Bean
     public BeanMapper beanMapper(){

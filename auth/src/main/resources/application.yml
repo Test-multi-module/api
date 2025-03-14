@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres?sslmode=require
+    url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres
     username: adm
     password: 24o62o!!
     driver-class-name: org.postgresql.Driver

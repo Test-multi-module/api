@@ -10,7 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.db</groupId>
+    <groupId>com</groupId>
     <artifactId>db</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>db</name>
@@ -42,15 +42,22 @@
             <dependency>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-meta</artifactId>
-                <version>3.16.10</version>
+                <version>3.19.18</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen</artifactId>
-                <version>3.16.10</version>
+                <version>3.19.18</version>
                 <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jooq</artifactId>
+        </dependency>
+    </dependencies>
 </project>

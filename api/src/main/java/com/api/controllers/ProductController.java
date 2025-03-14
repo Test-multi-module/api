@@ -15,10 +15,9 @@ public class ProductController {
     private final ProductService productService;
     public ProductController(ProductService productService) {this.productService = productService;}
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")//todo explore how it works
     @GetMapping("/{id}")
     public ProductDTO getSomeProductById(@PathVariable("id") Integer id) {
-
         return productService.findById(id);
     }
 

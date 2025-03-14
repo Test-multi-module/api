@@ -19,7 +19,9 @@ public class ProductServiceDS {
     protected final DSLContext jooq;
 
     public List<Product> list() {
-        return jooq.select().from(PRODUCT).fetchInto(Product.class);
+        List<Product> products = jooq.select().from(PRODUCT).fetchInto(Product.class);
+        products.get(0).setTitle("i am from ds service");
+        return products;
     }
 
     public Product findById(int prdId){

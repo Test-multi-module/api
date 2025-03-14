@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.1</version>
+        <version>3.3.3</version>
         <relativePath/>
     </parent>
     <groupId>com</groupId>
@@ -16,7 +16,7 @@
     <name>server</name>
     <description>server</description>
 
-    <properties><java.version>19</java.version></properties>
+    <properties><java.version>21</java.version></properties>
 
     <modules>
         <module>db</module>
@@ -40,19 +40,13 @@
             <dependency>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq</artifactId>
-                <version>3.16.10</version>
+                <version>3.19.18</version>
             </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>42.7.3</version>
                 <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>5.3.31</version>
-                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

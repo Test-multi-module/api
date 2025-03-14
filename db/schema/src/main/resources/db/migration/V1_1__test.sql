@@ -16,9 +16,3 @@ create table if not exists review(
     user_name varchar(255),
     CONSTRAINT FK_DEVICE_ATTESTATIONS_DEVICES FOREIGN KEY (product_id) REFERENCES product
 );
-
-create table if not exists users(
-    id serial primary key,
-    username varchar(255),
-    password varchar(255)
-)

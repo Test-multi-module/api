@@ -3,18 +3,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.db</groupId>
+        <groupId>com</groupId>
         <artifactId>db</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.db</groupId>
     <artifactId>ds</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.db</groupId>
             <artifactId>schema</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -23,7 +23,6 @@
         <dependency>
             <groupId>com.db</groupId>
             <artifactId>model</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -36,10 +35,6 @@
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq-codegen</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
         </dependency>
     </dependencies>
 </project>

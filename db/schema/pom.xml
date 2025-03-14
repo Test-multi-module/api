@@ -3,14 +3,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.db</groupId>
+        <groupId>com</groupId>
         <artifactId>db</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.db</groupId>
     <artifactId>schema</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>10.14.0</version>
+        </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
@@ -58,7 +65,7 @@
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
-                <version>3.17.7</version>
+                <version>3.19.13</version>
                 <executions>
                     <execution>
                         <id>generate</id>
@@ -66,7 +73,7 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres?sslmode=require</url>
+                                <url>jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres</url>
                                 <user>adm</user>
                                 <password>24o62o!!</password>
                             </jdbc>
@@ -75,10 +82,23 @@
                                 <database>
                                     <name>org.jooq.meta.postgres.PostgresDatabase</name>
                                     <inputSchema>public</inputSchema>
+                                    <inputCatalog/>
                                 </database>
                                 <generate>
                                     <daos>false</daos>
                                     <pojos>false</pojos>
+                                    <indexes>true</indexes>
+                                    <keys>true</keys>
+                                    <links>false</links>
+                                    <records>false</records>
+                                    <routines>false</routines>
+                                    <sequences>false</sequences>
+                                    <tables>true</tables>
+                                    <udts>false</udts>
+                                    <sources>false</sources>
+                                    <sourcesOnViews>false</sourcesOnViews>
+                                    <queues>false</queues>
+                                    <sequenceFlags>false</sequenceFlags>
                                 </generate>
                                 <target>
                                     <packageName>com.db.schema.generated</packageName>

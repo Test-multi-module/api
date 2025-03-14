@@ -1,11 +1,16 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres
+    username: adm
+    password: 24o62o!!
+    driver-class-name: org.postgresql.Driver
   security:
     oauth2:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8180/realms/server-realm
-  datasource:
-    url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres?sslmode=require
-    username: adm
-    password: 24o62o!!
-    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    org.springframework.jdbc.core: DEBUG
+    org.hibernate: DEBUG
