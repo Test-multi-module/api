@@ -1,7 +1,6 @@
-package com.db.ds;
+package com.testproj.db.ds;
 
-import com.db.model.User;
-import com.db.ds.UserDS;
+import com.testproj.db.model.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.db.schema.generated.Tables.REVIEW;
+import static com.testproj.db.schema.generated.Tables.REVIEW;
 
 @Service
 @AllArgsConstructor(access = AccessLevel.PUBLIC)

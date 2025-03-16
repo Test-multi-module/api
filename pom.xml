@@ -10,13 +10,12 @@
         <version>3.3.3</version>
         <relativePath/>
     </parent>
-    <groupId>com</groupId>
+
+    <groupId>com.testproj</groupId>
     <artifactId>server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>server</name>
-    <description>server</description>
 
-    <properties><java.version>21</java.version></properties>
+    <properties><java.version>21</java.version></properties><!--taken by plugin set in spring-boot-starter-parent-->
 
     <modules>
         <module>db</module>

@@ -1,4 +1,4 @@
-package com.db.model;
+package com.testproj.db.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = {"com.auth", "com.db"})
+@ComponentScan(basePackages = {"com.auth", "com.testproj.db"})
 public class AuthBeanConfig {
     @Bean
     public BeanMapper beanMapper(){

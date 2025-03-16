@@ -1,6 +1,6 @@
-package com.db.ds;
+package com.testproj.db.ds;
 
-import com.db.model.Product;
+import com.testproj.db.model.Product;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import org.jooq.Condition;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.db.schema.generated.Tables.PRODUCT;
+import static com.testproj.db.schema.generated.Tables.PRODUCT;
 
 @Service
 @AllArgsConstructor(access = AccessLevel.PUBLIC)

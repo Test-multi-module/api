@@ -2,9 +2,9 @@ package com.api.services;
 
 import com.api.dtos.filters.ProductFilter;
 import com.api.dtos.models.ProductDTO;
-import com.db.model.Product;
+import com.testproj.db.model.Product;
 
-import com.db.ds.ProductServiceDS;
+import com.testproj.db.ds.ProductServiceDS;
 import io.beanmapper.BeanMapper;
 import lombok.AllArgsConstructor;
 import org.jooq.Condition;

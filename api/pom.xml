@@ -4,17 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com</groupId>
+        <groupId>com.testproj</groupId>
         <artifactId>server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <artifactId>api</artifactId>
-    <name>api</name>
-    <description>api</description>
+    <groupId>com.testproj.api</groupId>
 
     <dependencies>
         <dependency>
-            <groupId>com.db</groupId>
+            <groupId>com.testproj.db.ds</groupId>
             <artifactId>ds</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
