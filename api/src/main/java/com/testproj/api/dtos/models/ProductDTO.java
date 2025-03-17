@@ -1,4 +1,4 @@
-package com.api.dtos.models;
+package com.testproj.api.dtos.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

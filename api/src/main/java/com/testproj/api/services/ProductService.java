@@ -1,7 +1,7 @@
-package com.api.services;
+package com.testproj.api.services;
 
-import com.api.dtos.filters.ProductFilter;
-import com.api.dtos.models.ProductDTO;
+import com.testproj.api.dtos.filters.ProductFilter;
+import com.testproj.api.dtos.models.ProductDTO;
 import com.testproj.db.model.Product;
 
 import com.testproj.db.ds.ProductServiceDS;

@@ -1,7 +1,7 @@
-package com.api.controllers;
+package com.testproj.api.controllers;
 
-import com.api.dtos.models.ReviewDTO;
-import com.api.services.ReviewService;
+import com.testproj.api.dtos.models.ReviewDTO;
+import com.testproj.api.services.ReviewService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

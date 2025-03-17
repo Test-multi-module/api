@@ -1,6 +1,6 @@
-package com.api.services;
+package com.testproj.api.services;
 
-import com.api.dtos.models.ReviewDTO;
+import com.testproj.api.dtos.models.ReviewDTO;
 import com.testproj.db.ds.ReviewServiceDS;
 import com.testproj.db.model.Review;
 import io.beanmapper.BeanMapper;

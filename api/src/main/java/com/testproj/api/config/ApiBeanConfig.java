@@ -1,4 +1,4 @@
-package com.api.config;
+package com.testproj.api.config;
 
 import io.beanmapper.BeanMapper;
 import io.beanmapper.config.BeanMapperBuilder;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 @Configuration
-@ComponentScan(basePackages = {"com.api", "com.testproj.db", "com.testproj.db.schema"})
+@ComponentScan(basePackages = {"com.testproj.db"})
 public class ApiBeanConfig {
     @Bean
     public BeanMapper beanMapper(){

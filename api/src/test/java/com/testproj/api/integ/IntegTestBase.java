@@ -1,4 +1,4 @@
-package com.api.integ;
+package com.testproj.api.integ;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
