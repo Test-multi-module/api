@@ -1,4 +1,4 @@
-package com.auth.service;
+package com.testproj.auth.service;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import lombok.Getter;

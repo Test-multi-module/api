@@ -1,5 +1,4 @@
-package com.auth.dtos;
-
+package com.testproj.auth.dtos;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,12 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
-public class LoginRequest {
+public class User {
+
+    private Long id;
+
     private String username;
     private String password;
+
+    private List<Role> roles;
 }

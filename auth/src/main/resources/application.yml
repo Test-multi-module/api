@@ -1,16 +1,4 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres
-    username: adm
-    password: 24o62o!!
-    driver-class-name: org.postgresql.Driver
-  server:
-    port: 8080
   sql:
     init:
       mode: always
-
-
-security:
-  jwt:
-    secret-key: "mysupersecretkeywithnormallengthstartingfrom32"

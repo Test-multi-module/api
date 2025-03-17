@@ -1,4 +1,4 @@
-package com.auth.dtos;
+package com.testproj.auth.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

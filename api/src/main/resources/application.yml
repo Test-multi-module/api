@@ -14,3 +14,7 @@ logging:
   level:
     org.springframework.jdbc.core: DEBUG
     org.hibernate: DEBUG
+
+security:
+  jwt:
+    secret-key: "mysupersecretkeywithnormallengthstartingfrom32"
