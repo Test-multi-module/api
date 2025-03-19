@@ -49,15 +49,27 @@
                         <version>42.7.3</version>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <configFiles>
-                        <configFile>${basedir}/flyway.conf</configFile>
-                    </configFiles>
-                </configuration>
                 <executions>
                     <execution>
+                        <id>public-migration</id>
                         <goals><goal>migrate</goal></goals>
                         <phase>generate-resources</phase>
+                        <configuration>
+                            <configFiles>
+                                <configFile>${basedir}/flyway-public.conf</configFile>
+                            </configFiles>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>auth-migration</id>
+                        <goals><goal>migrate</goal></goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <configFiles>
+                                <configFile>${basedir}/flyway-auth.conf</configFile>
+                            </configFiles>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -67,12 +79,12 @@
                 <version>3.19.13</version>
                 <executions>
                     <execution>
-                        <id>generate</id>
+                        <id>generate-public</id>
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres</url>
+                                <url>jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres?currentSchema=public</url>
                                 <user>adm</user>
                                 <password>24o62o!!</password>
                             </jdbc>
@@ -81,26 +93,43 @@
                                 <database>
                                     <name>org.jooq.meta.postgres.PostgresDatabase</name>
                                     <inputSchema>public</inputSchema>
-                                    <inputCatalog/>
                                 </database>
                                 <generate>
-                                    <daos>false</daos>
-                                    <pojos>false</pojos>
-                                    <indexes>true</indexes>
-                                    <keys>true</keys>
-                                    <links>false</links>
-                                    <records>false</records>
-                                    <routines>false</routines>
-                                    <sequences>false</sequences>
                                     <tables>true</tables>
-                                    <udts>false</udts>
-                                    <sources>false</sources>
-                                    <sourcesOnViews>false</sourcesOnViews>
-                                    <queues>false</queues>
-                                    <sequenceFlags>false</sequenceFlags>
+                                    <pojos>false</pojos>
+                                    <daos>false</daos>
                                 </generate>
                                 <target>
                                     <packageName>com.testproj.db.schema.generated</packageName>
+                                    <directory>src/main/java</directory>
+                                </target>
+                            </generator>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>generate-auth</id>
+                        <goals><goal>generate</goal></goals>
+                        <configuration>
+                            <jdbc>
+                                <driver>org.postgresql.Driver</driver>
+                                <url>jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres?currentSchema=auth</url>
+                                <user>adm</user>
+                                <password>24o62o!!</password>
+                            </jdbc>
+                            <generator>
+                                <name>org.jooq.codegen.DefaultGenerator</name>
+                                <database>
+                                    <name>org.jooq.meta.postgres.PostgresDatabase</name>
+                                    <inputSchema>auth</inputSchema>
+                                </database>
+                                <generate>
+                                    <tables>true</tables>
+                                    <pojos>false</pojos>
+                                    <daos>false</daos>
+                                </generate>
+                                <target>
+                                    <packageName>com.testproj.auth.schema.generated</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>

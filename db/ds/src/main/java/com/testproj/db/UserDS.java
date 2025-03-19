@@ -1,9 +1,8 @@
-package com.testproj.db.ds;
+package com.testproj.db;
 
 import com.testproj.db.model.User;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +10,9 @@ import java.util.List;
 import static com.testproj.db.schema.generated.Tables.REVIEW;
 
 @Service
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserDS {
     protected final DSLContext jooq;
+    public UserDS(@Qualifier("publicDslContext") DSLContext dsl) {this.jooq = dsl;}
 
     public List<User> list() {
         return null;

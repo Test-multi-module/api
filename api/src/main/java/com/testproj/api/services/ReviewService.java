@@ -1,7 +1,7 @@
 package com.testproj.api.services;
 
 import com.testproj.api.dtos.models.ReviewDTO;
-import com.testproj.db.ds.ReviewServiceDS;
+import com.testproj.db.ReviewServiceDS;
 import com.testproj.db.model.Review;
 import io.beanmapper.BeanMapper;
 import lombok.AllArgsConstructor;

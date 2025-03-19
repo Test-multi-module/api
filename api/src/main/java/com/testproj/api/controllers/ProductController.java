@@ -1,8 +1,8 @@
 package com.testproj.api.controllers;
 
 import com.testproj.api.dtos.filters.ProductFilter;
-import com.testproj.api.dtos.models.ProductDTO;
 import com.testproj.api.services.ProductService;
+import com.testproj.api.dtos.models.ProductDTO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

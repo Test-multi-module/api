@@ -1,8 +1,7 @@
 package com.testproj.auth.service;
 
-import com.testproj.db.ds.UserDS;
+import com.testproj.db.UserDS;
 import com.testproj.db.model.User;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

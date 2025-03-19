@@ -1,14 +1,27 @@
 spring:
   datasource:
-    url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres
-    username: adm
-    password: 24o62o!!
-    driver-class-name: org.postgresql.Driver
-
-logging:
-  level:
-    org.springframework.jdbc.core: DEBUG
-    org.hibernate: DEBUG
+    auth:
+      url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres
+      username: adm
+      password: 24o62o!!
+      driver-class-name: org.postgresql.Driver
+      schema: auth
+      platform: postgres
+      flyway:
+        enabled: true
+        locations: classpath:db/migration/auth_migration
+        schemas: auth
+    public:
+      url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres
+      username: adm
+      password: 24o62o!!
+      driver-class-name: org.postgresql.Driver
+      schema: public
+      platform: postgres
+      flyway:
+        enabled: true
+        locations: classpath:db/migration/public_migration
+        schemas: public
 
 security:
   jwt:
