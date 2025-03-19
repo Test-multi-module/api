@@ -1,6 +1,6 @@
 package com.testproj.auth.service;
 
-import com.testproj.db.UserDS;
+import com.testproj.db.auth.AuthUserDS;
 import com.testproj.db.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
-    private final UserDS userDS; // todo подумать, что тут. скорее всего ds-шники из db-модуля
+    private final AuthUserDS authUserDS;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Логика загрузки пользователя из базы данных
         // Предполагается, что у тебя есть сущность User, которая представляет пользователя
-        User user = Optional.ofNullable(userDS.findByUsername(username))
+        User user = Optional.ofNullable(authUserDS.findByUsername(username))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         // Возвращаем пользователя, преобразуя его в объект UserDetails

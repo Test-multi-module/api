@@ -1,4 +1,4 @@
-package com.testproj.db;
+package com.testproj.db.pb;
 
 import com.testproj.db.model.Product;
 import org.jooq.Condition;

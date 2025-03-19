@@ -4,7 +4,7 @@ import com.testproj.api.dtos.filters.ProductFilter;
 import com.testproj.api.dtos.models.ProductDTO;
 import com.testproj.db.model.Product;
 
-import com.testproj.db.ProductServiceDS;
+import com.testproj.db.pb.ProductServiceDS;
 import io.beanmapper.BeanMapper;
 import lombok.AllArgsConstructor;
 import org.jooq.Condition;

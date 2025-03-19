@@ -1,4 +1,4 @@
-package com.testproj.db;
+package com.testproj.db.pb;
 
 import com.testproj.db.model.User;
 import org.jooq.DSLContext;

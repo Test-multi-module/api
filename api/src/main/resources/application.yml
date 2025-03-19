@@ -1,4 +1,6 @@
 spring:
+  flyway:
+    enabled: false
   datasource:
     auth:
       url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres
@@ -7,10 +9,6 @@ spring:
       driver-class-name: org.postgresql.Driver
       schema: auth
       platform: postgres
-      flyway:
-        enabled: true
-        locations: classpath:db/migration/auth_migration
-        schemas: auth
     public:
       url: jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres
       username: adm
@@ -18,10 +16,6 @@ spring:
       driver-class-name: org.postgresql.Driver
       schema: public
       platform: postgres
-      flyway:
-        enabled: true
-        locations: classpath:db/migration/public_migration
-        schemas: public
 
 security:
   jwt:
