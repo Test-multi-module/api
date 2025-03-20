@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RestControllerAdvice
-@RequestMapping("/api/private/products")
+@RequestMapping("/api/public/products")
 public class ProductController {
     private final ProductService productService;
     public ProductController(ProductService productService) {this.productService = productService;}

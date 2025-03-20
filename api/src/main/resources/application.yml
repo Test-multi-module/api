@@ -16,7 +16,3 @@ spring:
       driver-class-name: org.postgresql.Driver
       schema: public
       platform: postgres
-
-security:
-  jwt:
-    secret-key: "mysupersecretkeywithnormallengthstartingfrom32"

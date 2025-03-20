@@ -15,11 +15,8 @@ import java.util.List;
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
 public class User {
-
     private Long id;
-
     private String username;
     private String password;
-
-    private List<Role> roles;
+    private Role roles;
 }

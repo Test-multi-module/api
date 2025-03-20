@@ -1,4 +1,4 @@
-package com.testproj.auth.service;
+package com.testproj.auth.security.service;
 
 import com.testproj.db.auth.AuthUserDS;
 import com.testproj.db.model.User;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class CustomUserDetailsService implements UserDetailsService {
+public class AuthUserService implements UserDetailsService {
     private final AuthUserDS authUserDS;
 
     @Override
