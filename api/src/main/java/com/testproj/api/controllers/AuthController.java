@@ -1,5 +1,6 @@
 package com.testproj.api.controllers;
 
+import com.testproj.auth.dtos.LoginRequest;
 import com.testproj.auth.security.service.AuthUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -7,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.testproj.auth.dtos.JwtResponse;
 import com.testproj.auth.security.service.JwtService;
@@ -25,12 +25,12 @@ public class AuthController {
     private final AuthUserService authUserService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password));
-            String token = jwtService.generateToken(username);
-            return ResponseEntity.ok(new JwtResponse(token)); // Возвращаем JWT в ответе
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                    loginRequest.getPassword()));
+            String token = jwtService.generateToken(loginRequest.getUsername());
+            return ResponseEntity.ok(new JwtResponse(token));
 
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
