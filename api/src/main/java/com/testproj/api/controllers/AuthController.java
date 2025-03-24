@@ -1,7 +1,7 @@
 package com.testproj.api.controllers;
 
 import com.testproj.auth.dtos.LoginRequest;
-import com.testproj.auth.security.service.AuthUserService;
+import jakarta.annotation.security.PermitAll;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.testproj.auth.dtos.JwtResponse;
 import com.testproj.auth.security.service.JwtService;
 
+
 @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor
@@ -22,14 +23,14 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-    private final AuthUserService authUserService;
 
     @PostMapping("/login")
+    @PermitAll
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                     loginRequest.getPassword()));
-            String token = jwtService.generateToken(loginRequest.getUsername());
+             String token = jwtService.generateToken(loginRequest.getUsername());
             return ResponseEntity.ok(new JwtResponse(token));
 
         } catch (BadCredentialsException e) {
