@@ -1,4 +1,4 @@
-package com.testproj.db.model;
+package com.testproj.db.pb.schema.model;
 
 import lombok.*;
 
@@ -8,17 +8,16 @@ import lombok.*;
 @Setter(AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class Review {
+public class Product {
+    private Integer rating;
 
     private Integer id;
 
-    private Integer productId;
+    private String title;
 
-    private String timestamp;
+    private Integer  price;
 
-    private String userName;
+    private String description;
 
-    private Integer rating;
-
-    private String comment;
+    private String categories;
 }

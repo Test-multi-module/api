@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.UUID;
 
 import io.jsonwebtoken.security.Keys;
 
@@ -23,9 +24,9 @@ public class JwtService {
     private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
-    public String generateToken(String username) {
+    public String generateToken(UUID usedId) {
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(usedId.toString())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(key, SignatureAlgorithm.HS256)

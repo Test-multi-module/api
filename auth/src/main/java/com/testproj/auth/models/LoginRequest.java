@@ -1,4 +1,4 @@
-package com.testproj.auth.dtos;
+package com.testproj.auth.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,11 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter@Setter
 public class LoginRequest {
-    private String username;
+    private UUID userId;
     private String password;
 }

@@ -53,7 +53,7 @@
                     <execution>
                         <id>public-migration</id>
                         <goals><goal>migrate</goal></goals>
-                        <phase>generate-resources</phase>
+                        <phase>process-resources</phase>
                         <configuration>
                             <configFiles>
                                 <configFile>${basedir}/flyway-public.conf</configFile>
@@ -100,7 +100,7 @@
                                     <daos>false</daos>
                                 </generate>
                                 <target>
-                                    <packageName>com.testproj.db.schema.generated</packageName>
+                                    <packageName>com.testproj.db.pb.schema</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>
@@ -129,7 +129,7 @@
                                     <daos>false</daos>
                                 </generate>
                                 <target>
-                                    <packageName>com.testproj.auth.schema.generated</packageName>
+                                    <packageName>com.testproj.db.auth.schema</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>

@@ -1,8 +1,8 @@
 package com.testproj.api.services;
 
 import com.testproj.api.dtos.models.ReviewDTO;
-import com.testproj.db.pb.ReviewServiceDS;
-import com.testproj.db.model.Review;
+import com.testproj.db.pb.schema.model.Review;
+import com.testproj.db.pb.ReviewDS;
 import io.beanmapper.BeanMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,20 +14,20 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewService {
     private final BeanMapper beanMapper;
-    private final ReviewServiceDS reviewServiceDS;//TODO final or Autowire
+    private final ReviewDS reviewDS;//TODO final or Autowire
     public List<ReviewDTO> list() {
-        return beanMapper.map(reviewServiceDS.list(), ReviewDTO.class);
+        return beanMapper.map(reviewDS.list(), ReviewDTO.class);
     }
 
     public ReviewDTO findById(Integer prdId){
-        return beanMapper.map(reviewServiceDS.findById(prdId), ReviewDTO.class);
+        return beanMapper.map(reviewDS.findById(prdId), ReviewDTO.class);
     }
 
     public void addReview(Review review){
-        reviewServiceDS.addReview(review);
+        reviewDS.addReview(review);
     }
 
     public List<ReviewDTO> getReviewsForProduct(Integer prdId) {
-        return beanMapper.map(reviewServiceDS.getReviewsForProduct(prdId), ReviewDTO.class);
+        return beanMapper.map(reviewDS.getReviewsForProduct(prdId), ReviewDTO.class);
     }
 }

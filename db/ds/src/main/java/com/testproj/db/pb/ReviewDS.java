@@ -1,20 +1,20 @@
 package com.testproj.db.pb;
 
 
-import com.testproj.db.model.Review;
+import com.testproj.db.pb.schema.model.Review;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.testproj.db.schema.generated.Tables.REVIEW;
+import static com.testproj.db.pb.schema.Tables.REVIEW;
 
 
 @Service
-public class ReviewServiceDS {
+public class ReviewDS {
     protected final DSLContext jooq;
-    public ReviewServiceDS(@Qualifier("publicDslContext") DSLContext dsl) {this.jooq = dsl;}
+    public ReviewDS(@Qualifier("publicDslContext") DSLContext dsl) {this.jooq = dsl;}
 
     public List<Review> list() {
         return null;
