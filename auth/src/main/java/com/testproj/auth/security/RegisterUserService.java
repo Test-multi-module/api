@@ -1,4 +1,4 @@
-package com.testproj.auth.security.service;
+package com.testproj.auth.security;
 
 import com.testproj.db.auth.schema.model.AuthUser;
 import com.testproj.db.auth.AuthUserDS;

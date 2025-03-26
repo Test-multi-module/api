@@ -1,4 +1,4 @@
-package com.testproj.auth.security.service;
+package com.testproj.auth.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

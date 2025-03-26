@@ -1,9 +1,9 @@
 package com.testproj.api.config;
 
 
-import com.testproj.auth.security.service.AuthUserService;
-import com.testproj.auth.security.service.JwtAuthenticationFilter;
-import com.testproj.auth.security.service.JwtService;
+import com.testproj.auth.security.AuthUserService;
+import com.testproj.auth.security.JwtAuthenticationFilter;
+import com.testproj.auth.security.JwtService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
