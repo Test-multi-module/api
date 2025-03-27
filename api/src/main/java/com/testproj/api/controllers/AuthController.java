@@ -5,9 +5,9 @@ import com.testproj.api.services.UserService;
 import com.testproj.auth.models.LoginRequest;
 import com.testproj.api.dtos.models.RegisterRequestDTO;
 import com.testproj.db.auth.schema.model.AuthUser;
-import com.testproj.auth.security.service.RegisterUserService;
+import com.testproj.auth.security.RegisterUserService;
 import com.testproj.auth.models.JwtResponse;
-import com.testproj.auth.security.service.JwtService;
+import com.testproj.auth.security.JwtService;
 import io.beanmapper.BeanMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,9 +35,9 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserId(),
-                    loginRequest.getPassword()));
-             String token = jwtService.generateToken(loginRequest.getUserId());
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginRequest.getUserid().toString(), loginRequest.getPassword()));
+             String token = jwtService.generateToken(loginRequest.getUserid());
             return ResponseEntity.ok(new JwtResponse(token));
 
         } catch (BadCredentialsException e) {
@@ -45,13 +45,23 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/confirm-email")
+    public  ResponseEntity<Void> confirmEmail(){//todo
+        return ResponseEntity.ok().build();
+    }
+
 
     @PostMapping("/register")
+    //Если ты планируешь возможность разнести базы, можно сразу смотреть в сторону distributed transactions
+    // (XA transactions) или event-driven подхода (outbox pattern, eventual consistency).
+    //тот же Transactional может не помочь, ибо планирую на разные базы
+    // (речь о том, что registerUserService.register и userService.create не синхронизированы, может отработать 1 метод,
+    // но не отработать второй , одна таблица пополнится, авторая нет
+    //todo проанализировать, на сколько это опаснo для меня и что с этим делать
     //todo maybe separate converter for extracting AuthUser,UserDTO OR @RequestBody SomeContainerWithUserAndAuthUserTypes request
-    public ResponseEntity<JwtResponse> register(@RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<Void> register(@RequestBody RegisterRequestDTO request) {//"tereshenko24102000@gmail.com"
         AuthUser authUser = registerUserService.register(beanMapper.map(request, AuthUser.class));
-        userService.create(beanMapper.map(request,UserDTO.class));
-        String token = jwtService.generateToken(authUser.getId());
-        return ResponseEntity.ok(new JwtResponse(token));
+       // userService.create(beanMapper.map(request,UserDTO.class));
+        return ResponseEntity.ok().build();
     }
 }

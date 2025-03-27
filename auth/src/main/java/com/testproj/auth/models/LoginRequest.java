@@ -13,6 +13,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter@Setter
 public class LoginRequest {
-    private UUID userId;
+    private UUID userid;
     private String password;
 }

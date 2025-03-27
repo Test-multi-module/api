@@ -20,9 +20,10 @@ public class AuthUser {
     private Date updated;
 
     private boolean disabled;
+    private boolean activated;
 
     private String login;
-    private String role;
+    private int role;
     private String nickName;
     private String password;
     private String email;

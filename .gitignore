@@ -3,3 +3,4 @@
 *.iml
 
 **/com/testproj/db/*/schema/
+.env
