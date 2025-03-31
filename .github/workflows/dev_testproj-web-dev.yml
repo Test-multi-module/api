@@ -6,12 +6,12 @@ name: Build and deploy JAR app to Azure Web App - testproj-web-dev
 on:
   push:
     branches:
-      - dev
-  workflow_dispatch:
+      - dev #Workflow запускается, когда в репозитории происходит push на ветку dev.
+  workflow_dispatch: #Это позволяет вручную запускать workflow через интерфейс GitHub Actions.
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #Указывает, что job будет выполняться на виртуальной машине с ОС Ubuntu.
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
-          java-version: 'java21'
+          java-version: '21'
           distribution: 'microsoft'
 
       - name: Build with Maven
