@@ -15,11 +15,7 @@ import java.util.Date;
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
 public class RegisterRequestDTO {//obj will be mapped to 2 objects - AuthUser and User//todo documentation via swagger
-    private int role;//todo via Enum
     private String login;
     private String password;
     private String email;
-
-    private String nickname;
-    private Date dayOfBirth;
 }

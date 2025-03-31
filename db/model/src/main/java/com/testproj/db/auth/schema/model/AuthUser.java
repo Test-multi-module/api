@@ -24,7 +24,6 @@ public class AuthUser {
 
     private String login;
     private int role;
-    private String nickName;
     private String password;
     private String email;
 }

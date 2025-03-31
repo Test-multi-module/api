@@ -21,7 +21,7 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setTo(to);
         helper.setSubject("Testproj | Email confirmation");
-        helper.setText("Hello from testproj.com! Please confirm your email by clicking the link", false);
+        helper.setText("Hello from testproj.com! Please confirm your email by clicking the link http://localhost:8081/auth", false);
         javaMailSender.send(mimeMessage);
     }
 }

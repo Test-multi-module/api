@@ -84,7 +84,7 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres?currentSchema=public</url>
+                                <url>jdbc:postgresql://testproj-flex-dev.postgres.database.azure.com:5432/postgres?currentSchema=public</url>
                                 <user>adm</user>
                                 <password>24o62o!!</password>
                             </jdbc>
@@ -113,7 +113,7 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://auction4.postgres.database.azure.com:5432/postgres?currentSchema=auth</url>
+                                <url>jdbc:postgresql://testproj-flex-dev.postgres.database.azure.com:5432/postgres?currentSchema=auth</url>
                                 <user>adm</user>
                                 <password>24o62o!!</password>
                             </jdbc>

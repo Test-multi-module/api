@@ -26,11 +26,11 @@ public class AuthUserService implements UserDetailsService {
         //UUID.fromString("550e8400-e29b-41d4-a716-446655440000")//from postman
         AuthUser authUser = new AuthUser(UUID.randomUUID(),
                 new Date(), new Date(), false,false, "mylogin",
-                0, "mynickname", encodedPassword, "test@gmail.com");
+                0, encodedPassword, "test@gmail.com");
 
         // Возвращаем пользователя, преобразуя его в объект UserDetails
         return new org.springframework.security.core.userdetails.User(
-                authUser.getNickName(), authUser.getPassword(), Collections.emptyList());
+                authUser.getLogin(), authUser.getPassword(), Collections.emptyList());
     }
 }
 

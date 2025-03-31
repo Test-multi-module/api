@@ -33,7 +33,7 @@ public class AuthUserDS {
         user.setId(UUID.randomUUID());
         user.setDisabled(false);//todo analize if it really should be set here. mb shoud be dropped
         user.setActivated(false);//todo analize if it really should be set here. mb shoud be dropped
-        user.setRole(0);//todo | enum??
+        user.setRole(0);//todo | enum??//0 by default now
 
         jooq.insertInto(AUTH_USERS).set(jooq.newRecord(AUTH_USERS, user)).execute();
         return user;
