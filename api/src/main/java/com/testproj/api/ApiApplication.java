@@ -16,7 +16,7 @@ public class ApiApplication {
         System.setProperty("MAIL_USERNAME", dotenv.get("MAIL_USERNAME"));
         System.setProperty("MAIL_PASSWORD", dotenv.get("MAIL_PASSWORD"));
         SpringApplication app = new SpringApplication(ApiApplication.class);
-        app.setDefaultProperties(Collections.singletonMap("server.port", "8080"));
+        app.setDefaultProperties(Collections.singletonMap("server.port", "80"));
        // String port = System.getenv("PORT");
        // if (port == null || port.isEmpty()) port = "8081";
        // app.setDefaultProperties(Collections.singletonMap("server.port", port));
