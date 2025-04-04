@@ -11,16 +11,14 @@ import java.util.Collections;
 @Slf4j
 public class ApiApplication {
     public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.configure().directory("api/src/main/resources")
-                .load();
-        System.setProperty("MAIL_USERNAME", dotenv.get("MAIL_USERNAME"));
-        System.setProperty("MAIL_PASSWORD", dotenv.get("MAIL_PASSWORD"));
+       // Dotenv dotenv = Dotenv.configure().directory("api/src/main/resources").load();
+        System.setProperty("MAIL_USERNAME", System.getenv("MAIL_USERNAME"));
+        System.setProperty("MAIL_PASSWORD", System.getenv("MAIL_PASSWORD"));
         SpringApplication app = new SpringApplication(ApiApplication.class);
-        app.setDefaultProperties(Collections.singletonMap("server.port", "8080"));
-       // String port = System.getenv("PORT");
-       // if (port == null || port.isEmpty()) port = "8081";
-       // app.setDefaultProperties(Collections.singletonMap("server.port", port));
-
+        //app.setDefaultProperties(Collections.singletonMap("server.port", "8080"));
+        String port = System.getenv("PORT");
+        if (port == null || port.isEmpty()) port = "8081";
+        app.setDefaultProperties(Collections.singletonMap("server.port", port));
         app.run(args);//comment
     }
 }
