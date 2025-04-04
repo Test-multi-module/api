@@ -1,6 +1,5 @@
 package com.testproj.api;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +10,6 @@ import java.util.Collections;
 @Slf4j
 public class ApiApplication {
     public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();// Игнорировать отсутствие файла
         System.setProperty("MAIL_USERNAME", System.getenv("MAIL_USERNAME"));
         System.setProperty("MAIL_PASSWORD", System.getenv("MAIL_PASSWORD"));
         SpringApplication app = new SpringApplication(ApiApplication.class);
