@@ -56,7 +56,7 @@
                         <phase>process-resources</phase>
                         <configuration>
                             <configFiles>
-                                <configFile>${basedir}/flyway-public.conf</configFile>
+                                <configFile>${basedir}/flyway-public.properties</configFile>
                             </configFiles>
                         </configuration>
                     </execution>
@@ -67,7 +67,7 @@
                         <phase>generate-resources</phase>
                         <configuration>
                             <configFiles>
-                                <configFile>${basedir}/flyway-auth.conf</configFile>
+                                <configFile>${basedir}/flyway-auth.properties</configFile>
                             </configFiles>
                         </configuration>
                     </execution>
