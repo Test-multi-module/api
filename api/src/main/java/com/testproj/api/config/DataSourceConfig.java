@@ -27,7 +27,6 @@ public class DataSourceConfig {
         Flyway flyway = Flyway.configure().dataSource(authDataSource)
                 .locations("classpath:db/migration/auth_migration")
                 .schemas("auth").load();
-        flyway.migrate();
         return flyway;
     }
 
@@ -36,7 +35,6 @@ public class DataSourceConfig {
         Flyway flyway =  Flyway.configure().dataSource(publicDataSource)
                 .locations("classpath:db/migration/public_migration")
                 .schemas("public").load();
-        flyway.migrate();
         return flyway;
     }
 
