@@ -37,7 +37,7 @@ public class AuthController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginRequest.getUserid().toString(), loginRequest.getPassword()));
-             String token = jwtService.generateToken(loginRequest.getUserid());
+             String token = jwtService.generateToken(loginRequest.getUserid().toString());
             return ResponseEntity.ok(new JwtResponse(token));
 
         } catch (BadCredentialsException e) {
@@ -45,7 +45,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/confirm-email")
+    @PostMapping("/confirm-email/{token}")
     public  ResponseEntity<Void> confirmEmail(){//todo
         return ResponseEntity.ok().build();
     }

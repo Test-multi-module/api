@@ -1,6 +1,7 @@
 package com.testproj.auth.service;
 
 
+import com.testproj.auth.security.JwtService;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,13 +16,18 @@ import jakarta.mail.internet.MimeMessage;
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
+    private final JwtService jwtService;
 
     public void sendConfirmationEmail(String to) throws MessagingException {
+        String token = jwtService.generateToken(to);
+        String confirmationLink =
+             "https://testproj-web-dev-b0g5gzgga3c2bjge.canadacentral-01.azurewebsites.net/auth/confirm-email/" + token;
+
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setTo(to);
         helper.setSubject("Testproj | Email confirmation");
-        helper.setText("Hello from testproj.com! Please confirm your email by clicking the link http://localhost:8081/auth", false);
+        helper.setText("Please confirm your email by clicking the link " + confirmationLink, false);
         javaMailSender.send(mimeMessage);
     }
 }
