@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
+import java.util.UUID;
+
 
 @Service
 @AllArgsConstructor
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
-    private final JwtService jwtService;
 
-    public void sendConfirmationEmail(String to) throws MessagingException {
-        String token = jwtService.generateToken(to);
+    public void sendConfirmationEmail(String to, UUID token) throws MessagingException {
         String confirmationLink =
              "https://testproj-web-dev-b0g5gzgga3c2bjge.canadacentral-01.azurewebsites.net/auth/confirm-email/" + token;
 
