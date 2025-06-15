@@ -11,16 +11,19 @@ import java.util.Date;
 import java.util.UUID;
 
 @Builder
-@Getter
-@Setter
+@Getter@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmailConfirmationToken {
 
     private UUID id;
+
     private Date created_at;
+
     private Date expires_at;
+
     private ConfirmationTokenStatus status;
+
     private UUID token;
 
     private UUID user_id;
