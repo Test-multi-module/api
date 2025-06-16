@@ -20,9 +20,5 @@
             <groupId>com.testproj.db.schema</groupId>
             <artifactId>schema</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.testproj.db.schema</groupId>
-            <artifactId>schema</artifactId>
-        </dependency>
     </dependencies>
 </project>
