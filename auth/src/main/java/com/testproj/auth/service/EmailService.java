@@ -1,7 +1,6 @@
 package com.testproj.auth.service;
 
 
-import com.testproj.auth.security.JwtService;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
