@@ -21,6 +21,8 @@ public class RegisterUserService {
 
     public AuthUser register(AuthUser authUser){
         try {
+            //todo : pay attention | ERROR: insert or update on table "email_confirmation_tokens" violates foreign key constraint "email_confirmation_tokens_user_id_fkey" ()
+            //todo: entirely logic could be planned and built
             authUser = authUserDS.create(authUser);
             EmailConfirmationToken emailConfirmationToken = emailConfirmationTokenDS.create(authUser.getId());
 
