@@ -25,6 +25,19 @@ spring:
       driver-class-name: org.postgresql.Driver
       schema: public
       platform: postgres
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 1013817045252-6eqovff35rlggkbagsj0a32o9hm0kor3.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid, email, profile
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
 logging:
   level:
     org.flywaydb: DEBUG

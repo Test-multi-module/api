@@ -1,6 +1,7 @@
 package com.testproj.api.config;
 
 
+import com.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import com.testproj.auth.security.AuthUserService;
 import com.testproj.auth.security.JwtAuthenticationFilter;
 import com.testproj.auth.security.JwtService;
@@ -29,6 +30,7 @@ public class SecurityConfig {
 
     private final AuthUserService authUserService;
     private final JwtService jwtService;
+    private final CustomOAuth2SuccessHandler successHandler;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -43,7 +45,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout(logout -> logout.logoutUrl("/logout").permitAll());
+                .logout(logout -> logout.logoutUrl("/logout").permitAll())
+                .oauth2Login(oauth2 -> oauth2.successHandler(successHandler));
 
         return http.build();
     }
