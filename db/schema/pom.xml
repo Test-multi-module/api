@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.testproj.db</groupId>
+        <groupId>net.testproj.db</groupId>
         <artifactId>db</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.testproj.db.schema</groupId>
+    <groupId>net.testproj.db.schema</groupId>
     <artifactId>schema</artifactId>
 
     <dependencies>
@@ -100,7 +100,7 @@
                                     <daos>false</daos>
                                 </generate>
                                 <target>
-                                    <packageName>com.testproj.db.pb.schema</packageName>
+                                    <packageName>net.testproj.db.pb.schema</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>
@@ -129,7 +129,7 @@
                                     <daos>false</daos>
                                 </generate>
                                 <target>
-                                    <packageName>com.testproj.db.auth.schema</packageName>
+                                    <packageName>net.testproj.db.auth.schema</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>

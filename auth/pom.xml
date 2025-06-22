@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.testproj</groupId>
+        <groupId>net.testproj</groupId>
         <artifactId>server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.testproj.auth</groupId>
+    <groupId>net.testproj.auth</groupId>
     <artifactId>auth</artifactId>
 
     <dependencies>
@@ -31,7 +31,7 @@
             <artifactId>jooq</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.testproj.db.ds</groupId>
+            <groupId>net.testproj.db.ds</groupId>
             <artifactId>ds</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.testproj</groupId>
+        <groupId>net.testproj</groupId>
         <artifactId>server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>api</artifactId>
-    <groupId>com.testproj.api</groupId>
+    <groupId>net.testproj.api</groupId>
 
     <dependencies>
         <dependency>
@@ -18,12 +18,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.testproj.db.ds</groupId>
+            <groupId>net.testproj.db.ds</groupId>
             <artifactId>ds</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.testproj.db.schema</groupId>
+            <groupId>net.testproj.db.schema</groupId>
             <artifactId>schema</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -57,7 +57,7 @@
             <artifactId>spring-security-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.testproj.auth</groupId>
+            <groupId>net.testproj.auth</groupId>
             <artifactId>auth</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

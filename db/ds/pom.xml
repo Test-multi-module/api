@@ -3,17 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.testproj.db</groupId>
+        <groupId>net.testproj.db</groupId>
         <artifactId>db</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.testproj.db.ds</groupId>
+    <groupId>net.testproj.db.ds</groupId>
     <artifactId>ds</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.testproj.db.schema</groupId>
+            <groupId>net.testproj.db.schema</groupId>
             <artifactId>schema</artifactId>
         </dependency>
         <dependency>
@@ -21,7 +21,7 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.testproj.db.model</groupId>
+            <groupId>net.testproj.db.model</groupId>
             <artifactId>model</artifactId>
         </dependency>
         <dependency>

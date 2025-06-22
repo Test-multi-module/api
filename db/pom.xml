@@ -5,13 +5,13 @@
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>com.testproj</groupId>
+        <groupId>net.testproj</groupId>
         <artifactId>server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>db</artifactId>
-    <groupId>com.testproj.db</groupId>
+    <groupId>net.testproj.db</groupId>
 
     <modules>
         <module>schema</module>
@@ -22,17 +22,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.testproj.db.ds</groupId>
+                <groupId>net.testproj.db.ds</groupId>
                 <artifactId>ds</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.testproj.db.model</groupId>
+                <groupId>net.testproj.db.model</groupId>
                 <artifactId>model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.testproj.db.schema</groupId>
+                <groupId>net.testproj.db.schema</groupId>
                 <artifactId>schema</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
