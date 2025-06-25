@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class EmailService {
+public class EmailService {//todo : drop the comment
 
     private final JavaMailSender javaMailSender;
 
