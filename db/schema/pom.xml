@@ -51,22 +51,22 @@
                 </dependencies>
                 <executions>
                     <execution>
-                        <id>public-migration</id>
-                        <goals><goal>migrate</goal></goals>
-                        <phase>process-resources</phase>
-                        <configuration>
-                            <configFiles>
-                                <configFile>${basedir}/flyway-public.properties</configFile>
-                            </configFiles>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>auth-migration</id>
                         <goals><goal>migrate</goal></goals>
                         <phase>generate-resources</phase>
                         <configuration>
                             <configFiles>
                                 <configFile>${basedir}/flyway-auth.properties</configFile>
+                            </configFiles>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>public-migration</id>
+                        <goals><goal>migrate</goal></goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <configFiles>
+                                <configFile>${basedir}/flyway-public.properties</configFile>
                             </configFiles>
                         </configuration>
                     </execution>
@@ -83,7 +83,7 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://testproj-flex-dev.postgres.database.azure.com:5432/postgres?currentSchema=public</url>
+                                <url>jdbc:postgresql://localhost:5432/postgres?currentSchema=public</url>
                                 <user>adm</user>
                                 <password>24o62o!!</password>
                             </jdbc>
@@ -112,7 +112,7 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://testproj-flex-dev.postgres.database.azure.com:5432/postgres?currentSchema=auth</url>
+                                <url>jdbc:postgresql://localhost:5432/postgres?currentSchema=auth</url>
                                 <user>adm</user>
                                 <password>24o62o!!</password>
                             </jdbc>

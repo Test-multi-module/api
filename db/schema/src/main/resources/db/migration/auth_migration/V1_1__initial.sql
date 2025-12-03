@@ -1,4 +1,6 @@
-CREATE TABLE auth_users (
+CREATE SCHEMA IF NOT EXISTS auth;
+
+CREATE TABLE auth.auth_users (
     id uuid NOT NULL PRIMARY KEY ,
 
     created timestamp NOT NULL,

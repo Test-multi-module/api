@@ -4,7 +4,7 @@ create table  users(
     day_of_birth timestamp,
     auth_user_id UUID UNIQUE NOT NULL,
     FOREIGN KEY (auth_user_id) REFERENCES auth.auth_users(id) ON DELETE CASCADE
-)
+);
 
 create table  products(
     id uuid NOT NULL PRIMARY KEY,
