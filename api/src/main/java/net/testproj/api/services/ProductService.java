@@ -27,7 +27,7 @@ public class ProductService {
     }
 
     public void addProduct(ProductDTO product){
-        productDS.addProduct(beanMapper.map(product, Product.class));
+       // productDS.addProduct(beanMapper.map(product, Product.class));
     }
 
     public List<ProductDTO> searchProduct(ProductFilter productFilter){
@@ -36,7 +36,9 @@ public class ProductService {
     }
 
     public ProductDTO update(ProductDTO productDTO, Integer id){
-        return beanMapper.map(productDS.update(beanMapper.map(productDTO, Product.class),id), ProductDTO.class);}
+        return null;//todo uncomment
+       // return beanMapper.map(productDS.update(beanMapper.map(productDTO, Product.class),id), ProductDTO.class);
+    }
 
     public void delete(Integer id){
         productDS.delete(id);}

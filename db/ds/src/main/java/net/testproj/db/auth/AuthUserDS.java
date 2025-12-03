@@ -1,5 +1,7 @@
 package net.testproj.db.auth;
 
+import net.testproj.db.auth.schema.model.AuthUser;
+import net.testproj.db.pb.schema.model.User;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -8,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import static net.testproj.db.auth.schema.Tables.AUTH_USERS;
 
 
 @Service
@@ -33,7 +34,7 @@ public class AuthUserDS {
         user.setActivated(false);//todo analize if it really should be set here. mb shoud be dropped
         user.setRole(0);//todo | enum??//0 by default now
 
-        jooq.insertInto(AUTH_USERS).set(jooq.newRecord(AUTH_USERS, user)).execute();
+       // jooq.insertInto(AUTH_USERS).set(jooq.newRecord(AUTH_USERS, user)).execute();//todo uncomment
         return user;
     }
 }

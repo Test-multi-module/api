@@ -1,5 +1,6 @@
 package net.testproj.db.pb;
 
+import net.testproj.db.pb.schema.model.Product;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.testproj.db.pb.schema.Tables.PRODUCT;
+//import static net.testproj.db.pb.schema.Tables.PRODUCT;//todo uncomment
 
 @Service
 public class ProductDS {
@@ -17,13 +18,15 @@ public class ProductDS {
     public ProductDS(@Qualifier("publicDslContext") DSLContext dsl) {this.jooq = dsl;}
 
     public List<Product> list() {
-        List<Product> products = jooq.select().from(PRODUCT).fetchInto(Product.class);
-        products.get(0).setTitle("i am from ds service");
-        return products;
+      //  List<Product> products = jooq.select().from(PRODUCT).fetchInto(Product.class);
+     //   products.get(0).setTitle("i am from ds service");
+     //   return products;
+        return null;//todo uncomment
     }
 
     public Product findById(int prdId){
-        return jooq.select().from(PRODUCT).where(PRODUCT.ID.eq(prdId)).fetchInto(Product.class).get(0);
+        return null;//todo: uncomment
+    //    return jooq.select().from(PRODUCT).where(PRODUCT.ID.eq(prdId)).fetchInto(Product.class).get(0);
     }
 
     public void addProduct(Product product){

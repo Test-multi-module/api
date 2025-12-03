@@ -8,8 +8,6 @@ import java.util.Collections;
 @SpringBootApplication(scanBasePackages = "net.testproj")
 public class ApiApplication {
     public static void main(String[] args) {
-        System.setProperty("MAIL_USERNAME", System.getenv("MAIL_USERNAME"));
-        System.setProperty("MAIL_PASSWORD", System.getenv("MAIL_PASSWORD"));
         SpringApplication app = new SpringApplication(ApiApplication.class);
         String port = System.getenv("PORT");
         if (port == null || port.isEmpty()) port = "8081";

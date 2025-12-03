@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApiBeanConfig {
-    @Bean//decided to set here as converter probably will be added soon
+    @Bean//decided to set here as converter probably will be needed and added soon
     public BeanMapper beanMapper(){
         return new BeanMapperBuilder().withoutDefaultConverters().build();
     }
