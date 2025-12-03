@@ -60,7 +60,6 @@
                             </configFiles>
                         </configuration>
                     </execution>
-
                     <execution>
                         <id>auth-migration</id>
                         <goals><goal>migrate</goal></goals>

@@ -1,7 +1,6 @@
 package net.testproj.db.pb;
 
 
-import net.testproj.db.pb.schema.model.Review;
 import net.testproj.db.pb.schema.Tables;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Qualifier;

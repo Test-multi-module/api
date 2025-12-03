@@ -1,6 +1,5 @@
 package net.testproj.db.pb;
 
-import net.testproj.db.pb.schema.model.Product;
 import net.testproj.db.pb.schema.Tables;
 import org.jooq.Condition;
 import org.jooq.DSLContext;

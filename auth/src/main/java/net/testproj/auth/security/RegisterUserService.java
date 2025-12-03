@@ -2,9 +2,7 @@ package net.testproj.auth.security;
 
 import net.testproj.auth.service.EmailService;
 import net.testproj.db.auth.EmailConfirmationTokenDS;
-import net.testproj.db.auth.schema.model.AuthUser;
 import net.testproj.db.auth.AuthUserDS;
-import net.testproj.db.auth.schema.model.EmailConfirmationToken;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

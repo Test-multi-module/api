@@ -2,7 +2,6 @@ package net.testproj.api.controllers;
 
 import net.testproj.auth.models.LoginRequest;
 import net.testproj.api.dtos.models.RegisterRequestDTO;
-import net.testproj.db.auth.schema.model.AuthUser;
 import net.testproj.auth.security.RegisterUserService;
 import net.testproj.auth.models.JwtResponse;
 import net.testproj.auth.security.JwtService;

@@ -1,7 +1,6 @@
 package net.testproj.db.auth;
 
 import net.testproj.db.auth.schema.enums.ConfirmationTokenStatus;
-import net.testproj.db.auth.schema.model.EmailConfirmationToken;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

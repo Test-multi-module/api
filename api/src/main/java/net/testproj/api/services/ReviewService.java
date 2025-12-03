@@ -1,7 +1,6 @@
 package net.testproj.api.services;
 
 import net.testproj.api.dtos.models.ReviewDTO;
-import net.testproj.db.pb.schema.model.Review;
 import net.testproj.db.pb.ReviewDS;
 import io.beanmapper.BeanMapper;
 import lombok.AllArgsConstructor;

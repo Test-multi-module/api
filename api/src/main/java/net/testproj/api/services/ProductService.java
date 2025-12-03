@@ -2,7 +2,6 @@ package net.testproj.api.services;
 
 import net.testproj.api.dtos.filters.ProductFilter;
 import net.testproj.api.dtos.models.ProductDTO;
-import net.testproj.db.pb.schema.model.Product;
 
 import net.testproj.db.pb.ProductDS;
 import io.beanmapper.BeanMapper;

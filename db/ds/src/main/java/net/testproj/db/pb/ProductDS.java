@@ -1,6 +1,5 @@
 package net.testproj.db.pb;
 
-import net.testproj.db.pb.schema.model.Product;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Qualifier;
