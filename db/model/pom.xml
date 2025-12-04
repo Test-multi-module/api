@@ -16,9 +16,5 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.testproj.db.schema</groupId>
-            <artifactId>schema</artifactId>
-        </dependency>
     </dependencies>
 </project>

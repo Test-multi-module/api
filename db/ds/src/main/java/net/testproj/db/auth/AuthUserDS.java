@@ -1,7 +1,6 @@
 package net.testproj.db.auth;
 
-import net.testproj.db.auth.schema.model.AuthUser;
-import net.testproj.db.pb.schema.model.User;
+import net.testproj.db.pb.User;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

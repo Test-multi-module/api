@@ -1,7 +1,7 @@
 package net.testproj.auth.security;
 
 import lombok.AllArgsConstructor;
-import net.testproj.db.auth.schema.model.AuthUser;
+import net.testproj.db.auth.AuthUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

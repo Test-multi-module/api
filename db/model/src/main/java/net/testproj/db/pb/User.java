@@ -1,4 +1,4 @@
-package net.testproj.db.pb.schema.model;
+package net.testproj.db.pb;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

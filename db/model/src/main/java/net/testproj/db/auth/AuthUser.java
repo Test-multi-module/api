@@ -1,4 +1,4 @@
-package net.testproj.db.auth.schema.model;
+package net.testproj.db.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
