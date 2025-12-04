@@ -24,18 +24,16 @@ public class DataSourceConfig {
 
     @Bean
     public Flyway flywayAuth(@Qualifier("authDataSource") DataSource authDataSource) {
-        Flyway flyway = Flyway.configure().dataSource(authDataSource)
+        return Flyway.configure().dataSource(authDataSource)
                 .locations("classpath:db/migration/auth_migration")
                 .schemas("auth").load();
-        return flyway;
     }
 
     @Bean
     public Flyway flywayPublic(@Qualifier("publicDataSource") DataSource publicDataSource) {
-        Flyway flyway =  Flyway.configure().dataSource(publicDataSource)
+        return Flyway.configure().dataSource(publicDataSource)
                 .locations("classpath:db/migration/public_migration")
                 .schemas("public").load();
-        return flyway;
     }
 
     @Bean

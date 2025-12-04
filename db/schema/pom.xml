@@ -78,17 +78,18 @@
                 <version>3.19.13</version>
                 <executions>
                     <execution>
+                        <phase>generate-sources</phase>
                         <id>generate-public</id>
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://localhost:5432/postgres?currentSchema=public</url>
+                                <url>jdbc:postgresql://localhost:5432/postgres</url>
                                 <user>adm</user>
                                 <password>24o62o!!</password>
                             </jdbc>
                             <generator>
-                                <name>org.jooq.codegen.DefaultGenerator</name>
+                                <name>org.jooq.codegen.JavaGenerator</name>
                                 <database>
                                     <name>org.jooq.meta.postgres.PostgresDatabase</name>
                                     <inputSchema>public</inputSchema>
@@ -99,25 +100,25 @@
                                     <daos>false</daos>
                                 </generate>
                                 <target>
-                                    <packageName>net.testproj.db.pb.schema</packageName>
+                                    <packageName>net.testproj.db.pb</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>
                         </configuration>
                     </execution>
-
                     <execution>
+                        <phase>generate-sources</phase>
                         <id>generate-auth</id>
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://localhost:5432/postgres?currentSchema=auth</url>
+                                <url>jdbc:postgresql://localhost:5432/postgres</url>
                                 <user>adm</user>
                                 <password>24o62o!!</password>
                             </jdbc>
                             <generator>
-                                <name>org.jooq.codegen.DefaultGenerator</name>
+                                <name>org.jooq.codegen.JavaGenerator</name>
                                 <database>
                                     <name>org.jooq.meta.postgres.PostgresDatabase</name>
                                     <inputSchema>auth</inputSchema>
@@ -128,7 +129,7 @@
                                     <daos>false</daos>
                                 </generate>
                                 <target>
-                                    <packageName>net.testproj.db.auth.schema</packageName>
+                                    <packageName>net.testproj.db.auth</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>
