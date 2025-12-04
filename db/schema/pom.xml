@@ -83,8 +83,6 @@
                                 </database>
                                 <generate>
                                     <tables>true</tables>
-                                    <pojos>false</pojos>
-                                    <daos>false</daos>
                                 </generate>
                                 <target>
                                     <packageName>net.testproj.db.pb</packageName>
@@ -112,8 +110,6 @@
                                 </database>
                                 <generate>
                                     <tables>true</tables>
-                                    <pojos>false</pojos>
-                                    <daos>false</daos>
                                 </generate>
                                 <target>
                                     <packageName>net.testproj.db.auth</packageName>
