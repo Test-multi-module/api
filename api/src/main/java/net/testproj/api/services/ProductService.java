@@ -3,6 +3,7 @@ package net.testproj.api.services;
 import net.testproj.api.dtos.filters.ProductFilter;
 import net.testproj.api.dtos.models.ProductDTO;
 
+import net.testproj.db.pb.Product;
 import net.testproj.db.pb.ProductDS;
 import io.beanmapper.BeanMapper;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -22,12 +24,12 @@ public class ProductService {
         return  beanMapper.map(productDS.list(), ProductDTO.class);
     }
 
-    public ProductDTO findById(Integer prdId){
+    public ProductDTO findById(UUID prdId){
         return beanMapper.map(productDS.findById(prdId), ProductDTO.class);
     }
 
     public void addProduct(ProductDTO product){
-       // productDS.addProduct(beanMapper.map(product, Product.class));
+        productDS.addProduct(beanMapper.map(product, Product.class));
     }
 
     public List<ProductDTO> searchProduct(ProductFilter productFilter){
@@ -36,8 +38,7 @@ public class ProductService {
     }
 
     public ProductDTO update(ProductDTO productDTO, Integer id){
-        return null;//todo uncomment
-       // return beanMapper.map(productDS.update(beanMapper.map(productDTO, Product.class),id), ProductDTO.class);
+        return beanMapper.map(productDS.update(beanMapper.map(productDTO, Product.class),id), ProductDTO.class);
     }
 
     public void delete(Integer id){

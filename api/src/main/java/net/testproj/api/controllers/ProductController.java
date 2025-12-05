@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/private/products")
@@ -16,7 +17,7 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ADMIN')")//todo explore how it works
     @GetMapping("/{id}")
-    public ProductDTO getSomeProductById(@PathVariable("id") Integer id) {
+    public ProductDTO getSomeProductById(@PathVariable("id") UUID id) {
         return productService.findById(id);
     }
 
