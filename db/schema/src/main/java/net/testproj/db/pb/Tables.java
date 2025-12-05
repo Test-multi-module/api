@@ -5,8 +5,6 @@ package net.testproj.db.pb;
 
 
 import net.testproj.db.pb.tables.FlywaySchemaHistory;
-import net.testproj.db.pb.tables.Products;
-import net.testproj.db.pb.tables.Users;
 
 
 /**
@@ -19,14 +17,4 @@ public class Tables {
      * The table <code>public.flyway_schema_history</code>.
      */
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
-
-    /**
-     * The table <code>public.products</code>.
-     */
-    public static final Products PRODUCTS = Products.PRODUCTS;
-
-    /**
-     * The table <code>public.users</code>.
-     */
-    public static final Users USERS = Users.USERS;
 }

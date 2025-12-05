@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.testproj.db.pb.tables.FlywaySchemaHistory;
-import net.testproj.db.pb.tables.Products;
-import net.testproj.db.pb.tables.Users;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
@@ -35,16 +33,6 @@ public class Public extends SchemaImpl {
     public final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
-     * The table <code>public.products</code>.
-     */
-    public final Products PRODUCTS = Products.PRODUCTS;
-
-    /**
-     * The table <code>public.users</code>.
-     */
-    public final Users USERS = Users.USERS;
-
-    /**
      * No further instances allowed
      */
     private Public() {
@@ -60,9 +48,7 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
-            Products.PRODUCTS,
-            Users.USERS
+            FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY
         );
     }
 }
