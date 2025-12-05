@@ -4,7 +4,9 @@
 package net.testproj.db.auth;
 
 
+import net.testproj.db.auth.tables.AuthUsers;
 import net.testproj.db.auth.tables.FlywaySchemaHistory;
+import net.testproj.db.auth.tables.records.AuthUsersRecord;
 import net.testproj.db.auth.tables.records.FlywaySchemaHistoryRecord;
 
 import org.jooq.TableField;
@@ -24,5 +26,6 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<AuthUsersRecord> AUTH_USERS_PKEY = Internal.createUniqueKey(AuthUsers.AUTH_USERS, DSL.name("auth_users_pkey"), new TableField[] { AuthUsers.AUTH_USERS.ID }, true);
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
 }

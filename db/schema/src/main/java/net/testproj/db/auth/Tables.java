@@ -4,6 +4,7 @@
 package net.testproj.db.auth;
 
 
+import net.testproj.db.auth.tables.AuthUsers;
 import net.testproj.db.auth.tables.FlywaySchemaHistory;
 
 
@@ -12,6 +13,11 @@ import net.testproj.db.auth.tables.FlywaySchemaHistory;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>auth.auth_users</code>.
+     */
+    public static final AuthUsers AUTH_USERS = AuthUsers.AUTH_USERS;
 
     /**
      * The table <code>auth.flyway_schema_history</code>.

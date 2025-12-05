@@ -7,6 +7,7 @@ package net.testproj.db.auth;
 import java.util.Arrays;
 import java.util.List;
 
+import net.testproj.db.auth.tables.AuthUsers;
 import net.testproj.db.auth.tables.FlywaySchemaHistory;
 
 import org.jooq.Catalog;
@@ -26,6 +27,11 @@ public class Auth extends SchemaImpl {
      * The reference instance of <code>auth</code>
      */
     public static final Auth AUTH = new Auth();
+
+    /**
+     * The table <code>auth.auth_users</code>.
+     */
+    public final AuthUsers AUTH_USERS = AuthUsers.AUTH_USERS;
 
     /**
      * The table <code>auth.flyway_schema_history</code>.
@@ -48,6 +54,7 @@ public class Auth extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            AuthUsers.AUTH_USERS,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY
         );
     }
