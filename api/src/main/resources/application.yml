@@ -26,9 +26,7 @@ spring:
             scope: openid, email, profile
         provider:
           google:
-            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
-            token-uri: https://oauth2.googleapis.com/token
-            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            issuer-uri: https://accounts.google.com
 logging:
   level:
     org.flywaydb: DEBUG
