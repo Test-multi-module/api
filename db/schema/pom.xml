@@ -10,7 +10,6 @@
 
     <groupId>net.testproj.db.schema</groupId>
     <artifactId>schema</artifactId>
-
     <build>
         <plugins>
             <plugin>
@@ -71,9 +70,13 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://localhost:5432/postgres</url>
-                                <user>adm</user>
-                                <password>24o62o!!</password>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <url>${env.DB_URL}</url>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <user>${env.DB_USER_NAME}</user>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <password>${env.DB_PASSWORD}</password>
+                                <driver>org.postgresql.Driver</driver>
                             </jdbc>
                             <generator>
                                 <name>org.jooq.codegen.JavaGenerator</name>
@@ -98,9 +101,13 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://localhost:5432/postgres</url>
-                                <user>adm</user>
-                                <password>24o62o!!</password>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <url>${env.DB_URL}</url>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <user>${env.DB_USER_NAME}</user>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <password>${env.DB_PASSWORD}</password>
+                                <driver>org.postgresql.Driver</driver>
                             </jdbc>
                             <generator>
                                 <name>org.jooq.codegen.JavaGenerator</name>

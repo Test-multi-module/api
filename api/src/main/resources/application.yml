@@ -3,16 +3,16 @@ spring:
     enabled: false
   datasource:
     auth:
-      url: jdbc:postgresql://localhost:5432/postgres
-      username: adm
-      password: 24o62o!!
+      url: ${DB_URL}
+      username: ${DB_USER_NAME}
+      password: ${DB_PASSWORD}
       driver-class-name: org.postgresql.Driver
       schema: auth
       platform: postgres
     public:
-      url: jdbc:postgresql://localhost:5432/postgres
-      username: adm
-      password: 24o62o!!
+      url: ${DB_URL}
+      username: ${DB_USER_NAME}
+      password: ${DB_PASSWORD}
       driver-class-name: org.postgresql.Driver
       schema: public
       platform: postgres
