@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component//done only with copy-pasting todo: explore
+@Component//done only with copy-pasting todo: explore and analise, if really needed
 @AllArgsConstructor
 public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler {
 

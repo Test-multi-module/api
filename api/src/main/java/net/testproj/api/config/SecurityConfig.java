@@ -1,7 +1,6 @@
 package net.testproj.api.config;
 
-
-import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
+//import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import net.testproj.auth.security.AuthUserService;
 import net.testproj.auth.security.JwtAuthenticationFilter;
 import net.testproj.auth.security.JwtService;
@@ -9,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -30,13 +30,14 @@ public class SecurityConfig {
 
     private final AuthUserService authUserService;
     private final JwtService jwtService;
-    private final CustomOAuth2SuccessHandler successHandler;
+    //private final CustomOAuth2SuccessHandler successHandler;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter(jwtService, authUserService);
     }
     @Bean//настройка http безопасности для auth-сервера
+    //todo спросить gpt что делает этот мой метод
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtFilter) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
@@ -46,7 +47,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.logoutUrl("/logout").permitAll())
-                .oauth2Login(oauth2 -> oauth2.successHandler(successHandler));
+                .oauth2Login(Customizer.withDefaults());//oauth2 -> oauth2.successHandler(successHandler)
 
         return http.build();
     }
