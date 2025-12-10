@@ -32,21 +32,45 @@
                     <execution>
                         <id>auth-migration</id>
                         <goals><goal>migrate</goal></goals>
-                        <phase>generate-resources</phase>
+                        <phase>validate</phase>
                         <configuration>
-                            <configFiles>
-                                <configFile>${basedir}/flyway-auth.properties</configFile>
-                            </configFiles>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <url>${env.DB_URL}</url>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <user>${env.DB_USER_NAME}</user>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <password>${env.DB_PASSWORD}</password>
+
+                            <createSchemas>true</createSchemas>
+                            <schemas>auth</schemas>
+                            <defaultSchema>auth</defaultSchema>
+                            <driver>org.postgresql.Driver</driver>
+
+                            <locations>
+                                <location>filesystem:src/main/resources/db/migration/auth</location>
+                            </locations>
                         </configuration>
                     </execution>
                     <execution>
                         <id>public-migration</id>
                         <goals><goal>migrate</goal></goals>
-                        <phase>generate-resources</phase>
+                        <phase>validate</phase>
                         <configuration>
-                            <configFiles>
-                                <configFile>${basedir}/flyway-public.properties</configFile>
-                            </configFiles>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <url>${env.DB_URL}</url>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <user>${env.DB_USER_NAME}</user>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <password>${env.DB_PASSWORD}</password>
+
+                            <createSchemas>true</createSchemas>
+                            <schemas>public</schemas>
+                            <defaultSchema>public</defaultSchema>
+                            <driver>org.postgresql.Driver</driver>
+
+                            <locations>
+                                <location>filesystem:src/main/resources/db/migration/public</location>
+                            </locations>
                         </configuration>
                     </execution>
                 </executions>
@@ -89,8 +113,7 @@
                                 </generate>
                                 <target>
                                     <packageName>net.testproj.db.pb</packageName>
-                                    <directory>src/main/java</directory>
-                                </target>
+                                    <directory>${project.build.directory}/generated-sources/jooq</directory>                                </target>
                             </generator>
                         </configuration>
                     </execution>
@@ -120,9 +143,27 @@
                                 </generate>
                                 <target>
                                     <packageName>net.testproj.db.auth</packageName>
-                                    <directory>src/main/java</directory>
-                                </target>
+                                    <directory>${project.build.directory}/generated-sources/jooq</directory>                                </target>
                             </generator>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>add-jooq-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/jooq</source>
+                            </sources>
                         </configuration>
                     </execution>
                 </executions>
