@@ -12,6 +12,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      DB_URL: ${{ secrets.DB_URL }}
+      DB_USER_NAME: ${{ secrets.DB_USER_NAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
     permissions:
       contents: read #This is required for actions/checkout
 
