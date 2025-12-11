@@ -10,6 +10,16 @@
 
     <groupId>net.testproj.db.schema</groupId>
     <artifactId>schema</artifactId>
+
+    <properties>
+        <!--suppress UnresolvedMavenProperty -->
+        <db.url>${env.DB_URL}</db.url>
+        <!--suppress UnresolvedMavenProperty -->
+        <db.user>${env.DB_USER_NAME}</db.user>
+        <!--suppress UnresolvedMavenProperty -->
+        <db.password>${env.DB_PASSWORD}</db.password>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -25,7 +35,7 @@
                     <dependency>
                         <groupId>org.flywaydb</groupId>
                         <artifactId>flyway-database-postgresql</artifactId>
-                        <version>10.14.0</version>
+                        <version>10.15.0</version>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -34,12 +44,9 @@
                         <goals><goal>migrate</goal></goals>
                         <phase>validate</phase>
                         <configuration>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <url>${env.DB_URL}</url>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <user>${env.DB_USER_NAME}</user>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <password>${env.DB_PASSWORD}</password>
+                            <url>${db.url}</url>
+                            <user>${db.user}</user>
+                            <password>${db.password}</password>
 
                             <createSchemas>true</createSchemas>
                             <schemas>auth</schemas>
@@ -56,12 +63,9 @@
                         <goals><goal>migrate</goal></goals>
                         <phase>validate</phase>
                         <configuration>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <url>${env.DB_URL}</url>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <user>${env.DB_USER_NAME}</user>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <password>${env.DB_PASSWORD}</password>
+                            <url>${db.url}</url>
+                            <user>${db.user}</user>
+                            <password>${db.password}</password>
 
                             <createSchemas>true</createSchemas>
                             <schemas>public</schemas>
@@ -94,13 +98,9 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <url>${env.DB_URL}</url>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <user>${env.DB_USER_NAME}</user>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <password>${env.DB_PASSWORD}</password>
-                                <driver>org.postgresql.Driver</driver>
+                                <url>${db.url}</url>
+                                <user>${db.user}</user>
+                                <password>${db.password}</password>
                             </jdbc>
                             <generator>
                                 <name>org.jooq.codegen.JavaGenerator</name>
@@ -124,13 +124,9 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <url>${env.DB_URL}</url>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <user>${env.DB_USER_NAME}</user>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <password>${env.DB_PASSWORD}</password>
-                                <driver>org.postgresql.Driver</driver>
+                                <url>${db.url}</url>
+                                <user>${db.user}</user>
+                                <password>${db.password}</password>
                             </jdbc>
                             <generator>
                                 <name>org.jooq.codegen.JavaGenerator</name>
