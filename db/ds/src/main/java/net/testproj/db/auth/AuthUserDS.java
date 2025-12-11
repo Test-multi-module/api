@@ -2,7 +2,6 @@ package net.testproj.db.auth;
 
 import net.testproj.db.pb.User;
 import org.jooq.DSLContext;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,7 +14,7 @@ import static net.testproj.db.auth.tables.AuthUsers.AUTH_USERS;
 @Service
 public class AuthUserDS {
     protected final DSLContext jooq;
-    public AuthUserDS(@Qualifier("authDslContext") DSLContext dsl) {this.jooq = dsl;}
+    public AuthUserDS(DSLContext dsl) {this.jooq = dsl;}
 
     public List<User> list() {
         return null;

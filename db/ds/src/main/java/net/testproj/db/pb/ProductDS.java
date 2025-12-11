@@ -2,7 +2,6 @@ package net.testproj.db.pb;
 
 import org.jooq.Condition;
 import org.jooq.DSLContext;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import static net.testproj.db.pb.tables.Products.PRODUCTS;
 public class ProductDS {
 
     protected final DSLContext jooq;
-    public ProductDS(@Qualifier("publicDslContext") DSLContext dsl) {this.jooq = dsl;}
+    public ProductDS(DSLContext dsl) {this.jooq = dsl;}
 
     public List<Product> list() {
         List<Product> products = jooq.select().from(PRODUCTS).fetchInto(Product.class);
