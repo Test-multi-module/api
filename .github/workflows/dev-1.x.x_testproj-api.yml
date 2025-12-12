@@ -63,7 +63,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'testproj-api'
+          app-name: 'testproj-api-server'
           slot-name: 'Production'
           package: 'api-0.0.1-SNAPSHOT.jar'
           
