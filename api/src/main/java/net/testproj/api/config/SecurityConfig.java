@@ -36,8 +36,7 @@ public class SecurityConfig {
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter(jwtService, authUserService);
     }
-    @Bean//настройка http безопасности для auth-сервера
-    //todo спросить gpt что делает этот мой метод
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtFilter) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
