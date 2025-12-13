@@ -1,6 +1,6 @@
 package net.testproj.api.config;
 
-//import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
+import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import net.testproj.auth.security.AuthUserService;
 import net.testproj.auth.security.JwtAuthenticationFilter;
 import net.testproj.auth.security.JwtService;
@@ -8,12 +8,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +30,7 @@ public class SecurityConfig {
 
     private final AuthUserService authUserService;
     private final JwtService jwtService;
-    //private final CustomOAuth2SuccessHandler successHandler;
+    private final CustomOAuth2SuccessHandler successHandler;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -43,11 +43,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/private/**").authenticated()
                         .anyRequest().permitAll())
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.logoutUrl("/logout").permitAll())
-                .oauth2Login(Customizer.withDefaults());//oauth2 -> oauth2.successHandler(successHandler)
+                .oauth2Login(oauth2 -> oauth2.successHandler(successHandler));
 
         return http.build();
     }
