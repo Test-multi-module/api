@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
-public class ProductDTO {//TODO
+public class TestObjToBeDeletedDTO {//TODO
     Integer rating;
 
     @JsonProperty("id")

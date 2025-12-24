@@ -8,7 +8,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 
 @SpringBootTest(classes = ApiApplication.class ,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductMgmtIntegTest extends IntegTestBase{
+public class TestControllerMgmtIntegTest extends IntegTestBase{
 
     @LocalServerPort private int port;
 

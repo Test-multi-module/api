@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 @Builder
@@ -15,6 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class User {
     private UUID id;
-    private Date dayOfBirth;
+    private Instant dayOfBirth;
     private String nickName;
+    private String providerAvatarUrl;
+    private UUID authUserId;
 }

@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.Collections;
-import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -25,12 +25,13 @@ public class AuthUserService implements UserDetailsService {
         String encodedPassword = encoder.encode("mypass");
         //UUID.fromString("550e8400-e29b-41d4-a716-446655440000")//from postman
         AuthUser authUser = new AuthUser(UUID.randomUUID(),
-                new Date(), new Date(), false,false, "mylogin",
-                0, encodedPassword, "test@gmail.com");
+                Instant.now(), Instant.now(), false,false, "test@gmail.com", 1);
 
         // Возвращаем пользователя, преобразуя его в объект UserDetails
         return new org.springframework.security.core.userdetails.User(
-                authUser.getLogin(), authUser.getPassword(), Collections.emptyList());
+                authUser.getId().toString(),
+                Integer.toString(authUser.getAuthorizationType()),
+                Collections.emptyList());
     }
 }
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 @Builder
@@ -16,14 +16,12 @@ import java.util.UUID;
 public class AuthUser {
 
     private UUID id;
-    private Date created;
-    private Date updated;
+    private Instant createdAt;
+    private Instant updatedAt;
 
     private boolean disabled;
-    private boolean activated;
+    private boolean deleted;
 
-    private String login;
-    private int role;
-    private String password;
     private String email;
+    private int authorizationType;
 }

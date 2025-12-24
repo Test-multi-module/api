@@ -10,6 +10,4 @@ public class UserDS {
 
     protected final DSLContext jooq;
     public UserDS(DSLContext dsl) {this.jooq = dsl;}
-
-    public void delete(int id){}
 }

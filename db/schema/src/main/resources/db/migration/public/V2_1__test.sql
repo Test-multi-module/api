@@ -1,16 +1,12 @@
 create table  users(
-    id uuid NOT NULL PRIMARY KEY,
-    nick_name character varying(255) NOT NULL,
-    day_of_birth timestamp,
+    id uuid NOT NULL,
+    nick_name character varying(64) NOT NULL,
+    day_of_birth timestamptz,
     auth_user_id UUID UNIQUE NOT NULL,
-    FOREIGN KEY (auth_user_id) REFERENCES auth.auth_users(id) ON DELETE CASCADE
+    provider_avatar_url text
 );
 
-create table  products(
-    id uuid NOT NULL PRIMARY KEY,
-    title character varying(100) NOT NULL,
-    price integer,
-    description character varying(1024),
-    categories character varying(512) UNIQUE NOT NULL,
-    rating integer
-)
+ALTER TABLE users ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+ALTER TABLE users ADD CONSTRAINT users_fkey
+    FOREIGN KEY (auth_user_id) REFERENCES auth.users(id) ON DELETE CASCADE;
