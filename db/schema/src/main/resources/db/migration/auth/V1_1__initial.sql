@@ -27,6 +27,11 @@ CREATE TABLE oauth2_accounts(
     provider_avatar_url text
 );
 
-ALTER TABLE oauth2_accounts ADD CONSTRAINT oauth2_accounts_pkey PRIMARY KEY (id);
-ALTER TABLE oauth2_accounts
-    ADD CONSTRAINT oauth2_accounts_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE oauth2_accounts ADD CONSTRAINT oauth2_accounts_pkey
+    PRIMARY KEY (id);
+ALTER TABLE oauth2_accounts ADD CONSTRAINT oauth2_accounts_fkey
+    FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE oauth2_accounts ADD CONSTRAINT oauth2_accounts_uq_provider_provider_user_id
+    UNIQUE(provider, provider_user_id)
+ALTER TABLE oauth2_accounts ADD CONSTRAINT  oauth2_accounts_uq_provider_user_id
+    UNIQUE(provider, user_id)

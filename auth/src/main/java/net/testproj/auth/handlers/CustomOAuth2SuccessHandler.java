@@ -11,6 +11,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Component
 @AllArgsConstructor
@@ -22,8 +23,23 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
-        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
+        if (!(authentication instanceof OAuth2AuthenticationToken token)) {
+            throw new IllegalStateException("Expected OAuth2AuthenticationToken but got: " + authentication.getClass());
+        }
+
+        String provider = token.getAuthorizedClientRegistrationId();
+
         OAuth2User user = token.getPrincipal();
+        Map<String, Object> attrs = user.getAttributes();
+
+        String providerUserId = String.valueOf(attrs.get("sub"));
+        String email = String.valueOf(attrs.get("email"));
+        String givenName = (String) attrs.get("given_name");
+        String familyName = (String) attrs.get("family_name");
+        String pictureUrl = (String) attrs.get("picture");
+
+        System.out.println("OAuth2 attrs keys: " + attrs.keySet());
+
 
         // тут можно создать пользователя в БД и выдать JWT String email = user.getAttribute("email");
         // выдать JWT:
