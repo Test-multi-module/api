@@ -1,5 +1,6 @@
 package net.testproj.db.auth;
 
+import com.github.f4b6a3.uuid.UuidCreator;
 import net.testproj.db.pb.User;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class AuthUserDS {
     }
 
     public AuthUser create(AuthUser user){
+        UUID id = UuidCreator.getTimeOrderedEpoch(); // UUIDv7
         Date now = new Date();
         user.setUpdatedAt(Instant.now());
         user.setCreatedAt(Instant.now());

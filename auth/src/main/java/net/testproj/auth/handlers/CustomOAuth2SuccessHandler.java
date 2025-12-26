@@ -1,9 +1,12 @@
 package net.testproj.auth.handlers;
 
+import io.beanmapper.BeanMapper;
 import net.testproj.auth.security.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import net.testproj.db.auth.OAuth2Account;
+import net.testproj.db.auth.OAuth2AccountDS;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -18,6 +21,10 @@ import java.util.Map;
 public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final JwtService jwtService;
+
+    private final BeanMapper beanMapper;
+    private final OAuth2AccountDS oAuth2AccountDS;
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -40,12 +47,12 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         System.out.println("OAuth2 attrs keys: " + attrs.keySet());
 
-
-        // тут можно создать пользователя в БД и выдать JWT String email = user.getAttribute("email");
-        // выдать JWT:
         String jwt = jwtService.generateToken("todo generation and all process here");
 
-        // вернуть в тело или через redirect
         response.getWriter().write(jwt);
+    }
+
+    public OAuth2Account getOAuth2Account(String providerUserId, String provider){
+        return oAuth2AccountDS.getByProviderAndProviderUserId(providerUserId, provider);
     }
 }
