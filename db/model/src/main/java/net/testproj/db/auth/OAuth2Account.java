@@ -21,12 +21,19 @@ public class OAuth2Account {
 
     private UUID userId;
     private UUID id;
+
+    private boolean deleted;
+    private boolean disabled;
+
     private String provider;
     private String providerUserId;
     private String emailAtProvider;
 
     private Instant createdAt;
+    private Instant updatedAt;
     private Instant lastLoginAt;
 
     private String providerAvatarUrl;
+    private String givenName;
+    private String familyName;
 }

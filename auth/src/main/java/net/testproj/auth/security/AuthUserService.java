@@ -1,7 +1,7 @@
 package net.testproj.auth.security;
 
 import lombok.AllArgsConstructor;
-import net.testproj.db.auth.AuthUser;
+import net.testproj.db.auth.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,14 +24,12 @@ public class AuthUserService implements UserDetailsService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode("mypass");
         //UUID.fromString("550e8400-e29b-41d4-a716-446655440000")//from postman
-        AuthUser authUser = new AuthUser(UUID.randomUUID(),
-                Instant.now(), Instant.now(), false,false, "test@gmail.com", 1);
+        User user = new User(UUID.randomUUID(),
+                Instant.now(), Instant.now(), false,false, "test@gmail.com");
 
         // Возвращаем пользователя, преобразуя его в объект UserDetails
         return new org.springframework.security.core.userdetails.User(
-                authUser.getId().toString(),
-                Integer.toString(authUser.getAuthorizationType()),
-                Collections.emptyList());
+                user.getId().toString(), Integer.toString(user.getId().version()), Collections.emptyList());
     }
 }
 

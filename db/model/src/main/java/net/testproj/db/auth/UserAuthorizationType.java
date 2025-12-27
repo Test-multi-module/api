@@ -1,27 +1,31 @@
 package net.testproj.db.auth;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.AllArgsConstructor;
 
 import java.time.Instant;
 import java.util.UUID;
 
+
 @Builder
-@Getter@Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthUser {
+public class UserAuthorizationType {
 
+    private UUID userId;
     private UUID id;
+
+    private boolean deleted;
+    private boolean disabled;
+
     private Instant createdAt;
     private Instant updatedAt;
 
-    private boolean disabled;
-    private boolean deleted;
-
-    private String email;
     private int authorizationType;
 }

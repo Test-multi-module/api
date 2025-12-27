@@ -1,12 +1,11 @@
 package net.testproj.auth.handlers;
 
-import io.beanmapper.BeanMapper;
 import net.testproj.auth.security.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import net.testproj.db.auth.OAuth2Account;
-import net.testproj.db.auth.OAuth2AccountDS;
+import net.testproj.db.auth.*;
+import net.testproj.db.auth.enums.AuthorizationType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
 @Component
 @AllArgsConstructor
@@ -22,8 +22,9 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
     private final JwtService jwtService;
 
-    private final BeanMapper beanMapper;
     private final OAuth2AccountDS oAuth2AccountDS;
+    private final UserAuthorizationTypeDS userAuthorizationTypeDS;
+    private final AuthUserDS authUserDS;
 
 
     @Override
@@ -36,8 +37,8 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         String provider = token.getAuthorizedClientRegistrationId();
 
-        OAuth2User user = token.getPrincipal();
-        Map<String, Object> attrs = user.getAttributes();
+        OAuth2User oAuth2User = token.getPrincipal();
+        Map<String, Object> attrs = oAuth2User.getAttributes();
 
         String providerUserId = String.valueOf(attrs.get("sub"));
         String email = String.valueOf(attrs.get("email"));
@@ -45,14 +46,32 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         String familyName = (String) attrs.get("family_name");
         String pictureUrl = (String) attrs.get("picture");
 
-        System.out.println("OAuth2 attrs keys: " + attrs.keySet());
+        OAuth2Account oAuth2Account = oAuth2AccountDS.getByProviderAndProviderUserId(providerUserId, provider);
+        if (oAuth2Account == null) {
 
+            User user = authUserDS.insert(User.builder().email(email).build());
+
+            userAuthorizationTypeDS.insert(UserAuthorizationType.builder()
+                    .authorizationType(AuthorizationType.fromRegistrationId(provider).getCode())
+                    .userId(user.getId())
+                    .build());
+
+            oAuth2Account = OAuth2Account.builder()
+                    .userId(user.getId())
+                    .provider(provider)
+                    .providerUserId(providerUserId)
+                    .emailAtProvider(email)
+                    .providerAvatarUrl(pictureUrl)
+                    .givenName(givenName)
+                    .familyName(familyName)
+                    .build();
+            oAuth2AccountDS.insert(oAuth2Account);
+        }
+
+        //todo jwt generation
+        UUID sub = oAuth2Account.getId();
         String jwt = jwtService.generateToken("todo generation and all process here");
 
         response.getWriter().write(jwt);
-    }
-
-    public OAuth2Account getOAuth2Account(String providerUserId, String provider){
-        return oAuth2AccountDS.getByProviderAndProviderUserId(providerUserId, provider);
     }
 }
