@@ -22,9 +22,6 @@ public class OAuth2Account {
     private UUID userId;
     private UUID id;
 
-    private boolean deleted;
-    private boolean disabled;
-
     private String provider;
     private String providerUserId;
     private String emailAtProvider;
@@ -32,6 +29,8 @@ public class OAuth2Account {
     private Instant createdAt;
     private Instant updatedAt;
     private Instant lastLoginAt;
+    private Instant deletedAt;
+    private Instant disabledAt;
 
     private String providerAvatarUrl;
     private String givenName;

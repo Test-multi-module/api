@@ -3,32 +3,13 @@ CREATE TABLE users (
 
     created_at timestamptz  NOT NULL default now(),
     updated_at timestamptz  NOT NULL default now(),
-
-    disabled boolean NOT NULL DEFAULT false,
-    deleted boolean NOT NULL DEFAULT false,
+    disabled_at timestamptz,
+    deleted_at timestamptz,
 
     email character varying(255)
 );
 
 ALTER TABLE users ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-CREATE TABLE user_authorization_types (
-    id uuid NOT NULL,
-    user_id uuid NOT NULL,
-
-    created_at timestamptz  NOT NULL default now(),
-    updated_at timestamptz  NOT NULL default now(),
-
-    disabled boolean NOT NULL DEFAULT false,
-    deleted boolean NOT NULL DEFAULT false,
-
-    authorization_type integer NOT NULL
-);
-
-ALTER TABLE user_authorization_types ADD CONSTRAINT user_authorization_types_pkey PRIMARY KEY (id);
-
-ALTER TABLE user_authorization_types ADD CONSTRAINT user_authorization_types_fkey
-    FOREIGN KEY (user_id) REFERENCES users(id);
 
 CREATE TABLE oauth2_accounts(
     id uuid NOT NULL,
@@ -38,11 +19,11 @@ CREATE TABLE oauth2_accounts(
     provider_user_id varchar(255) NOT NULL,
     email_at_provider varchar(254) NOT NULL,
 
-    disabled boolean NOT NULL DEFAULT false,
-    deleted boolean NOT NULL DEFAULT false,
-
     created_at timestamptz  NOT NULL default now(),
     updated_at timestamptz  NOT NULL default now(),
+    disabled_at timestamptz,
+    deleted_at timestamptz,
+
     last_login_at timestamptz,
 
     provider_avatar_url text,

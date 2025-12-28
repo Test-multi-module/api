@@ -25,7 +25,7 @@ public class AuthUserService implements UserDetailsService {
         String encodedPassword = encoder.encode("mypass");
         //UUID.fromString("550e8400-e29b-41d4-a716-446655440000")//from postman
         User user = new User(UUID.randomUUID(),
-                Instant.now(), Instant.now(), false,false, "test@gmail.com");
+                Instant.now(), Instant.now(), null,null, "test@gmail.com");
 
         // Возвращаем пользователя, преобразуя его в объект UserDetails
         return new org.springframework.security.core.userdetails.User(

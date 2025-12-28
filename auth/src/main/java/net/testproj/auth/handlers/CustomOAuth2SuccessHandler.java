@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import net.testproj.db.auth.*;
-import net.testproj.db.auth.enums.AuthorizationType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -23,7 +22,6 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
     private final JwtService jwtService;
 
     private final OAuth2AccountDS oAuth2AccountDS;
-    private final UserAuthorizationTypeDS userAuthorizationTypeDS;
     private final AuthUserDS authUserDS;
 
 
@@ -50,11 +48,6 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         if (oAuth2Account == null) {
 
             User user = authUserDS.insert(User.builder().email(email).build());
-
-            userAuthorizationTypeDS.insert(UserAuthorizationType.builder()
-                    .authorizationType(AuthorizationType.fromRegistrationId(provider).getCode())
-                    .userId(user.getId())
-                    .build());
 
             oAuth2Account = OAuth2Account.builder()
                     .userId(user.getId())
