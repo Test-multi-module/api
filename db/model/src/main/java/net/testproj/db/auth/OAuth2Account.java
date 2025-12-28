@@ -35,4 +35,6 @@ public class OAuth2Account {
     private String providerAvatarUrl;
     private String givenName;
     private String familyName;
+
+    private boolean emailVerified;
 }

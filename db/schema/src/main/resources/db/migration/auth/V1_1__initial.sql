@@ -19,6 +19,8 @@ CREATE TABLE oauth2_accounts(
     provider_user_id varchar(255) NOT NULL,
     email_at_provider varchar(254) NOT NULL,
 
+    email_verified boolean NOT NULL default FALSE,
+
     created_at timestamptz  NOT NULL default now(),
     updated_at timestamptz  NOT NULL default now(),
     disabled_at timestamptz,

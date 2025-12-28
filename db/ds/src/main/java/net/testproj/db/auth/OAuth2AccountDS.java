@@ -4,6 +4,10 @@ import com.github.f4b6a3.uuid.UuidCreator;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.UUID;
+
 import static net.testproj.db.auth.tables.Oauth2Accounts.OAUTH2_ACCOUNTS;
 
 
@@ -13,7 +17,7 @@ public class OAuth2AccountDS {
     protected final DSLContext jooq;
     public OAuth2AccountDS(DSLContext dsl) {this.jooq = dsl;}
 
-    public OAuth2Account getByProviderAndProviderUserId(String providerUserId, String provider){
+    public OAuth2Account getByProviderUserIdAndProvider(String providerUserId, String provider){
         return jooq.select().from(OAUTH2_ACCOUNTS)
                 .where(OAUTH2_ACCOUNTS.PROVIDER_USER_ID.eq(providerUserId)
                         .and(OAUTH2_ACCOUNTS.PROVIDER.eq(provider)))
@@ -25,4 +29,22 @@ public class OAuth2AccountDS {
         jooq.insertInto(OAUTH2_ACCOUNTS).set(jooq.newRecord(OAUTH2_ACCOUNTS, obj)).execute();
     }
 
+    public void update(UUID id, String email, boolean emailVarified, Instant lastLoginAt,
+                       String providerAvatarUrl, String givenName, String familyName){
+
+        jooq.update(OAUTH2_ACCOUNTS)
+                .set(OAUTH2_ACCOUNTS.PROVIDER_AVATAR_URL, providerAvatarUrl)
+                .set(OAUTH2_ACCOUNTS.EMAIL_AT_PROVIDER, email)
+                .set(OAUTH2_ACCOUNTS.GIVEN_NAME, givenName)
+                .set(OAUTH2_ACCOUNTS.FAMILY_NAME, familyName)
+                .set(OAUTH2_ACCOUNTS.EMAIL_VERIFIED, emailVarified)
+                .set(OAUTH2_ACCOUNTS.UPDATED_AT, Instant.now().atOffset(ZoneOffset.UTC))
+                .set(OAUTH2_ACCOUNTS.LAST_LOGIN_AT, lastLoginAt.atOffset(ZoneOffset.UTC))
+                .where(OAUTH2_ACCOUNTS.ID.eq(id)).execute();
+
+    }
 }
+
+//todo анализ того как я юзаю методы jooq
+//todo как генерить дату корректно
+//todo как на работке сделать table перпеменну, может даже AbstractDS-lalala

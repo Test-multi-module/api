@@ -4,8 +4,11 @@ import com.github.f4b6a3.uuid.UuidCreator;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.UUID;
 
+import static net.testproj.db.auth.tables.Oauth2Accounts.OAUTH2_ACCOUNTS;
 import static net.testproj.db.auth.tables.Users.USERS;
 
 
@@ -23,4 +26,7 @@ public class AuthUserDS {
         return jooq.select().from(USERS).where(USERS.ID.eq(id)).fetchInto(User.class).getFirst();
     }
 
+    public void update(UUID id, String email){
+        jooq.update(USERS).set(USERS.EMAIL, email).where(USERS.ID.eq(id)).execute();
+    }
 }
