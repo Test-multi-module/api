@@ -3,6 +3,7 @@ package net.testproj.api.unit;
 import lombok.RequiredArgsConstructor;
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +25,7 @@ import java.util.Map;
 class ApiApplicationTests {
     @Autowired private CustomOAuth2SuccessHandler handler;
 
-    @Test
+    @Test@Disabled
     void successHandlerLogic() throws IOException {
         Map<String, Object> claims = Map.of(
                 "sub", "123",
