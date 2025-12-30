@@ -1,4 +1,4 @@
-package net.testproj.api.integ;
+package net.testproj.tests.integ;
 
 import net.testproj.api.ApiApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 
 @SpringBootTest(classes = ApiApplication.class ,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TestControllerMgmtIntegTest extends IntegTestBase{
+public class TestControllerMgmtIntegTest extends IntegTestBase {
 
     @LocalServerPort private int port;
 

@@ -1,8 +1,8 @@
-package net.testproj.api.integ;
+package net.testproj.tests.integ;
 
+import net.testproj.api.ApiApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
+@SpringBootTest(classes = ApiApplication.class)
 public abstract class IntegTestBase {//like at softpos - test base class
 }

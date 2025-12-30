@@ -1,8 +1,7 @@
-package net.testproj.api.unit;
+package net.testproj.tests.unit;
 
-import lombok.RequiredArgsConstructor;
+import net.testproj.api.ApiApplication;
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest
+@SpringBootTest(classes = ApiApplication.class)
 class ApiApplicationTests {
     @Autowired private CustomOAuth2SuccessHandler handler;
 
@@ -41,7 +40,7 @@ class ApiApplicationTests {
         handler.onAuthenticationSuccess(request, response, auth);
     }
 
-    private static @NonNull OAuth2AuthenticationToken getOAuth2AuthenticationToken(Instant now, Map<String, Object> claims) {
+    private static OAuth2AuthenticationToken getOAuth2AuthenticationToken(Instant now, Map<String, Object> claims) {
         OidcIdToken idToken =
                 new OidcIdToken("fake-id-token", now, now.plusSeconds(3600), claims);
 

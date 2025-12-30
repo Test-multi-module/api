@@ -25,6 +25,7 @@
         <module>db</module>
         <module>api</module>
         <module>auth</module>
+        <module>test</module>
     </modules>
 
     <dependencyManagement>
