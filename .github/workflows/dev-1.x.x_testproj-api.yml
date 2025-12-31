@@ -33,6 +33,9 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
+      - name: List api target
+        run: ls -la api/target
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
