@@ -59,7 +59,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <!-- ВАЖНО: это тот же id, который Spring Boot включает по умолчанию -->
                         <id>repackage</id>
                         <goals>
                             <goal>repackage</goal>
