@@ -1,11 +1,9 @@
-package net.testproj.tests.unit;
+package net.testproj.tests.integ;
 
-import net.testproj.api.ApiApplication;
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -20,8 +18,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest(classes = ApiApplication.class)
-class ApiApplicationTests {
+class ApiApplicationTests extends IntegTestBase {
     @Autowired private CustomOAuth2SuccessHandler handler;
 
     @Test@Disabled

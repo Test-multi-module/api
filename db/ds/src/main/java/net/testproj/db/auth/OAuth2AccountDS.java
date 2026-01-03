@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.util.List;
 import java.util.UUID;
 
 import static net.testproj.db.auth.tables.Oauth2Accounts.OAUTH2_ACCOUNTS;
@@ -18,10 +19,11 @@ public class OAuth2AccountDS {
     public OAuth2AccountDS(DSLContext dsl) {this.jooq = dsl;}
 
     public OAuth2Account getByProviderUserIdAndProvider(String providerUserId, String provider){
-        return jooq.select().from(OAUTH2_ACCOUNTS)
+        List<OAuth2Account> lst =  jooq.select().from(OAUTH2_ACCOUNTS)
                 .where(OAUTH2_ACCOUNTS.PROVIDER_USER_ID.eq(providerUserId)
                         .and(OAUTH2_ACCOUNTS.PROVIDER.eq(provider)))
-                .fetchInto(OAuth2Account.class).getFirst();
+                .fetchInto(OAuth2Account.class);
+        return lst.isEmpty() ? null : lst.getFirst();//todo refactor
     }
 
     public void insert(OAuth2Account obj){
