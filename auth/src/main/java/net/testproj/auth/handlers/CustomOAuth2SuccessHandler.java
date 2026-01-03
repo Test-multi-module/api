@@ -72,6 +72,8 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             oAuth2AccountDS.insert(oAuth2Account);
         }
 
+        //todo: analyze token generation
+
         String jwt = jwtService.generateToken(oAuth2Account.getUserId());
         response.getWriter().write(jwt);
     }
