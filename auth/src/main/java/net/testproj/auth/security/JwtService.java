@@ -20,7 +20,7 @@ import io.jsonwebtoken.security.Keys;
 @Getter
 public class JwtService {
 
-    private static final String SECRET_KEY = "mysupersecretkeywithnormallengthstartingfrom32";
+    private static final String SECRET_KEY = "mysupersecretkeywithnormallengthstartingfrom32";//Секрет нельзя хардкодить в коде . Должен приходить из env/secret storage (IntelliJ env / Azure App Service settings).
     private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
@@ -30,6 +30,9 @@ public class JwtService {
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(key, SignatureAlgorithm.HS256)
+                .setIssuer("testproj-auth")
+                .setAudience("testproj-api")
+                //  .setScopes()
                 .compact();
     }
 
