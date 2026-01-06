@@ -3,3 +3,6 @@
 *.iml
 
 **/com/testproj/db/*/schema/
+
+# keys / secrets
+**/src/main/resources/keys/*.p12
