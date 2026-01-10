@@ -6,4 +6,3 @@
 
 # keys / secrets
 **/src/main/resources/keys/*.p12
-**/src/main/resources/keys/*.pem

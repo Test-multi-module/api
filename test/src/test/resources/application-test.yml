@@ -1,0 +1,8 @@
+auth:
+  security:
+    jwt:
+      keystore:
+        location: keys/test-keystore.p12
+        store-password: Test!123
+        key-alias: test-keypair
+        key-password: Test!123
