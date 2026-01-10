@@ -6,7 +6,8 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 
@@ -19,6 +20,11 @@ import java.security.interfaces.RSAPublicKey;
 @Configuration
 @EnableConfigurationProperties(JwtProps.class)
 public class AuthJwtConfig {
+    private final ResourceLoader resourceLoader;
+
+    public AuthJwtConfig(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     @Bean
     public JwtEncoder jwtEncoder(JwtProps props) throws Exception {
@@ -27,7 +33,9 @@ public class AuthJwtConfig {
 
         KeyStore ks = KeyStore.getInstance("PKCS12");
 
-        try(InputStream is = new ClassPathResource(props.getLocation()).getInputStream()) {
+        Resource resource = resourceLoader.getResource(props.getLocation());
+
+        try(InputStream is = resource.getInputStream()) {
             ks.load(is, props.getStorePassword().toCharArray());
         }
 
