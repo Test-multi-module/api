@@ -31,7 +31,7 @@ public class AuthJwtConfig {
         String alias = props.getKeyAlias();
         char[] keyPass = props.getKeyPassword().toCharArray();
 
-        KeyStore ks = KeyStore.getInstance("PKCS12");
+        KeyStore ks = KeyStore.getInstance(props.getType());
 
         Resource resource = resourceLoader.getResource(props.getLocation());
 

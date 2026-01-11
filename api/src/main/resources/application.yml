@@ -36,6 +36,7 @@ auth:
   security:
     jwt:
       keystore:
+        type: PKCS12
         location: classpath:keys/dev-keystore.p12
         store-password: ${JWT_KEYSTORE_PASSWORD}
         key-alias: dev-keypair
