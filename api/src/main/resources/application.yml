@@ -22,6 +22,16 @@ logging:
     org.flywaydb: DEBUG
     org.springframework.web: DEBUG
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+api:
+  security:
+    jwt:
+      truststore:
+        location: classpath:keys/dev-truststore.p12
+        password: ${JWT_TRUSTSTORE_PASSWORD}
+        type: PKCS12
+        alias: dev-keypair
+      issuer: "testproj-auth"
+      audience: "testproj-api"
 auth:
   security:
     jwt:

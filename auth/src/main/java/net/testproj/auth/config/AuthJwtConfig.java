@@ -18,7 +18,7 @@ import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
 
 @Configuration
-@EnableConfigurationProperties(JwtProps.class)
+@EnableConfigurationProperties(JwtKeyStoreProps.class)
 public class AuthJwtConfig {
     private final ResourceLoader resourceLoader;
 
@@ -27,7 +27,7 @@ public class AuthJwtConfig {
     }
 
     @Bean
-    public JwtEncoder jwtEncoder(JwtProps props) throws Exception {
+    public JwtEncoder jwtEncoder(JwtKeyStoreProps props) throws Exception {
         String alias = props.getKeyAlias();
         char[] keyPass = props.getKeyPassword().toCharArray();
 

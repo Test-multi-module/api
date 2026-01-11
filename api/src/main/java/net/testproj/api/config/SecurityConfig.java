@@ -46,8 +46,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.logoutUrl("/logout").permitAll())
-                .oauth2Login(oauth2 -> oauth2.successHandler(successHandler));
-                //.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}));
+                .oauth2Login(oauth2 -> oauth2.successHandler(successHandler))
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}));
 
         return http.build();
     }

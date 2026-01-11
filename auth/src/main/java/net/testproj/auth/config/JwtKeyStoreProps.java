@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix="auth.security.jwt.keystore")
 @Getter
 @Setter
-public class JwtProps {
+public class JwtKeyStoreProps {
     private String location;
     private String storePassword;
     private String keyAlias;
