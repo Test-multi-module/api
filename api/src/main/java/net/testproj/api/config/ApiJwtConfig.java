@@ -38,7 +38,7 @@ public class ApiJwtConfig {
         Resource resource = resourceLoader.getResource(ts.getLocation());
 
         try (InputStream is = resource.getInputStream()) {
-            ks.load(is, ts.getPassword().toCharArray());
+            ks.load(is, ts.getStorePassword().toCharArray());
         }
 
         Certificate cert = ks.getCertificate(ts.getAlias());

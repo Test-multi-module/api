@@ -22,7 +22,7 @@ public class JwtProps {
         @NotBlank
         private String location;
         @NotBlank
-        private String password;
+        private String storePassword;
         @NotBlank
         private String type;
         @NotBlank

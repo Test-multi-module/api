@@ -27,7 +27,7 @@ api:
     jwt:
       truststore:
         location: classpath:keys/dev-truststore.p12
-        password: ${JWT_TRUSTSTORE_PASSWORD}
+        store-password: ${JWT_TRUSTSTORE_PASSWORD}
         type: PKCS12
         alias: dev-keypair
       issuer: "testproj-auth"
