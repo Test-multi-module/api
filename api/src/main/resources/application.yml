@@ -29,7 +29,7 @@ api:
         location: classpath:keys/dev-truststore.p12
         store-password: ${JWT_TRUSTSTORE_PASSWORD}
         type: PKCS12
-        alias: dev-keypair
+        alias: dev-cert
       issuer: "testproj-auth"
       audience: "testproj-api"
 auth:
