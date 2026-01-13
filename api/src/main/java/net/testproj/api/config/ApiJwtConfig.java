@@ -6,7 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.security.oauth2.jwt.JwtDecoder;import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -25,8 +31,21 @@ public class ApiJwtConfig {
 
     @Bean
     public JwtDecoder jwtDecoder(JwtProps props) throws Exception {
-        //todo;
-        return new NimbusJwtDecoder(new DefaultJWTProcessor<>());
+        RSAPublicKey publicKey = loadRsaPublicKeyFromTruststore(props);
+        NimbusJwtDecoder decoder = NimbusJwtDecoder.withPublicKey(publicKey).build();
+
+        String issuer = props.getIssuer();
+        if (issuer == null || issuer.isBlank()) {
+            throw new IllegalStateException("JWT issuer must be configured (api.security.jwt.issuer)");
+        }
+
+        OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
+
+        // todo audience
+
+        decoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(withIssuer));
+
+        return decoder;
     }
 
     private RSAPublicKey loadRsaPublicKeyFromTruststore(JwtProps props) throws Exception {
