@@ -35,6 +35,10 @@ api:
 auth:
   security:
     jwt:
+      issuer: "testproj-auth"
+      access-token:
+        audience: "testproj-api"
+        ttl-seconds: 900
       keystore:
         type: PKCS12
         location: classpath:keys/dev-keystore.p12

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Component
@@ -74,7 +75,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         //todo: analyze token generation
 
-        String jwt = jwtService.generateToken(oAuth2Account.getUserId());
+        String jwt = jwtService.issueAccessToken(oAuth2Account.getUserId().toString(), new ArrayList<>());
         response.getWriter().write(jwt);
     }
 }

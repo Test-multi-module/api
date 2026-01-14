@@ -4,41 +4,60 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import net.testproj.auth.config.JwtProps;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
+import org.springframework.security.oauth2.jwt.JwsHeader;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
-import java.util.Date;
+import java.time.Instant;
+import java.util.Collection;
 import java.util.UUID;
-
-import io.jsonwebtoken.security.Keys;
 
 
 @Service
 @Getter
+@EnableConfigurationProperties(JwtProps.class)
+@RequiredArgsConstructor
 public class JwtService {
 
-    private static final String SECRET_KEY = "mysupersecretkeywithnormallengthstartingfrom32";//Секрет нельзя хардкодить в коде . Должен приходить из env/secret storage (IntelliJ env / Azure App Service settings).
-    private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
-    private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    private final JwtEncoder jwtEncoder;
+    private final JwtProps props;
 
-    public String generateToken(UUID usedId) {
-        return Jwts.builder()
-                .setSubject(usedId.toString())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(key, SignatureAlgorithm.HS256)
-                .setIssuer("testproj-auth")
-                .setAudience("testproj-api")
-                //  .setScopes()
-                .compact();
+    public String issueAccessToken(String subject, Collection<String> roles) {
+        long ttl = props.getAccessToken().getTtlSeconds();
+
+        Instant now = Instant.now();
+        Instant exp = now.plusSeconds(ttl);
+
+        JwtClaimsSet.Builder claims = JwtClaimsSet.builder()
+                .issuer(props.getIssuer())
+                .subject(subject)
+                .issuedAt(now)
+                .expiresAt(exp)
+                .id(UUID.randomUUID().toString());
+
+        // todo aud
+
+        if (roles != null && !roles.isEmpty()) {claims.claim("roles", roles);}
+
+        JwsHeader jwsHeader = JwsHeader.with(SignatureAlgorithm.RS256).build();
+
+        JwtEncoderParameters params = JwtEncoderParameters.from(jwsHeader, claims.build());
+        return jwtEncoder.encode(params).getTokenValue();
     }
 
     public String validateAndExtractUserName(String token) {
         try {
-            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token)
+            return Jwts.parserBuilder()//.setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
         }catch(MalformedJwtException e){//todo Custom exception and process it via ControllerAdvice

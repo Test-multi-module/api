@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -28,7 +30,7 @@ public class AuthController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginRequest.getUserid().toString(), loginRequest.getPassword()));
-             String token = jwtService.generateToken(loginRequest.getUserid());
+             String token = jwtService.issueAccessToken(loginRequest.getUserid().toString(),new ArrayList<>());
             return ResponseEntity.ok(new JwtResponse(token));
 
         } catch (BadCredentialsException e) {
