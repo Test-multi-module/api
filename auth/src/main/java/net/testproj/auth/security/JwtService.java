@@ -31,7 +31,7 @@ public class JwtService {
     private final JwtProps props;
 
     public String issueAccessToken(String subject, Collection<String> roles) {
-        long ttl = props.getAccessToken().getTtlSeconds();
+        long ttl = props.getAccessTokenProps().getTtlSeconds();
 
         Instant now = Instant.now();
         Instant exp = now.plusSeconds(ttl);

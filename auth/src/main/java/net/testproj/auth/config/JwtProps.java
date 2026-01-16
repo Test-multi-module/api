@@ -16,10 +16,10 @@ import org.springframework.validation.annotation.Validated;
 public class JwtProps {
     private String issuer;
     @Valid
-    private AccessToken accessToken;
+    private JwtProps.AccessTokenProps accessTokenProps;
 
     @Getter@Setter
-    public static class AccessToken {
+    public static class AccessTokenProps {
         @NotBlank
         private String audience;
 

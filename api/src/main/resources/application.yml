@@ -36,7 +36,7 @@ auth:
   security:
     jwt:
       issuer: "testproj-auth"
-      access-token:
+      access-token-props:
         audience: "testproj-api"
         ttl-seconds: 900
       keystore:
