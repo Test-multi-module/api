@@ -1,7 +1,6 @@
 package net.testproj.tests.integ;
 
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -21,7 +20,7 @@ import java.util.Map;
 class ApiApplicationTests extends IntegTestBase {
     @Autowired private CustomOAuth2SuccessHandler handler;
 
-    @Test@Disabled
+    @Test
     void successHandlerLogic() throws IOException {
         Map<String, Object> claims = Map.of(
                 "sub", "123",

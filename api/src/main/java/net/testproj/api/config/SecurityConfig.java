@@ -7,10 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,10 +17,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
-@EnableMethodSecurity//Для работы @PreAuthorize нужно включить глобальное управление безопасностью
+@EnableMethodSecurity
 @AllArgsConstructor
-@EnableWebSecurity//Включает поддержку Spring Security. Если её не указать, то Spring Security не будет работать.
-@EnableGlobalMethodSecurity(prePostEnabled = true)//Разрешает аннотации уровня метода, такие как @PreAuthorize("hasRole('ADMIN')") и т.д
 public class SecurityConfig {
 
     private final AuthUserService authUserService;
