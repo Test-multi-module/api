@@ -1,10 +1,5 @@
 package net.testproj.auth.security;
 
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.security.SignatureException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.testproj.auth.config.JwtProps;
@@ -51,21 +46,5 @@ public class JwtService {
 
         JwtEncoderParameters params = JwtEncoderParameters.from(jwsHeader, claims.build());
         return jwtEncoder.encode(params).getTokenValue();
-    }
-
-    public String validateAndExtractUserName(String token) {
-        try {
-            return Jwts.parserBuilder()//.setSigningKey(key)
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
-        }catch(MalformedJwtException e){//todo Custom exception and process it via ControllerAdvice
-            throw new MalformedJwtException("TODO if needed MalformedJwtException processing");
-        }catch(SignatureException e){
-            throw new SignatureException("TODO if needed SignatureException processing");
-        }catch (ExpiredJwtException e) {
-            throw new JwtException("TODO if needed ExpiredJwtException processing");
-        }
     }
 }
