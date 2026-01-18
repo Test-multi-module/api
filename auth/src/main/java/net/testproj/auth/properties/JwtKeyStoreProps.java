@@ -1,4 +1,4 @@
-package net.testproj.auth.config;
+package net.testproj.auth.properties;
 
 import lombok.Getter;import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

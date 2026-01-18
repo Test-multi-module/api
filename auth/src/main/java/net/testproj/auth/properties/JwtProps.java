@@ -1,4 +1,4 @@
-package net.testproj.auth.config;
+package net.testproj.auth.properties;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

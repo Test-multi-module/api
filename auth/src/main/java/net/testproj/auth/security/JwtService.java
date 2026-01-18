@@ -2,7 +2,7 @@ package net.testproj.auth.security;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.testproj.auth.config.JwtProps;
+import net.testproj.auth.properties.JwtProps;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
