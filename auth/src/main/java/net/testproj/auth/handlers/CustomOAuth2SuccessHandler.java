@@ -1,6 +1,6 @@
 package net.testproj.auth.handlers;
 
-import net.testproj.auth.security.JwtService;
+import net.testproj.auth.services.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;

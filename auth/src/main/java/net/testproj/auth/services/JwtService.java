@@ -1,4 +1,4 @@
-package net.testproj.auth.security;
+package net.testproj.auth.services;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

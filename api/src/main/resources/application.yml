@@ -33,6 +33,7 @@ api:
       issuer: "testproj-auth"
       audience: "testproj-api"
 auth:
+  redirect-url: ${LOGIN_REDIRECT_URL}
   security:
     jwt:
       issuer: "testproj-auth"
