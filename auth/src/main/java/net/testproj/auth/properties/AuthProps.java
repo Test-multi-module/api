@@ -15,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 public class AuthProps {
 
     @NotBlank
-    private String redirectUrl;
+    private String loginRedirectUrl;
 
     @NotNull
     @Positive

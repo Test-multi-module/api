@@ -1,9 +1,10 @@
 package net.testproj.auth.handlers;
 
-import net.testproj.auth.services.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import net.testproj.auth.properties.AuthProps;
+import net.testproj.auth.services.LoginCodeService;
 import net.testproj.db.auth.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -11,20 +12,21 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Map;
 
 @Component
 @AllArgsConstructor
 public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
-    private final JwtService jwtService;
+    private final LoginCodeService loginCodeService;
 
     private final OAuth2AccountDS oAuth2AccountDS;
     private final AuthUserDS authUserDS;
+    private final AuthProps authProps;
 
 
     @Override
@@ -73,8 +75,14 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             oAuth2AccountDS.insert(oAuth2Account);
         }
 
-        String jwt = jwtService.issueAccessToken(oAuth2Account.getUserId().toString(), new ArrayList<>());
+        String loginCode = loginCodeService.issue(oAuth2Account.getUserId().toString());
 
-        response.getWriter().write(jwt);
+        String redirectUrl = UriComponentsBuilder
+                .fromUriString(authProps.getLoginRedirectUrl())
+                .queryParam("code", loginCode)
+                .build(true)//говорит Spring’у:«НЕ трогай и НЕ перекодируй уже готовые части URL».
+                .toUriString();
+
+        response.sendRedirect(redirectUrl);//cам ставит 302 статус и locationHeader
     }
 }

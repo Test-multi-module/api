@@ -33,7 +33,7 @@ api:
       issuer: "testproj-auth"
       audience: "testproj-api"
 auth:
-  redirect-url: ${LOGIN_REDIRECT_URL}
+  login-redirect-url: ${LOGIN_REDIRECT_URL}
   login-code-ttl-seconds: 60
   login-code-pepper: ${LOGIN_CODE_PEPPER}
   security:
