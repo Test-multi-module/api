@@ -3,6 +3,7 @@ package net.testproj.auth.config;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
+import net.testproj.auth.properties.AuthProps;
 import net.testproj.auth.properties.JwtKeyStoreProps;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,7 @@ import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
 
 @Configuration
-@EnableConfigurationProperties(JwtKeyStoreProps.class)
+@EnableConfigurationProperties({JwtKeyStoreProps.class, AuthProps.class})
 public class AuthJwtConfig {
     private final ResourceLoader resourceLoader;
 
