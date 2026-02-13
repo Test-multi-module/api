@@ -1,11 +1,15 @@
 spring:
+  docker:
+    compose:
+      enabled: true
+      file: docker-compose.yml
   flyway:
     enabled: false
   datasource:
-      url: ${DB_URL}
-      username: ${DB_USER_NAME}
-      password: ${DB_PASSWORD}
-      driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USER_NAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
   security:
     oauth2:
       client:
@@ -29,7 +33,7 @@ api:
         location: classpath:keys/dev-truststore.p12
         store-password: ${JWT_TRUSTSTORE_PASSWORD}
         type: PKCS12
-        alias: dev-cert
+        alias: jwt-public-key
       issuer: "testproj-auth"
       audience: "testproj-api"
 auth:
@@ -46,5 +50,5 @@ auth:
         type: PKCS12
         location: classpath:keys/dev-keystore.p12
         store-password: ${JWT_KEYSTORE_PASSWORD}
-        key-alias: dev-keypair
+        key-alias: jwt-key-pair
         key-password: ${JWT_KEY_PASSWORD}
