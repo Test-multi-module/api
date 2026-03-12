@@ -31,7 +31,7 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipDocker
 
       - name: List api target
         run: ls -la api/target

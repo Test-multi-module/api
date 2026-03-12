@@ -30,57 +30,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.5.0</version>
-                <executions>
-                    <execution>
-                        <id>docker-compose-up</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>docker</executable>
-                            <arguments>
-                                <argument>compose</argument>
-                                <argument>-f</argument>
-                                <argument>${project.basedir}/../../docker-compose.yml</argument>
-                                <argument>up</argument>
-                                <argument>-d</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>wait-for-db</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <echo message="Waiting for database container healthcheck to become healthy (testproj_db)..."/>
-                                <exec executable="powershell" osfamily="windows" failonerror="true">
-                                    <arg value="-Command"/>
-                                    <arg value="$deadline=(Get-Date).AddSeconds(60); while((Get-Date) -lt $deadline){ $s=(docker inspect -f '{{.State.Health.Status}}' testproj_db 2>$null); if($s -eq 'healthy'){ exit 0 }; Start-Sleep -Seconds 2 }; exit 1"/>
-                                </exec>
-                                <exec executable="sh" osfamily="unix" failonerror="true">
-                                    <arg value="-c"/>
-                                    <arg value="i=0; while [ $i -lt 30 ]; do s=$(docker inspect -f '{{.State.Health.Status}}' testproj_db 2>/dev/null || true); if [ x$s = xhealthy ]; then exit 0; fi; i=$((i+1)); sleep 2; done; exit 1"/>
-                                </exec>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>10.15.0</version>
@@ -224,4 +173,70 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>docker-db</id>
+            <activation>
+                <property>
+                    <name>!skipDocker</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.5.0</version>
+                        <executions>
+                            <execution>
+                                <id>docker-compose-up</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>docker</executable>
+                                    <arguments>
+                                        <argument>compose</argument>
+                                        <argument>-f</argument>
+                                        <argument>${project.basedir}/../../docker-compose.yml</argument>
+                                        <argument>up</argument>
+                                        <argument>-d</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>wait-for-db</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <echo message="Waiting for database container healthcheck to become healthy (testproj_db)..."/>
+                                        <exec executable="powershell" osfamily="windows" failonerror="true">
+                                            <arg value="-Command"/>
+                                            <arg value="$deadline=(Get-Date).AddSeconds(60); while((Get-Date) -lt $deadline){ $s=(docker inspect -f '{{.State.Health.Status}}' testproj_db 2>$null); if($s -eq 'healthy'){ exit 0 }; Start-Sleep -Seconds 2 }; exit 1"/>
+                                        </exec>
+                                        <exec executable="sh" osfamily="unix" failonerror="true">
+                                            <arg value="-c"/>
+                                            <arg value="i=0; while [ $i -lt 30 ]; do s=$(docker inspect -f '{{.State.Health.Status}}' testproj_db 2>/dev/null || true); if [ x$s = xhealthy ]; then exit 0; fi; i=$((i+1)); sleep 2; done; exit 1"/>
+                                        </exec>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
