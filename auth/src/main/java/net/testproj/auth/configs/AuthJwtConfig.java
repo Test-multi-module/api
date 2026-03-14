@@ -1,4 +1,4 @@
-package net.testproj.auth.config;
+package net.testproj.auth.configs;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;

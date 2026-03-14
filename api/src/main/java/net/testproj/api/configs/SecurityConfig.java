@@ -1,4 +1,4 @@
-package net.testproj.api.config;
+package net.testproj.api.configs;
 
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import lombok.AllArgsConstructor;

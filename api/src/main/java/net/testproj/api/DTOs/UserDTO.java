@@ -1,4 +1,4 @@
-package net.testproj.api.dtos.models;
+package net.testproj.api.DTOs;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
+//todo скорее всего перейду на использование аннотации @Data которая обьединяет геттеры сеттеры toString и т.д.
 public class UserDTO {
     private UUID id;
     private Date dayOfBirth;

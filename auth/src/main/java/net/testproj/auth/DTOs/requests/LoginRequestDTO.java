@@ -1,4 +1,4 @@
-package net.testproj.auth.models;
+package net.testproj.auth.DTOs.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter@Setter
-public class LoginRequest {
+public class LoginRequestDTO {
     private UUID userid;
     private String password;
 }

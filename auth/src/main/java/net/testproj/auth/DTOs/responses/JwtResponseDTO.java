@@ -1,4 +1,4 @@
-package net.testproj.auth.models;
+package net.testproj.auth.DTOs.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,6 +6,6 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @Getter@Setter
-public class JwtResponse {
+public class JwtResponseDTO {
     private String token;
 }

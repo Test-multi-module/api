@@ -1,4 +1,4 @@
-package net.testproj.api.config;
+package net.testproj.api.configs;
 
 import io.beanmapper.BeanMapper;
 import io.beanmapper.config.BeanMapperBuilder;

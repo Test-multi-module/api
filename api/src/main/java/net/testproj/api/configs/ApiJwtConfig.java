@@ -1,4 +1,4 @@
-package net.testproj.api.config;
+package net.testproj.api.configs;
 
 import net.testproj.api.properties.JwtProps;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -1,6 +1,6 @@
 package net.testproj.api.services;
 
-import net.testproj.api.dtos.models.UserDTO;
+import net.testproj.api.DTOs.UserDTO;
 import net.testproj.db.pb.UserDS;
 import io.beanmapper.BeanMapper;
 import lombok.AllArgsConstructor;
