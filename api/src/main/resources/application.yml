@@ -30,7 +30,7 @@ api:
   security:
     jwt:
       truststore:
-        location: classpath:keys/dev-truststore.p12
+        location: ${TRUST_STORE_PATH}
         store-password: ${JWT_TRUSTSTORE_PASSWORD}
         type: PKCS12
         alias: jwt-public-key
@@ -48,7 +48,7 @@ auth:
         ttl-seconds: 900
       keystore:
         type: PKCS12
-        location: classpath:keys/dev-keystore.p12
+        location: ${KEY_STORE_PATH}
         store-password: ${JWT_KEYSTORE_PASSWORD}
         key-alias: jwt-key-pair
         key-password: ${JWT_KEY_PASSWORD}
