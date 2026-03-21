@@ -33,7 +33,7 @@ api:
         location: ${TRUST_STORE_PATH}
         store-password: ${JWT_TRUSTSTORE_PASSWORD}
         type: PKCS12
-        alias: jwt-public-key
+        alias: ${ALIAS}
       issuer: "testproj-auth"
       audience: "testproj-api"
 auth:
@@ -50,5 +50,5 @@ auth:
         type: PKCS12
         location: ${KEY_STORE_PATH}
         store-password: ${JWT_KEYSTORE_PASSWORD}
-        key-alias: jwt-key-pair
+        key-alias: ${KEY_ALIAS}
         key-password: ${JWT_KEY_PASSWORD}
