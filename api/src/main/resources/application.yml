@@ -28,6 +28,8 @@ logging:
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 api:
   security:
+    cors:
+      allowed-origins: ${CORS_ALLOWED_ORIGINS}
     jwt:
       truststore:
         location: ${TRUST_STORE_PATH}

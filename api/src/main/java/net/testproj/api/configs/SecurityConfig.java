@@ -1,7 +1,9 @@
 package net.testproj.api.configs;
 
+import net.testproj.api.properties.CorsProps;
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -19,9 +21,11 @@ import java.util.List;
 
 @Configuration
 @EnableMethodSecurity
+@EnableConfigurationProperties(CorsProps.class)
 @AllArgsConstructor
 public class SecurityConfig {
     private final CustomOAuth2SuccessHandler successHandler;
+    private final CorsProps corsProps;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -40,7 +44,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://client.testproj.net", "http://localhost:3000"));
+        configuration.setAllowedOrigins(corsProps.getAllowedOrigins());
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("Authorization", "Content-Type"));
