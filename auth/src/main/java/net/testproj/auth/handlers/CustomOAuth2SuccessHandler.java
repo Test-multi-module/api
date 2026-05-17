@@ -84,6 +84,5 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
                 .toUriString();
 
         response.sendRedirect(redirectUrl);//cам ставит 302 статус и locationHeader
-        //todo анализ можно ли как-то протестить что и куда я редирекчу , бо какая-то игра в воду
     }
 }
