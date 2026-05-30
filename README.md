@@ -30,3 +30,14 @@
 * `db`: Database access layer (Data Services).
 * `db/schema`: Database schema definitions, Flyway migrations, and jOOQ code generation configuration.
 * `test`: Integration and component tests.
+
+
+## Java version
+
+The project uses Java 21.
+
+Recommended local setup:
+- Project SDK: Java 21
+- Maven Runner JRE: Java 21
+
+Using the same JDK version for the project and Maven is recommended to avoid local build inconsistencies.

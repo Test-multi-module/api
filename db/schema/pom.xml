@@ -49,7 +49,7 @@
                     <execution>
                         <id>auth-migration</id>
                         <goals><goal>migrate</goal></goals>
-                        <phase>validate</phase>
+                        <phase>generate-sources</phase>
                         <configuration>
                             <url>${db.url}</url>
                             <user>${db.user}</user>
@@ -68,7 +68,7 @@
                     <execution>
                         <id>public-migration</id>
                         <goals><goal>migrate</goal></goals>
-                        <phase>validate</phase>
+                        <phase>generate-sources</phase>
                         <configuration>
                             <url>${db.url}</url>
                             <user>${db.user}</user>
@@ -120,7 +120,8 @@
                                 </generate>
                                 <target>
                                     <packageName>net.testproj.db.pb</packageName>
-                                    <directory>${project.build.directory}/generated-sources/jooq</directory>                                </target>
+                                    <directory>${project.build.directory}/generated-sources/jooq</directory>
+                                </target>
                             </generator>
                         </configuration>
                     </execution>
