@@ -1,7 +1,7 @@
 spring:
   docker:
     compose:
-      enabled: true
+      enabled: ${SPRING_DOCKER_COMPOSE_ENABLED:false}
       file: docker-compose.yml
   flyway:
     enabled: false
