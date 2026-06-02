@@ -28,7 +28,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <!-- todo: tofix the CVE issue org.springframework.boot in server pom should be uprgated when it possible-->
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-client</artifactId>
             <scope>provided</scope>
