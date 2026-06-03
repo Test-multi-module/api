@@ -133,7 +133,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>add-jooq-sources</id>
@@ -165,7 +164,6 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <version>3.5.0</version>
                         <executions>
                             <execution>
                                 <id>docker-compose-up</id>
@@ -189,7 +187,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>wait-for-db</id>
