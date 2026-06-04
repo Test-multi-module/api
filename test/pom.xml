@@ -62,13 +62,11 @@
         <dependency>
             <groupId>net.testproj.api</groupId>
             <artifactId>api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.testproj.auth</groupId>
             <artifactId>auth</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

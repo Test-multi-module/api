@@ -21,6 +21,8 @@
         <postgresql.version>42.7.3</postgresql.version>
         <flyway.version>10.15.0</flyway.version>
         <jooq.version>3.19.13</jooq.version>
+
+        <testproj.version>0.0.1-SNAPSHOT</testproj.version>
     </properties>
 
     <modules>
@@ -69,26 +71,6 @@
                 <version>6.0.0</version>
             </dependency>
             <dependency>
-                <groupId>net.testproj.db.model</groupId>
-                <artifactId>model</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>net.testproj.db.ds</groupId>
-                <artifactId>ds</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>net.testproj.db.schema</groupId>
-                <artifactId>schema</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>net.testproj.auth</groupId>
-                <artifactId>auth</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
@@ -109,6 +91,31 @@
                 <groupId>com.github.f4b6a3</groupId>
                 <artifactId>uuid-creator</artifactId>
                 <version>6.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>net.testproj.db.model</groupId>
+                <artifactId>model</artifactId>
+                <version>${testproj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.testproj.db.ds</groupId>
+                <artifactId>ds</artifactId>
+                <version>${testproj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.testproj.db.schema</groupId>
+                <artifactId>schema</artifactId>
+                <version>${testproj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.testproj.auth</groupId>
+                <artifactId>auth</artifactId>
+                <version>${testproj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.testproj.api</groupId>
+                <artifactId>api</artifactId>
+                <version>${testproj.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
