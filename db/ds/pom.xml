@@ -13,24 +13,24 @@
 
     <dependencies>
         <dependency>
-            <groupId>net.testproj.db.schema</groupId>
-            <artifactId>schema</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.testproj.db.model</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.github.f4b6a3</groupId>
             <artifactId>uuid-creator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.testproj.db.schema</groupId>
+            <artifactId>schema</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.testproj.db.model</groupId>
+            <artifactId>model</artifactId>
         </dependency>
     </dependencies>
 </project>
