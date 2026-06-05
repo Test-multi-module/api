@@ -25,17 +25,20 @@ import java.util.List;
 public class SecurityConfig {
     private final CorsProps corsProps;
 
+
     @Bean
     public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http)  {
         //todo : анализ и изучене, что надо что не надо теперь, когда этот фильтр чейн только под api
-        return http.authorizeHttpRequests(authz -> authz
+        return http
+                .securityMatcher("/api/**")
+                .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/private/**").authenticated()
                         .anyRequest().permitAll())
-                .cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())//todo изучить что это и для чего оно  надо и почему мне достаточно дефолтов
+                .csrf(AbstractHttpConfigurer::disable)//todo изучить что это и для чего оно бывает надо и почему мне не надо
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .build();
     }
 

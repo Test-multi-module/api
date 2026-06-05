@@ -29,10 +29,21 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain authSecurityFilterChain(HttpSecurity http)  {
-        //todo : анализ и изучене, что надо что не надо теперь, когда этот фильтр чейн только под auth
-        return http.authorizeHttpRequests(authz -> authz.anyRequest().permitAll())
-                .cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
+        return http
+                .securityMatcher(//todo: не забывать обновлять матчер при необходимости
+                        "/auth/**",
+                        "/oauth2/**",
+                        "/login/oauth2/**"
+                )
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers(
+                                "/auth/exchange",
+                                "/oauth2/authorization/**",
+                                "/login/oauth2/code/**"
+                        ).permitAll()
+                        .anyRequest().denyAll())
+                .cors(Customizer.withDefaults())//todo изучить что это и для чего оно  надо и почему мне достаточно дефолтов
+                .csrf(AbstractHttpConfigurer::disable)//todo изучить что это и для чего оно бывает надо и почему мне не надо
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .oauth2Login(oauth2 -> oauth2.successHandler(successHandler))
