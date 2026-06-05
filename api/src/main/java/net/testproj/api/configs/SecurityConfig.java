@@ -1,6 +1,5 @@
-package net.testproj.auth.configs;
+package net.testproj.api.configs;
 
-import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import lombok.AllArgsConstructor;
 import net.testproj.auth.properties.CorsProps;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,27 +20,28 @@ import java.util.List;
 
 @Configuration
 @EnableMethodSecurity
-@EnableConfigurationProperties(CorsProps.class)//todo переместить в application yml в блок auth
+@EnableConfigurationProperties(CorsProps.class)//todo проследить что бы тут были только api настройки
 @AllArgsConstructor
 public class SecurityConfig {
-    private final CustomOAuth2SuccessHandler successHandler;
     private final CorsProps corsProps;
 
     @Bean
-    public SecurityFilterChain authSecurityFilterChain(HttpSecurity http)  {
-        //todo : анализ и изучене, что надо что не надо теперь, когда этот фильтр чейн только под auth
-        return http.authorizeHttpRequests(authz -> authz.anyRequest().permitAll())
+    public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http)  {
+        //todo : анализ и изучене, что надо что не надо теперь, когда этот фильтр чейн только под api
+        return http.authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/api/private/**").authenticated()
+                        .anyRequest().permitAll())
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-                .oauth2Login(oauth2 -> oauth2.successHandler(successHandler))
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
                 .build();
     }
 
     @Bean
-    public CorsConfigurationSource authCorsConfigurationSource() {
-        //todo : анализ и изучене, что надо что не надо теперь, когда этот фильтр чейн только под auth
+    public CorsConfigurationSource apiCorsConfigurationSource() {
+        //todo : анализ и изучене, что надо что не надо теперь, когда этот фильтр чейн только под api
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(corsProps.getAllowedOrigins());
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
