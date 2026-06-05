@@ -1,8 +1,8 @@
-package net.testproj.api.configs;
+package net.testproj.auth.configs;
 
-import net.testproj.api.properties.CorsProps;
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import lombok.AllArgsConstructor;
+import net.testproj.auth.properties.CorsProps;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +28,7 @@ public class SecurityConfig {
     private final CorsProps corsProps;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http)  {
         return http.authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/private/**").authenticated()
                         .anyRequest().permitAll())

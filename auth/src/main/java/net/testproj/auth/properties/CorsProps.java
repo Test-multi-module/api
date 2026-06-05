@@ -1,4 +1,4 @@
-package net.testproj.api.properties;
+package net.testproj.auth.properties;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
