@@ -42,8 +42,8 @@ public class SecurityConfig {
                                 "/login/oauth2/code/**"
                         ).permitAll()
                         .anyRequest().denyAll())
-                .cors(Customizer.withDefaults())//todo изучить что это и для чего оно  надо и почему мне достаточно дефолтов
-                .csrf(AbstractHttpConfigurer::disable)//todo изучить что это и для чего оно бывает надо и почему мне не надо
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .oauth2Login(oauth2 -> oauth2.successHandler(successHandler))

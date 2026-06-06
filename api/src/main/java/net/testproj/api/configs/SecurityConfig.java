@@ -34,8 +34,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/private/**").authenticated()
                         .anyRequest().permitAll())
-                .cors(Customizer.withDefaults())//todo изучить что это и для чего оно  надо и почему мне достаточно дефолтов
-                .csrf(AbstractHttpConfigurer::disable)//todo изучить что это и для чего оно бывает надо и почему мне не надо
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
