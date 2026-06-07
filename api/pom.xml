@@ -39,15 +39,15 @@
             <artifactId>beanmapper</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.testproj.auth</groupId>
+            <groupId>net.testproj</groupId>
             <artifactId>auth</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.testproj.db.ds</groupId>
+            <groupId>net.testproj.db</groupId>
             <artifactId>ds</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.testproj.db.model</groupId>
+            <groupId>net.testproj.db</groupId>
             <artifactId>model</artifactId>
         </dependency>
     </dependencies>

@@ -25,11 +25,11 @@
             <artifactId>uuid-creator</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.testproj.db.schema</groupId>
+            <groupId>net.testproj.db</groupId>
             <artifactId>schema</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.testproj.db.model</groupId>
+            <groupId>net.testproj.db</groupId>
             <artifactId>model</artifactId>
         </dependency>
     </dependencies>

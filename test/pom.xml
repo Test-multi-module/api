@@ -35,7 +35,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.testproj.db.schema</groupId>
+            <groupId>net.testproj.db</groupId>
             <artifactId>schema</artifactId>
             <scope>test</scope>
         </dependency>
@@ -60,12 +60,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.testproj.api</groupId>
+            <groupId>net.testproj</groupId>
             <artifactId>api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.testproj.auth</groupId>
+            <groupId>net.testproj</groupId>
             <artifactId>auth</artifactId>
             <scope>test</scope>
         </dependency>
