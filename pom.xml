@@ -67,32 +67,32 @@
                 <version>6.1.1</version>
             </dependency>
             <dependency>
-                <groupId>net.testproj.db.model</groupId>
+                <groupId>net.testproj.db</groupId>
                 <artifactId>model</artifactId>
                 <version>${testproj.version}</version>
             </dependency>
             <dependency>
-                <groupId>net.testproj.db.ds</groupId>
+                <groupId>net.testproj.db</groupId>
                 <artifactId>ds</artifactId>
                 <version>${testproj.version}</version>
             </dependency>
             <dependency>
-                <groupId>net.testproj.db.schema</groupId>
+                <groupId>net.testproj.db</groupId>
                 <artifactId>schema</artifactId>
                 <version>${testproj.version}</version>
             </dependency>
             <dependency>
-                <groupId>net.testproj.auth</groupId>
+                <groupId>net.testproj</groupId>
                 <artifactId>auth</artifactId>
                 <version>${testproj.version}</version>
             </dependency>
             <dependency>
-                <groupId>net.testproj.api</groupId>
+                <groupId>net.testproj</groupId>
                 <artifactId>api</artifactId>
                 <version>${testproj.version}</version>
             </dependency>
             <dependency>
-                <groupId>net.testproj.test</groupId>
+                <groupId>net.testproj</groupId>
                 <artifactId>test</artifactId>
                 <version>${testproj.version}</version>
             </dependency>

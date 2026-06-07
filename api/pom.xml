@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>api</artifactId>
-    <groupId>net.testproj.api</groupId>
 
     <dependencies>
         <dependency>
