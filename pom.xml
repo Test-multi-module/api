@@ -91,6 +91,11 @@
                 <artifactId>api</artifactId>
                 <version>${testproj.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.testproj.test</groupId>
+                <artifactId>test</artifactId>
+                <version>${testproj.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
