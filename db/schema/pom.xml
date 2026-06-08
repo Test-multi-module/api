@@ -31,20 +31,21 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <url>${db.url}</url>
+                    <user>${db.user}</user>
+                    <password>${db.password}</password>
+                    <driver>org.postgresql.Driver</driver>
+                    <createSchemas>true</createSchemas>
+                </configuration>
                 <executions>
                     <execution>
                         <id>auth-migration</id>
                         <goals><goal>migrate</goal></goals>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <url>${db.url}</url>
-                            <user>${db.user}</user>
-                            <password>${db.password}</password>
-
-                            <createSchemas>true</createSchemas>
                             <schemas>auth</schemas>
                             <defaultSchema>auth</defaultSchema>
-                            <driver>org.postgresql.Driver</driver>
                             <locations>
                                 <location>filesystem:src/main/resources/db/migration/auth</location>
                             </locations>
@@ -55,14 +56,8 @@
                         <goals><goal>migrate</goal></goals>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <url>${db.url}</url>
-                            <user>${db.user}</user>
-                            <password>${db.password}</password>
-
-                            <createSchemas>true</createSchemas>
                             <schemas>public</schemas>
                             <defaultSchema>public</defaultSchema>
-                            <driver>org.postgresql.Driver</driver>
                             <locations>
                                 <location>filesystem:src/main/resources/db/migration/public</location>
                             </locations>
