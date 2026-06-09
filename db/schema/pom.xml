@@ -17,6 +17,8 @@
         <db.user>${env.DB_USER_NAME}</db.user>
         <!--suppress UnresolvedMavenProperty -->
         <db.password>${env.DB_PASSWORD}</db.password>
+        <jooq.generated-sources.directory>${project.build.directory}/generated-sources/jooq</jooq.generated-sources.directory>
+        <db.driver>org.postgresql.Driver</db.driver>
     </properties>
 
     <dependencies>
@@ -35,7 +37,7 @@
                     <url>${db.url}</url>
                     <user>${db.user}</user>
                     <password>${db.password}</password>
-                    <driver>org.postgresql.Driver</driver>
+                    <driver>${db.driver}</driver>
                     <createSchemas>true</createSchemas>
                 </configuration>
                 <executions>
@@ -70,7 +72,7 @@
                 <artifactId>jooq-codegen-maven</artifactId>
                 <configuration>
                     <jdbc>
-                        <driver>org.postgresql.Driver</driver>
+                        <driver>${db.driver}</driver>
                         <url>${db.url}</url>
                         <user>${db.user}</user>
                         <password>${db.password}</password>
@@ -84,7 +86,7 @@
                             <tables>true</tables>
                         </generate>
                         <target>
-                            <directory>${project.build.directory}/generated-sources/jooq</directory>
+                            <directory>${jooq.generated-sources.directory}</directory>
                         </target>
                     </generator>
                 </configuration>
@@ -133,7 +135,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>${project.build.directory}/generated-sources/jooq</source>
+                                <source>${jooq.generated-sources.directory}</source>
                             </sources>
                         </configuration>
                     </execution>
