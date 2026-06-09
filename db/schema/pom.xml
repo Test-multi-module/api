@@ -68,30 +68,38 @@
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
+                <configuration>
+                    <jdbc>
+                        <driver>org.postgresql.Driver</driver>
+                        <url>${db.url}</url>
+                        <user>${db.user}</user>
+                        <password>${db.password}</password>
+                    </jdbc>
+                    <generator>
+                        <name>org.jooq.codegen.JavaGenerator</name>
+                        <database>
+                            <name>org.jooq.meta.postgres.PostgresDatabase</name>
+                        </database>
+                        <generate>
+                            <tables>true</tables>
+                        </generate>
+                        <target>
+                            <directory>${project.build.directory}/generated-sources/jooq</directory>
+                        </target>
+                    </generator>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
                         <id>generate-public</id>
                         <goals><goal>generate</goal></goals>
                         <configuration>
-                            <jdbc>
-                                <driver>org.postgresql.Driver</driver>
-                                <url>${db.url}</url>
-                                <user>${db.user}</user>
-                                <password>${db.password}</password>
-                            </jdbc>
                             <generator>
-                                <name>org.jooq.codegen.JavaGenerator</name>
                                 <database>
-                                    <name>org.jooq.meta.postgres.PostgresDatabase</name>
                                     <inputSchema>public</inputSchema>
                                 </database>
-                                <generate>
-                                    <tables>true</tables>
-                                </generate>
                                 <target>
                                     <packageName>net.testproj.db.pb</packageName>
-                                    <directory>${project.build.directory}/generated-sources/jooq</directory>
                                 </target>
                             </generator>
                         </configuration>
@@ -101,24 +109,13 @@
                         <id>generate-auth</id>
                         <goals><goal>generate</goal></goals>
                         <configuration>
-                            <jdbc>
-                                <driver>org.postgresql.Driver</driver>
-                                <url>${db.url}</url>
-                                <user>${db.user}</user>
-                                <password>${db.password}</password>
-                            </jdbc>
                             <generator>
-                                <name>org.jooq.codegen.JavaGenerator</name>
                                 <database>
-                                    <name>org.jooq.meta.postgres.PostgresDatabase</name>
                                     <inputSchema>auth</inputSchema>
                                 </database>
-                                <generate>
-                                    <tables>true</tables>
-                                </generate>
                                 <target>
                                     <packageName>net.testproj.db.auth</packageName>
-                                    <directory>${project.build.directory}/generated-sources/jooq</directory>                                </target>
+                                </target>
                             </generator>
                         </configuration>
                     </execution>
