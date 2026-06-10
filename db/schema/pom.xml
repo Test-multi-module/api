@@ -147,11 +147,6 @@
     <profiles>
         <profile>
             <id>docker-db</id>
-            <activation>
-                <property>
-                    <name>!skipDocker</name>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -169,7 +164,7 @@
                                     <arguments>
                                         <argument>compose</argument>
                                         <argument>-f</argument>
-                                        <argument>${project.basedir}/../../docker-compose.yml</argument>
+                                        <argument>${project.basedir}/../../local-development/docker-compose.yml</argument>
                                         <argument>up</argument>
                                         <argument>-d</argument>
                                     </arguments>
