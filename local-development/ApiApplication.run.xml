@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="ACTIVE_PROFILES" value="local" />
     <envs>
       <env name="ALIAS" value="jwt-public-key" />
       <env name="CORS_ALLOWED_ORIGINS" value="http://localhost:4200" />
@@ -15,7 +16,6 @@
       <env name="KEY_STORE_PATH" value="classpath:keys/dev-keystore.p12" />
       <env name="LOGIN_CODE_PEPPER" value="123456789poiuytrew987654321" />
       <env name="LOGIN_REDIRECT_URL" value="https://client.testproj.net/auth/callback" />
-      <env name="SPRING_DOCKER_COMPOSE_ENABLED" value="true" />
       <env name="TRUST_STORE_PATH" value="classpath:keys/dev-truststore.p12" />
     </envs>
     <module name="api" />

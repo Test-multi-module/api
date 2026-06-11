@@ -1,8 +1,4 @@
 spring:
-  docker:
-    compose:
-      enabled: ${SPRING_DOCKER_COMPOSE_ENABLED:false}
-      file: local-development/docker-compose.yml
   datasource:
     url: ${DB_URL}
     username: ${DB_USER_NAME}
