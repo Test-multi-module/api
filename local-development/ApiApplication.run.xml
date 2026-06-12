@@ -15,7 +15,7 @@
       <env name="KEY_ALIAS" value="jwt-key-pair" />
       <env name="KEY_STORE_PATH" value="classpath:keys/dev-keystore.p12" />
       <env name="LOGIN_CODE_PEPPER" value="123456789poiuytrew987654321" />
-      <env name="LOGIN_REDIRECT_URL" value="https://client.testproj.net/auth/callback" />
+      <env name="LOGIN_REDIRECT_URL" value="http://localhost:4200/auth/callback" />
       <env name="TRUST_STORE_PATH" value="classpath:keys/dev-truststore.p12" />
     </envs>
     <module name="api" />
