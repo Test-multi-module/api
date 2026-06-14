@@ -154,6 +154,22 @@
                         <artifactId>exec-maven-plugin</artifactId>
                         <executions>
                             <execution>
+                                <id>start-docker-desktop</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>powershell</executable>
+                                    <arguments>
+                                        <argument>-ExecutionPolicy</argument>
+                                        <argument>Bypass</argument>
+                                        <argument>-File</argument>
+                                        <argument>${project.basedir}/../../local-development/start-docker-desktop.ps1</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
                                 <id>docker-compose-up</id>
                                 <phase>validate</phase>
                                 <goals>
@@ -188,10 +204,6 @@
                                         <exec executable="powershell" osfamily="windows" failonerror="true">
                                             <arg value="-Command"/>
                                             <arg value="$deadline=(Get-Date).AddSeconds(60); while((Get-Date) -lt $deadline){ $s=(docker inspect -f '{{.State.Health.Status}}' testproj_db 2>$null); if($s -eq 'healthy'){ exit 0 }; Start-Sleep -Seconds 2 }; exit 1"/>
-                                        </exec>
-                                        <exec executable="sh" osfamily="unix" failonerror="true">
-                                            <arg value="-c"/>
-                                            <arg value="i=0; while [ $i -lt 30 ]; do s=$(docker inspect -f '{{.State.Health.Status}}' testproj_db 2>/dev/null || true); if [ x$s = xhealthy ]; then exit 0; fi; i=$((i+1)); sleep 2; done; exit 1"/>
                                         </exec>
                                     </target>
                                 </configuration>
