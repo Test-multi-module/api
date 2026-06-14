@@ -154,7 +154,7 @@
                         <artifactId>exec-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>start-docker-desktop</id>
+                                <id>check-docker</id>
                                 <phase>validate</phase>
                                 <goals>
                                     <goal>exec</goal>
@@ -165,7 +165,7 @@
                                         <argument>-ExecutionPolicy</argument>
                                         <argument>Bypass</argument>
                                         <argument>-File</argument>
-                                        <argument>${project.basedir}/../../local-development/start-docker-desktop.ps1</argument>
+                                        <argument>${project.basedir}/../../local-development/check-docker.ps1</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
