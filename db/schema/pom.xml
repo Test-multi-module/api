@@ -146,9 +146,31 @@
 
     <profiles>
         <profile>
-            <id>docker-db</id>
+            <id>windows-docker-db</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>ensure-windows-for-profile</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <condition property="is.windows">
+                                            <os family="windows"/>
+                                        </condition>
+                                        <fail unless="is.windows"
+                                              message="Maven profile 'widows-docker-db' is intended for Windows local development only. Do not use this run configuration on Linux/macOS."/>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
@@ -186,26 +208,18 @@
                                     </arguments>
                                 </configuration>
                             </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
                             <execution>
                                 <id>wait-for-db</id>
                                 <phase>validate</phase>
                                 <goals>
-                                    <goal>run</goal>
+                                    <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <target>
-                                        <echo message="Waiting for database container healthcheck to become healthy (testproj_db)..."/>
-                                        <exec executable="powershell" osfamily="windows" failonerror="true">
-                                            <arg value="-Command"/>
-                                            <arg value="$deadline=(Get-Date).AddSeconds(60); while((Get-Date) -lt $deadline){ $s=(docker inspect -f '{{.State.Health.Status}}' testproj_db 2>$null); if($s -eq 'healthy'){ exit 0 }; Start-Sleep -Seconds 2 }; exit 1"/>
-                                        </exec>
-                                    </target>
+                                    <executable>powershell</executable>
+                                    <arguments>
+                                        <argument>-Command</argument>
+                                        <argument>$deadline=(Get-Date).AddSeconds(60); while((Get-Date) -lt $deadline){ $s=(docker inspect -f '{{.State.Health.Status}}' testproj_db 2&gt;$null); if($s -eq 'healthy'){ exit 0 }; Start-Sleep -Seconds 2 }; exit 1</argument>
+                                    </arguments>
                                 </configuration>
                             </execution>
                         </executions>

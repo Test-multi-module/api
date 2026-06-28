@@ -31,7 +31,7 @@
             <list>
               <option value="clean" />
               <option value="install" />
-              <option value="-Pdocker-db" />
+              <option value="-Pwindows-docker-db" />
             </list>
           </option>
           <option name="multimoduleDir" />
