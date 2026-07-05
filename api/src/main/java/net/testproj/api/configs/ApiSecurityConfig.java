@@ -28,7 +28,6 @@ public class ApiSecurityConfig {
 
     @Bean
     public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http)  {
-        //todo : анализ и изучене, что надо что не надо теперь, когда этот фильтр чейн только под api
         return http
                 .securityMatcher("/api/**")
                 .authorizeHttpRequests(authz -> authz
