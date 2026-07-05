@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
-@ConfigurationProperties(prefix = "api.security.cors")
+@ConfigurationProperties(prefix = "auth.security.cors")
 @Getter
 @Setter
 @Validated
