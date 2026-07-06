@@ -1,4 +1,4 @@
-package net.testproj.db.pb;
+package net.testproj.db.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

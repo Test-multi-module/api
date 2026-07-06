@@ -31,17 +31,13 @@ public class OAuth2AccountDS {
         jooq.insertInto(OAUTH2_ACCOUNTS).set(jooq.newRecord(OAUTH2_ACCOUNTS, obj)).execute();
     }
 
-    public void update(UUID id, String email, boolean emailVarified, Instant lastLoginAt,
-                       String providerAvatarUrl, String givenName, String familyName){
+    public void update(UUID id, String email, boolean emailVarified, String givenName, String familyName){
 
         jooq.update(OAUTH2_ACCOUNTS)
-                .set(OAUTH2_ACCOUNTS.PROVIDER_AVATAR_URL, providerAvatarUrl)
                 .set(OAUTH2_ACCOUNTS.EMAIL_AT_PROVIDER, email)
                 .set(OAUTH2_ACCOUNTS.GIVEN_NAME, givenName)
                 .set(OAUTH2_ACCOUNTS.FAMILY_NAME, familyName)
                 .set(OAUTH2_ACCOUNTS.EMAIL_VERIFIED, emailVarified)
-                .set(OAUTH2_ACCOUNTS.UPDATED_AT, Instant.now().atOffset(ZoneOffset.UTC))
-                .set(OAUTH2_ACCOUNTS.LAST_LOGIN_AT, lastLoginAt.atOffset(ZoneOffset.UTC))
                 .where(OAUTH2_ACCOUNTS.ID.eq(id)).execute();
 
     }

@@ -55,12 +55,10 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         OAuth2Account oAuth2Account = oAuth2AccountDS.getByProviderUserIdAndProvider(providerUserId, provider);
         if (oAuth2Account != null) {
-            oAuth2AccountDS.update(oAuth2Account.getId(), email, emailVerified, Instant.now(),
-                    pictureUrl, givenName, familyName);
-            authUserDS.update(oAuth2Account.getUserId(), email);
+            oAuth2AccountDS.update(oAuth2Account.getId(), email, emailVerified, givenName, familyName);
         } else {
 
-            User user = authUserDS.insert(User.builder().email(email).build());
+            User user = authUserDS.insert(User.builder().build());
 
             oAuth2Account = OAuth2Account.builder()
                     .userId(user.getId())

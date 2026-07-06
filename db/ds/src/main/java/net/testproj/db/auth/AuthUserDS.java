@@ -25,8 +25,4 @@ public class AuthUserDS {
         jooq.insertInto(USERS).set(jooq.newRecord(USERS, obj)).execute();
         return jooq.select().from(USERS).where(USERS.ID.eq(id)).fetchInto(User.class).getFirst();
     }
-
-    public void update(UUID id, String email){
-        jooq.update(USERS).set(USERS.EMAIL, email).where(USERS.ID.eq(id)).execute();
-    }
 }

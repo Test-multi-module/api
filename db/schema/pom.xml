@@ -54,14 +54,14 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>public-migration</id>
+                        <id>api-migration</id>
                         <goals><goal>migrate</goal></goals>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <schemas>public</schemas>
-                            <defaultSchema>public</defaultSchema>
+                            <schemas>api</schemas>
+                            <defaultSchema>api</defaultSchema>
                             <locations>
-                                <location>filesystem:src/main/resources/db/migration/public</location>
+                                <location>filesystem:src/main/resources/db/migration/api</location>
                             </locations>
                         </configuration>
                     </execution>
@@ -93,15 +93,15 @@
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
-                        <id>generate-public</id>
+                        <id>generate-api</id>
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <generator>
                                 <database>
-                                    <inputSchema>public</inputSchema>
+                                    <inputSchema>api</inputSchema>
                                 </database>
                                 <target>
-                                    <packageName>net.testproj.db.pb</packageName>
+                                    <packageName>net.testproj.db.api</packageName>
                                 </target>
                             </generator>
                         </configuration>
