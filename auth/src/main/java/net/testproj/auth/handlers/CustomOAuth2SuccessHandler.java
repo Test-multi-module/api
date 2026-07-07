@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import net.testproj.auth.properties.AuthProps;
 import net.testproj.auth.services.LoginCodeService;
 import net.testproj.db.auth.*;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -15,8 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.util.Map;
 
 @Component
 @AllArgsConstructor
@@ -25,14 +24,14 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
     private final LoginCodeService loginCodeService;
 
     private final OAuth2AccountDS oAuth2AccountDS;
-    private final AuthUserDS authUserDS;
+    private final UserDS userDS;
     private final AuthProps authProps;
 
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response,
-                                        Authentication authentication) throws IOException {
+    public void onAuthenticationSuccess(@NonNull HttpServletRequest request,
+                                        @NonNull HttpServletResponse response,
+                                        @NonNull Authentication authentication) throws IOException {
         if (!(authentication instanceof OAuth2AuthenticationToken token)) {
             throw new IllegalStateException("Expected OAuth2AuthenticationToken but got: " + authentication.getClass());
         }
@@ -40,26 +39,22 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         String provider = token.getAuthorizedClientRegistrationId();
 
         OAuth2User oAuth2User = token.getPrincipal();
-        Map<String, Object> attrs = oAuth2User.getAttributes();
-
         if (!(oAuth2User instanceof OidcUser oidcUser)) {
             throw new IllegalStateException("Expected OIDC user");
         }
 
-        String providerUserId = String.valueOf(attrs.get("sub"));
-        String email = String.valueOf(attrs.get("email"));
+        String providerUserId = oidcUser.getSubject();
+        String email = oidcUser.getEmail();
         boolean emailVerified = Boolean.TRUE.equals(oidcUser.getEmailVerified());
-        String familyName = (String) attrs.get("family_name");
-        String givenName = (String) attrs.get("given_name");
-        String pictureUrl = (String) attrs.get("picture");
+        String familyName = oidcUser.getFamilyName();
+        String givenName = oidcUser.getGivenName();
+        String pictureUrl = oidcUser.getPicture();
 
         OAuth2Account oAuth2Account = oAuth2AccountDS.getByProviderUserIdAndProvider(providerUserId, provider);
         if (oAuth2Account != null) {
             oAuth2AccountDS.update(oAuth2Account.getId(), email, emailVerified, givenName, familyName);
         } else {
-
-            User user = authUserDS.insert(User.builder().build());
-
+            User user = userDS.insert(User.builder().build());
             oAuth2Account = OAuth2Account.builder()
                     .userId(user.getId())
                     .provider(provider)

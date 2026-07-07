@@ -4,20 +4,17 @@ import com.github.f4b6a3.uuid.UuidCreator;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.ZoneOffset;
 import java.util.UUID;
 
-import static net.testproj.db.auth.tables.Oauth2Accounts.OAUTH2_ACCOUNTS;
 import static net.testproj.db.auth.tables.Users.USERS;
 
 
 @Service
-public class AuthUserDS {
+public class UserDS {
 
     protected final DSLContext jooq;
 
-    public AuthUserDS(DSLContext dsl) {this.jooq = dsl;}
+    public UserDS(DSLContext dsl) {this.jooq = dsl;}
 
     public User insert(User obj){
         UUID id = UuidCreator.getTimeOrderedEpoch();
