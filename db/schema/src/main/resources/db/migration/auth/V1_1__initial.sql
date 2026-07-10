@@ -1,5 +1,6 @@
 CREATE TABLE users (
-    id uuid NOT NULL
+    id uuid NOT NULL,
+    profile_completed boolean NOT NULL
 );
 
 ALTER TABLE users ADD CONSTRAINT users_pkey PRIMARY KEY (id);
@@ -12,7 +13,7 @@ CREATE TABLE oauth2_accounts(
     provider_user_id varchar(255) NOT NULL,
 
     email_at_provider varchar(254) NOT NULL,
-    email_verified boolean NOT NULL default FALSE,
+    email_verified boolean NOT NULL,
 
     given_name text,
     family_name text

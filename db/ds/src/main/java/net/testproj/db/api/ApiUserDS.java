@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserDS {
+public class ApiUserDS {
 
     protected final DSLContext jooq;
-    public UserDS(DSLContext dsl) {this.jooq = dsl;}
+    public ApiUserDS(DSLContext dsl) {this.jooq = dsl;}
 }

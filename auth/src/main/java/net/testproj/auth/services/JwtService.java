@@ -25,7 +25,7 @@ public class JwtService {
     private final JwtEncoder jwtEncoder;
     private final JwtProps props;
 
-    public String issueAccessToken(String subject, Collection<String> roles) {
+    public String issueAccessToken(UUID userId, Collection<String> roles) {
         long ttl = props.getAccessTokenProps().getTtlSeconds();
 
         Instant now = Instant.now();
@@ -33,7 +33,7 @@ public class JwtService {
 
         JwtClaimsSet.Builder claims = JwtClaimsSet.builder()
                 .issuer(props.getIssuer())
-                .subject(subject)
+                .subject(userId.toString())
                 .issuedAt(now)
                 .expiresAt(exp)
                 .id(UUID.randomUUID().toString());

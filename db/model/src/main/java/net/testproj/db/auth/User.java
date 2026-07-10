@@ -16,11 +16,5 @@ import java.util.UUID;
 public class User {
 
     private UUID id;
-
-    private Instant createdAt;
-    private Instant updatedAt;
-    private Instant disabledAt;
-    private Instant deletedAt;
-
-    private String email;
+    private boolean profileCompleted;
 }

@@ -1,6 +1,7 @@
 package net.testproj.api.configs;
 
 import lombok.AllArgsConstructor;
+import net.testproj.api.filters.ProfileCompletedFilter;
 import net.testproj.auth.properties.CorsProps;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -24,6 +26,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ApiSecurityConfig {
     private final CorsProps corsProps;
+    private final ProfileCompletedFilter profileCompletedFilter;
 
 
     @Bean
@@ -38,6 +41,7 @@ public class ApiSecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                .addFilterAfter(profileCompletedFilter, BearerTokenAuthenticationFilter.class)
                 .build();
     }
 

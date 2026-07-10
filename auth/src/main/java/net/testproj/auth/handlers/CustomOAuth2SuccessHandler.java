@@ -24,7 +24,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
     private final LoginCodeService loginCodeService;
 
     private final OAuth2AccountDS oAuth2AccountDS;
-    private final UserDS userDS;
+    private final AuthUserDS authUserDS;
     private final AuthProps authProps;
 
 
@@ -54,7 +54,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         if (oAuth2Account != null) {
             oAuth2AccountDS.update(oAuth2Account.getId(), email, emailVerified, givenName, familyName);
         } else {
-            User user = userDS.insert(User.builder().build());
+            User user = authUserDS.insert(User.builder().build());
             oAuth2Account = OAuth2Account.builder()
                     .userId(user.getId())
                     .provider(provider)
@@ -68,7 +68,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             oAuth2AccountDS.insert(oAuth2Account);
         }
 
-        String loginCode = loginCodeService.issue(oAuth2Account.getUserId().toString());
+        String loginCode = loginCodeService.issue(oAuth2Account.getUserId());
 
         String redirectUrl = UriComponentsBuilder
                 .fromUriString(authProps.getLoginRedirectUrl())

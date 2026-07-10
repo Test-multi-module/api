@@ -10,16 +10,22 @@ import static net.testproj.db.auth.tables.Users.USERS;
 
 
 @Service
-public class UserDS {
+public class AuthUserDS {
 
     protected final DSLContext jooq;
 
-    public UserDS(DSLContext dsl) {this.jooq = dsl;}
+    public AuthUserDS(DSLContext dsl) {this.jooq = dsl;}
 
     public User insert(User obj){
         UUID id = UuidCreator.getTimeOrderedEpoch();
         obj.setId(id);
         jooq.insertInto(USERS).set(jooq.newRecord(USERS, obj)).execute();
         return jooq.select().from(USERS).where(USERS.ID.eq(id)).fetchInto(User.class).getFirst();
+    }
+
+    public boolean isProfileCompleted(UUID userId) {
+       return jooq.select().from(USERS).where(USERS.ID.eq(userId))
+               .fetchInto(User.class).getFirst()
+               .isProfileCompleted();
     }
 }

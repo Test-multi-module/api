@@ -11,6 +11,7 @@ import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.Base64;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class LoginCodeService {
@@ -19,7 +20,7 @@ public class LoginCodeService {
     private static final Base64.Encoder B64 = Base64.getUrlEncoder().withoutPadding();
 
     private final AuthProps authProps;
-    private final Cache<String, String> cache;
+    private final Cache<String, UUID> cache;
 
     public LoginCodeService(AuthProps authProps) {
         this.authProps = authProps;
@@ -29,16 +30,16 @@ public class LoginCodeService {
                 .maximumSize(200_000).build();
     }
 
-    public String issue(String userId) {
+    public String issue(UUID userId) {
         String code = generateUrlSafeToken();
         String key = hashWithPepper(code, authProps.getLoginCodePepper());
         cache.put(key, userId);
         return code;
     }
 
-    public Optional<String> consume(String code) {
+    public Optional<UUID> consume(String code) {
         String key = hashWithPepper(code, authProps.getLoginCodePepper());
-        String userId = cache.asMap().remove(key);
+        UUID userId = cache.asMap().remove(key);
         return Optional.ofNullable(userId);
     }
 

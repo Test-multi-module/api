@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth/exchange")
@@ -22,7 +23,7 @@ public class AuthExchangeController {
     @PostMapping
     public ExchangeResponseDTO exchange(@RequestBody ExchangeRequestDTO request) {
 
-        String userId = loginCodeService.consume(request.getCode())
+        UUID userId = loginCodeService.consume(request.getCode())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid or expired code"));
 
         String accessToken = jwtService.issueAccessToken(userId, Collections.emptyList());
