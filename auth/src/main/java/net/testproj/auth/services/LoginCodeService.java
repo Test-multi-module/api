@@ -19,7 +19,7 @@ public class LoginCodeService {
     private static final Base64.Encoder B64 = Base64.getUrlEncoder().withoutPadding();
 
     private final AuthProps authProps;
-    private final Cache<String, String> cache; // key = hash(code), value = userId
+    private final Cache<String, String> cache;
 
     public LoginCodeService(AuthProps authProps) {
         this.authProps = authProps;
@@ -30,7 +30,7 @@ public class LoginCodeService {
     }
 
     public String issue(String userId) {
-        String code = generateUrlSafeToken(32); // 32 bytes = очень надёжно
+        String code = generateUrlSafeToken();
         String key = hashWithPepper(code, authProps.getLoginCodePepper());
         cache.put(key, userId);
         return code;
@@ -42,20 +42,20 @@ public class LoginCodeService {
         return Optional.ofNullable(userId);
     }
 
-    private static String generateUrlSafeToken(int bytes) {
-        byte[] buf = new byte[bytes];
+    private static String generateUrlSafeToken() {
+        byte[] buf = new byte[32];
         RANDOM.nextBytes(buf);
         return B64.encodeToString(buf);
     }
 
     private static String hashWithPepper(String code, String pepper) {
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");//возьми алгоритм SHA-256/результат всегда 32 байта/необратимый (из хэша нельзя восстановить вход)
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(pepper.getBytes(StandardCharsets.UTF_8));
-            md.update((byte) ':');//нужен что бы хеш ab+cd и a+bcd различались
+            md.update((byte) ':');
             md.update(code.getBytes(StandardCharsets.UTF_8));
-            byte[] digest = md.digest();//это равно "сделай хеш"
-            return B64.encodeToString(digest);//просто превратить поток байтов в строку
+            byte[] digest = md.digest();
+            return B64.encodeToString(digest);
         } catch (Exception e) {
             throw new IllegalStateException("Cannot hash login code", e);
         }
