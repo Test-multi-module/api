@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-import static net.testproj.db.auth.tables.Users.USERS;
+import static net.testproj.db.auth.tables.AuthUsers.AUTH_USERS;
 
 
 @Service
@@ -16,16 +16,20 @@ public class AuthUserDS {
 
     public AuthUserDS(DSLContext dsl) {this.jooq = dsl;}
 
-    public User insert(User obj){
+    public AuthUser insert(AuthUser obj){
         UUID id = UuidCreator.getTimeOrderedEpoch();
         obj.setId(id);
-        jooq.insertInto(USERS).set(jooq.newRecord(USERS, obj)).execute();
-        return jooq.select().from(USERS).where(USERS.ID.eq(id)).fetchInto(User.class).getFirst();
+        jooq.insertInto(AUTH_USERS).set(jooq.newRecord(AUTH_USERS, obj)).execute();
+        return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(id)).fetchInto(AuthUser.class).getFirst();
     }
 
     public boolean isProfileCompleted(UUID userId) {
-       return jooq.select().from(USERS).where(USERS.ID.eq(userId))
-               .fetchInto(User.class).getFirst()
+       return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(userId))
+               .fetchInto(AuthUser.class).getFirst()
                .isProfileCompleted();
+    }
+
+    public AuthUser getById(UUID id){//todo entityNotFound???? what if nothing was found?
+        return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(id)).fetchOneInto(AuthUser.class);
     }
 }

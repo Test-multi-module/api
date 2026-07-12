@@ -14,7 +14,7 @@
         <!--suppress UnresolvedMavenProperty -->
         <db.url>${env.DB_URL}</db.url>
         <!--suppress UnresolvedMavenProperty -->
-        <db.user>${env.DB_USER_NAME}</db.user>
+        <db.authUser>${env.DB_USER_NAME}</db.authUser>
         <!--suppress UnresolvedMavenProperty -->
         <db.password>${env.DB_PASSWORD}</db.password>
         <jooq.generated-sources.directory>${project.build.directory}/generated-sources/jooq</jooq.generated-sources.directory>
@@ -35,7 +35,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <configuration>
                     <url>${db.url}</url>
-                    <user>${db.user}</user>
+                    <user>${db.authUser}</user>
                     <password>${db.password}</password>
                     <driver>${db.driver}</driver>
                     <createSchemas>true</createSchemas>
@@ -74,7 +74,7 @@
                     <jdbc>
                         <driver>${db.driver}</driver>
                         <url>${db.url}</url>
-                        <user>${db.user}</user>
+                        <user>${db.authUser}</user>
                         <password>${db.password}</password>
                     </jdbc>
                     <generator>

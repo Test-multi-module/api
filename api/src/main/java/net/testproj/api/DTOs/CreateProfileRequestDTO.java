@@ -1,11 +1,13 @@
 package net.testproj.api.DTOs;
 
+
+
+import lombok.Getter;
+
 import java.util.Date;
-import java.util.UUID;
 
-
-public class UserDTO {
-    private UUID id;
+@Getter
+public class CreateProfileRequestDTO {
     private Date dayOfBirth;
     private String nickName;
 }
