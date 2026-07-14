@@ -16,4 +16,7 @@ public class AuthUser {
 
     private UUID id;
     private boolean profileCompleted;
+    private String email;
+    private String passwordHash;
+    private boolean emailVerified;
 }

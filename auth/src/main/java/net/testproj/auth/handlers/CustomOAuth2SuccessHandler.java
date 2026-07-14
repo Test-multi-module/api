@@ -9,6 +9,7 @@ import net.testproj.db.auth.*;
 import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -43,18 +44,22 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             throw new IllegalStateException("Expected OIDC user");
         }
 
+        if(!Boolean.TRUE.equals(oidcUser.getEmailVerified())){
+            throw new OAuth2AuthenticationException("Email not verified");
+        }
+
         String providerUserId = oidcUser.getSubject();
         String email = oidcUser.getEmail();
-        boolean emailVerified = Boolean.TRUE.equals(oidcUser.getEmailVerified());
         String familyName = oidcUser.getFamilyName();
         String givenName = oidcUser.getGivenName();
         String pictureUrl = oidcUser.getPicture();
 
         OAuth2Account oAuth2Account = oAuth2AccountDS.getByProviderUserIdAndProvider(providerUserId, provider);
         if (oAuth2Account != null) {
-            oAuth2AccountDS.update(oAuth2Account.getId(), email, emailVerified, givenName, familyName);
+            oAuth2AccountDS.update(oAuth2Account.getId(), email, givenName, familyName);
         } else {
-            AuthUser authUser = authUserDS.insert(AuthUser.builder().build());
+            AuthUser authUser = AuthUser.builder().email(email).emailVerified(true).build();
+            authUser = authUserDS.insert(authUser);
             oAuth2Account = OAuth2Account.builder()
                     .userId(authUser.getId())
                     .provider(provider)
@@ -63,7 +68,6 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
                     .providerAvatarUrl(pictureUrl)
                     .givenName(givenName)
                     .familyName(familyName)
-                    .emailVerified(emailVerified)
                     .build();
             oAuth2AccountDS.insert(oAuth2Account);
         }

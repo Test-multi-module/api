@@ -25,7 +25,8 @@ class ApiApplicationTests extends IntegTestBase {
         Map<String, Object> claims = Map.of(
                 "sub", "123",
                 "email", "test@example.com",
-                "name", "Test User"
+                "name", "Test User",
+                "email_verified", true
         );
         Instant now = Instant.now();
         OAuth2AuthenticationToken auth = getOAuth2AuthenticationToken(now, claims);
