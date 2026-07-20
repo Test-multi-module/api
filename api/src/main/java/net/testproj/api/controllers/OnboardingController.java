@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 
 @RestController
 @RequestMapping("/api/private/onboarding")
-@AllArgsConstructor
+@AllArgsConstructor//todo swagger-documentation (whole project)
 public class OnboardingController {
 
     private final UserService userService;
@@ -23,7 +23,7 @@ public class OnboardingController {
     @PostMapping("/create-profile")
     public UserDTO createProfile(
             @Valid @RequestBody CreateProfileRequestDTO dto,
-            @AuthenticationPrincipal Jwt jwt) throws Exception {//todo: AdviceComtroller?
+            @AuthenticationPrincipal Jwt jwt) throws Exception {//todo: AdviceController?
         return userService.createProfile(jwt, dto);
     }
 }
