@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter@Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExchangeRequestDTO {
-    private String loginCode;
+public class RegistrationRequestDTO {//todo validations for the fields + @JsonProperty
+    private String email;
+    private String password;
 }
