@@ -19,19 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthRegisterController {
     private final LoginCodeService loginCodeService;
     private final AuthUserDS authUserDS;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping
     public void register(@RequestBody RegistrationRequestDTO requestDTO) {
-        PasswordEncoder passwordEncoder = new Argon2PasswordEncoder(16, 32, 1, 65536, 3);
-        String hash = passwordEncoder.encode(requestDTO.getPassword());
-
         AuthUser authUser = AuthUser.builder()
                 .email(requestDTO.getEmail())
-                .passwordHash(hash)
+                .passwordHash(passwordEncoder.encode(requestDTO.getPassword()))
                 .profileCompleted(Boolean.FALSE)
                 .emailVerified(Boolean.FALSE).build();
         authUser = authUserDS.insert(authUser);
-        //todo: add user email not verified, send code to the email
+        //todo: send code to the email
         //todo after analysis before - some response obj
     }
 
