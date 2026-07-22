@@ -24,7 +24,8 @@ public class UserService {
     public UserDTO createProfile(Jwt jwt, CreateProfileRequestDTO dto) throws Exception {
         UUID userId = UUID.fromString(jwt.getSubject());
         AuthUser authUser = authUserDS.getById(userId);
-        if(authUser == null || !authUser.isProfileCompleted() || apiUserDS.getById(userId) != null)
+        if(authUser == null || !Boolean.TRUE.equals(authUser.getProfileCompleted()) ||
+                apiUserDS.getById(userId) != null)
             throw new Exception("todo some explanation | user not found | profile already completed");
 
         User apiUser = apiUserDS.insert(//todo prepare an approach, how to work dates

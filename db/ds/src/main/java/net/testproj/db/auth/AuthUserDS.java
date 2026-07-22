@@ -23,10 +23,10 @@ public class AuthUserDS {
         return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(id)).fetchInto(AuthUser.class).getFirst();
     }
 
-    public boolean isProfileCompleted(UUID userId) {
+    public Boolean isProfileCompleted(UUID userId) {
        return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(userId))
                .fetchInto(AuthUser.class).getFirst()
-               .isProfileCompleted();
+               .getProfileCompleted();
     }
 
     public AuthUser getById(UUID id){//todo entityNotFound???? what if nothing was found?

@@ -19,7 +19,6 @@ import java.util.List;
 
 
 @Configuration
-@EnableMethodSecurity
 @EnableConfigurationProperties(CorsProps.class)//todo переместить в application yml в блок auth
 @AllArgsConstructor
 public class AuthSecurityConfig {

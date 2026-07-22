@@ -12,11 +12,11 @@ import java.util.UUID;
 @Getter@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthUser {
+public class AuthUser {//todo analise if smth like notNull annotations needed here to show that field is not null in db
 
     private UUID id;
-    private boolean profileCompleted;
+    private Boolean profileCompleted;
     private String email;
     private String passwordHash;
-    private boolean emailVerified;
+    private Boolean emailVerified;
 }

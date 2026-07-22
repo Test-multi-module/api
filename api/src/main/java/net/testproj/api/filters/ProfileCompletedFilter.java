@@ -42,9 +42,9 @@ public class ProfileCompletedFilter extends OncePerRequestFilter {
                     once the business access architecture becomes clear.""");
 
         UUID userId = UUID.fromString(authentication.getName());
-        boolean profileCompleted = authUserDS.isProfileCompleted(userId);
+        Boolean profileCompleted = authUserDS.isProfileCompleted(userId);
 
-        if (!profileCompleted) {
+        if (!Boolean.TRUE.equals(profileCompleted)) {
             response.setStatus(HttpStatus.FORBIDDEN.value());
             response.setContentType("application/json");
             response.getWriter().write("""
