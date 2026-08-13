@@ -23,4 +23,11 @@ public class AuthProps {
 
     @NotBlank
     private String loginCodePepper;
+
+    @NotNull
+    @Positive
+    private Long emailVerificationCodeTtlSeconds;
+
+    @NotBlank
+    private String emailVerificationCodePepper;
 }

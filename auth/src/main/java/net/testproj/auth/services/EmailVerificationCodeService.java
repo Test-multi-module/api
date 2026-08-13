@@ -13,40 +13,41 @@ import java.util.Base64;
 import java.util.Optional;
 import java.util.UUID;
 
+//todo: нужен общий абстрактный класс-шаблонные-методы и тд для EmailVerificationCodeService и LoginCodeService
 @Service
-public class LoginCodeService {
+public class EmailVerificationCodeService {
 
     private static final SecureRandom RANDOM = new SecureRandom();
     private static final Base64.Encoder B64 = Base64.getUrlEncoder().withoutPadding();
 
+
     private final AuthProps authProps;
     private final Cache<String, UUID> cache;
 
-    public LoginCodeService(AuthProps authProps) {
+    public EmailVerificationCodeService(AuthProps authProps) {
         this.authProps = authProps;
 
         this.cache = Caffeine.newBuilder()
-                .expireAfterWrite(Duration.ofSeconds(authProps.getLoginCodeTtlSeconds()))
+                .expireAfterWrite(Duration.ofSeconds(authProps.getEmailVerificationCodeTtlSeconds()))
                 .maximumSize(200_000).build();
     }
 
     public String issue(UUID userId) {
         String code = generateCode();
-        String key = hashWithPepper(code, authProps.getLoginCodePepper());
+        String key = hashWithPepper(code, authProps.getEmailVerificationCodePepper());
         cache.put(key, userId);
         return code;
     }
 
     public Optional<UUID> consume(String code) {
-        String key = hashWithPepper(code, authProps.getLoginCodePepper());
+        String key = hashWithPepper(code, authProps.getEmailVerificationCodePepper());
         UUID userId = cache.asMap().remove(key);
         return Optional.ofNullable(userId);
     }
 
     private static String generateCode() {
-        byte[] buf = new byte[32];
-        RANDOM.nextBytes(buf);
-        return B64.encodeToString(buf);
+        //todo анализ, почему разный алг генерации с LoginCodeService.generateCode
+        return String.valueOf(100_000 + RANDOM.nextInt(900_000));
     }
 
     private static String hashWithPepper(String code, String pepper) {
@@ -58,7 +59,7 @@ public class LoginCodeService {
             byte[] digest = md.digest();
             return B64.encodeToString(digest);
         } catch (Exception e) {
-            throw new IllegalStateException("Cannot hash login code", e);
+            throw new IllegalStateException("Cannot hash email verification code", e);
         }
     }
 }

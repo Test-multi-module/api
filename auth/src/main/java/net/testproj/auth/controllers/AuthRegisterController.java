@@ -6,12 +6,13 @@ import net.testproj.auth.DTOs.requests.RegistrationRequestDTO;
 import net.testproj.auth.services.LoginCodeService;
 import net.testproj.db.auth.AuthUser;
 import net.testproj.db.auth.AuthUserDS;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+//todo: правило ведения БД - никаких неявных установок значеник(дефолтов и т.д.)
 
 @RestController
 @RequestMapping("/auth/register")
