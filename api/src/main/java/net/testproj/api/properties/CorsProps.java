@@ -1,4 +1,4 @@
-package net.testproj.auth.properties;
+package net.testproj.api.properties;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
-@ConfigurationProperties(prefix = "auth.security.cors")
+@ConfigurationProperties(prefix = "api.security.cors")
 @Getter
 @Setter
 @Validated

@@ -1,5 +1,6 @@
 package net.testproj.auth.properties;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -11,23 +12,22 @@ import org.springframework.validation.annotation.Validated;
 @Getter
 @Setter
 @Validated
-@ConfigurationProperties(prefix = "auth")
-public class AuthProps {
-
+@ConfigurationProperties(prefix = "auth.security.oauth2-login")
+public class OAuth2LoginProps {
     @NotBlank
-    private String loginRedirectUrl;
+    private String redirectUrl;
 
+    @Valid
     @NotNull
-    @Positive
-    private Long loginCodeTtlSeconds;
+    private OAuth2LoginProps.ExchangeCode exchangeCode;
 
-    @NotBlank
-    private String loginCodePepper;
+    @Getter@Setter
+    public static class ExchangeCode {
+        @NotBlank
+        private String pepper;
 
-    @NotNull
-    @Positive
-    private Long emailVerificationCodeTtlSeconds;
-
-    @NotBlank
-    private String emailVerificationCodePepper;
+        @NotNull
+        @Positive
+        private Long ttlSeconds;
+    }
 }

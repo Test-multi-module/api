@@ -1,64 +1,44 @@
 package net.testproj.auth.services;
 
-import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import net.testproj.auth.properties.AuthProps;
+import net.testproj.auth.properties.OAuth2LoginProps;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.SecureRandom;
 import java.time.Duration;
-import java.util.Base64;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class LoginCodeService {
+@EnableConfigurationProperties(OAuth2LoginProps.class)
+public class LoginCodeService extends AbstractOneTimeCodeService{
 
-    private static final SecureRandom RANDOM = new SecureRandom();
-    private static final Base64.Encoder B64 = Base64.getUrlEncoder().withoutPadding();
+    private final OAuth2LoginProps oAuth2LoginProps;
 
-    private final AuthProps authProps;
-    private final Cache<String, UUID> cache;
-
-    public LoginCodeService(AuthProps authProps) {
-        this.authProps = authProps;
-
-        this.cache = Caffeine.newBuilder()
-                .expireAfterWrite(Duration.ofSeconds(authProps.getLoginCodeTtlSeconds()))
-                .maximumSize(200_000).build();
+    public LoginCodeService(CodeHashService codeHashService,
+                            OAuth2LoginProps oAuth2LoginProps) {
+        super(Caffeine.newBuilder()
+                .expireAfterWrite(Duration.ofSeconds(oAuth2LoginProps.getExchangeCode().getTtlSeconds()))
+                .maximumSize(200_000)
+                .build(),
+                codeHashService);
+        this.oAuth2LoginProps = oAuth2LoginProps;
     }
 
+    @Override
     public String issue(UUID userId) {
-        String code = generateCode();
-        String key = hashWithPepper(code, authProps.getLoginCodePepper());
+        byte[] buf = new byte[32];
+        RANDOM.nextBytes(buf);
+        String code = B64.encodeToString(buf);
+        String key = codeHashService.hashWithPepper(code, oAuth2LoginProps.getExchangeCode().getPepper());
         cache.put(key, userId);
         return code;
     }
 
+    @Override
     public Optional<UUID> consume(String code) {
-        String key = hashWithPepper(code, authProps.getLoginCodePepper());
+        String key = codeHashService.hashWithPepper(code, oAuth2LoginProps.getExchangeCode().getPepper());
         UUID userId = cache.asMap().remove(key);
         return Optional.ofNullable(userId);
-    }
-
-    private static String generateCode() {
-        byte[] buf = new byte[32];
-        RANDOM.nextBytes(buf);
-        return B64.encodeToString(buf);
-    }
-
-    private static String hashWithPepper(String code, String pepper) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(pepper.getBytes(StandardCharsets.UTF_8));
-            md.update((byte) ':');
-            md.update(code.getBytes(StandardCharsets.UTF_8));
-            byte[] digest = md.digest();
-            return B64.encodeToString(digest);
-        } catch (Exception e) {
-            throw new IllegalStateException("Cannot hash login code", e);
-        }
     }
 }

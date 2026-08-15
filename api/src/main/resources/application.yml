@@ -33,6 +33,8 @@ logging:
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 api:
   security:
+    cors:
+      allowed-origins: ${CORS_ALLOWED_ORIGINS}
     jwt:
       truststore:
         location: ${TRUST_STORE_PATH}
@@ -42,17 +44,21 @@ api:
       issuer: "testproj-auth"
       audience: "testproj-api"
 auth:
-  login-redirect-url: ${LOGIN_REDIRECT_URL}
-  login-code-ttl-seconds: 60
-  email-verification-code-ttl-seconds: 300
-  login-code-pepper: ${LOGIN_CODE_PEPPER}
-  email-verification-code-pepper: ${EMAIL_VERIFICATION_CODE_PEPPER}
   security:
+    oauth2-login:
+      redirect-url: ${LOGIN_REDIRECT_URL}
+      exchange-code:
+        ttl-seconds: 60
+        pepper: ${LOGIN_CODE_PEPPER}
+    email-verification:
+      code:
+        ttl-seconds: 300
+        pepper: ${EMAIL_VERIFICATION_CODE_PEPPER}
     cors:
       allowed-origins: ${CORS_ALLOWED_ORIGINS}
     jwt:
       issuer: "testproj-auth"
-      access-token-props:
+      access-token:
         audience: "testproj-api"
         ttl-seconds: 900
       keystore:

@@ -3,7 +3,7 @@ package net.testproj.auth.handlers;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import net.testproj.auth.properties.AuthProps;
+import net.testproj.auth.properties.OAuth2LoginProps;
 import net.testproj.auth.services.LoginCodeService;
 import net.testproj.db.auth.*;
 import org.jspecify.annotations.NonNull;
@@ -26,7 +26,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
     private final OAuth2AccountDS oAuth2AccountDS;
     private final AuthUserDS authUserDS;
-    private final AuthProps authProps;
+    private final OAuth2LoginProps oAuth2LoginProps;
 
 
     @Override
@@ -80,7 +80,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         String loginCode = loginCodeService.issue(oAuth2Account.getUserId());
 
         String redirectUrl = UriComponentsBuilder
-                .fromUriString(authProps.getLoginRedirectUrl())
+                .fromUriString(oAuth2LoginProps.getRedirectUrl())
                 .queryParam("code", loginCode)
                 .build(true)//говорит Spring’у:«НЕ трогай и НЕ перекодируй уже готовые части URL».
                 .toUriString();

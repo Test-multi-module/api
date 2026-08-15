@@ -2,7 +2,7 @@ package net.testproj.api.configs;
 
 import lombok.AllArgsConstructor;
 import net.testproj.api.filters.ProfileCompletedFilter;
-import net.testproj.auth.properties.CorsProps;
+import net.testproj.api.properties.CorsProps;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

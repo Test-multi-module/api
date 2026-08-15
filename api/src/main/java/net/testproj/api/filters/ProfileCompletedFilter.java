@@ -29,7 +29,7 @@ public class ProfileCompletedFilter extends OncePerRequestFilter {
 
         var requestUri = request.getRequestURI();
         if (requestUri.equals("/api/private/create-profile") ||
-                !requestUri.startsWith("/api/private/")) {
+                requestUri.startsWith("/api/public/")) {
             filterChain.doFilter(request, response);
             return;
         }
