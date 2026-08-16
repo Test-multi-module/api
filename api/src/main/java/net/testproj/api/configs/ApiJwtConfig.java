@@ -1,7 +1,6 @@
 package net.testproj.api.configs;
 
 import net.testproj.api.properties.JwtProps;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -20,7 +19,6 @@ import java.security.cert.Certificate;
 import java.security.interfaces.RSAPublicKey;
 
 @Configuration
-@EnableConfigurationProperties(JwtProps.class)
 public class ApiJwtConfig {
     private final ResourceLoader resourceLoader;
 

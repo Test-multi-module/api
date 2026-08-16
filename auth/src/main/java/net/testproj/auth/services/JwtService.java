@@ -3,7 +3,6 @@ package net.testproj.auth.services;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.testproj.auth.properties.JwtProps;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -18,7 +17,6 @@ import java.util.UUID;
 
 @Service
 @Getter
-@EnableConfigurationProperties(JwtProps.class)
 @RequiredArgsConstructor
 public class JwtService {
 

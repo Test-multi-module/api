@@ -2,7 +2,6 @@ package net.testproj.auth.services;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import net.testproj.auth.properties.OAuth2LoginProps;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -10,7 +9,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@EnableConfigurationProperties(OAuth2LoginProps.class)
 public class LoginCodeService extends AbstractOneTimeCodeService{
 
     private final OAuth2LoginProps oAuth2LoginProps;

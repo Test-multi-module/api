@@ -3,7 +3,6 @@ package net.testproj.api.configs;
 import lombok.AllArgsConstructor;
 import net.testproj.api.filters.ProfileCompletedFilter;
 import net.testproj.api.properties.CorsProps;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -22,7 +21,6 @@ import java.util.List;
 
 @Configuration
 @EnableMethodSecurity
-@EnableConfigurationProperties(CorsProps.class)//todo проследить что бы тут были только api настройки
 @AllArgsConstructor
 public class ApiSecurityConfig {
     private final CorsProps corsProps;

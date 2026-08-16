@@ -3,7 +3,6 @@ package net.testproj.auth.configs;
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import lombok.AllArgsConstructor;
 import net.testproj.auth.properties.CorsProps;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +17,6 @@ import java.util.List;
 
 
 @Configuration
-@EnableConfigurationProperties(CorsProps.class)
 @AllArgsConstructor
 public class AuthSecurityConfig {
     private final CustomOAuth2SuccessHandler successHandler;
