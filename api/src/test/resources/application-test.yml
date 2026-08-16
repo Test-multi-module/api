@@ -9,10 +9,12 @@ api:
       issuer: "testproj-auth"
       audience: "testproj-api"
 auth:
-  login-redirect-url: "http://localhost:4200/auth/callback"
-  login-code-ttl-seconds: 60
-  login-code-pepper: "strongsecretpepper"
   security:
+    oauth2-login:
+      redirect-url: "http://localhost:4200/auth/callback"
+      exchange-code:
+        ttl-seconds: 60
+        pepper: "strongsecretpepper"
     jwt:
       keystore:
         location: classpath:keys/test-keystore.p12
