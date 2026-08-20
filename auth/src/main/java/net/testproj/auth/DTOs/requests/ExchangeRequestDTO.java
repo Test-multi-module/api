@@ -9,5 +9,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExchangeRequestDTO {
-    private String loginCode;
+    private String exchangeCode;
 }
