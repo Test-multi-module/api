@@ -1,5 +1,6 @@
 package net.testproj.auth.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.testproj.auth.DTOs.requests.EmailVerificationRequestDTO;
 import net.testproj.auth.DTOs.requests.RegistrationRequestDTO;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Locale;
 import java.util.UUID;
 
 //todo: правило ведения БД - никаких неявных установок значеник(дефолтов и т.д.)
@@ -29,9 +31,9 @@ public class AuthRegisterController {
     private final EmailVerificationCodeService emailVerificationCodeService;
 
     @PostMapping
-    public void register(@RequestBody RegistrationRequestDTO requestDTO) {
+    public void register(@Valid @RequestBody RegistrationRequestDTO requestDTO) {
         AuthUser authUser = AuthUser.builder()
-                .email(requestDTO.getEmail())
+                .email(requestDTO.getEmail().toLowerCase(Locale.ROOT))//todo: анализ , где именно делать toLowerCase
                 .passwordHash(passwordEncoder.encode(requestDTO.getPassword()))
                 .profileCompleted(Boolean.FALSE)
                 .emailVerified(Boolean.FALSE).build();
@@ -42,7 +44,7 @@ public class AuthRegisterController {
     }
 
     @PostMapping("/verify-email")
-    public void verifyEmail(@RequestBody EmailVerificationRequestDTO requestDTO) {
+    public void verifyEmail(@Valid @RequestBody EmailVerificationRequestDTO requestDTO) {
         UUID userId = emailVerificationCodeService.consume(requestDTO.getEmailVerificationCode())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid or expired code"));
 
@@ -53,7 +55,7 @@ public class AuthRegisterController {
 
 
     @PostMapping("/verify-email/resend")
-    public void verifyEmailResend(@RequestBody Object todoRequestDTO) {
+    public void verifyEmailResend(@Valid @RequestBody Object todoRequestDTO) {
         //todo: much more later + rename method and endpoint-path
 
     }

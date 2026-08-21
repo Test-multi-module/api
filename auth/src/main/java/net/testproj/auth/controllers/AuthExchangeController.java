@@ -1,5 +1,6 @@
 package net.testproj.auth.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.testproj.auth.DTOs.requests.ExchangeRequestDTO;
 import net.testproj.auth.DTOs.responses.ExchangeResponseDTO;
@@ -21,7 +22,7 @@ public class AuthExchangeController {
     private final JwtService jwtService;
 
     @PostMapping
-    public ExchangeResponseDTO exchange(@RequestBody ExchangeRequestDTO request) {
+    public ExchangeResponseDTO exchange(@Valid @RequestBody ExchangeRequestDTO request) {
 
         UUID userId = loginCodeService.consume(request.getExchangeCode())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid or expired code"));

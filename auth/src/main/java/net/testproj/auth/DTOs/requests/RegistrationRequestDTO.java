@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegistrationRequestDTO {//todo validations for the fields + @JsonProperty
-    private String email;
+    private String email;//todo: может как-то при маппинге с клиента через спринг-механизмы переводить в нижний регистр?
     private String password;
 }
