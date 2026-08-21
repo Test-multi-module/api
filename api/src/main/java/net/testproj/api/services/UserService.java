@@ -5,7 +5,7 @@ import net.testproj.api.DTOs.CreateProfileRequestDTO;
 import net.testproj.api.DTOs.UserDTO;
 import net.testproj.db.api.ApiUserDS;
 import lombok.AllArgsConstructor;
-import net.testproj.db.api.User;
+import net.testproj.db.api.ApiUser;
 import net.testproj.db.auth.AuthUserDS;
 import net.testproj.db.auth.AuthUser;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -28,8 +28,8 @@ public class UserService {
                 apiUserDS.getById(userId) != null)
             throw new Exception("todo some explanation | user not found | profile already completed");
 
-        User apiUser = apiUserDS.insert(//todo prepare an approach, how to work dates
-                net.testproj.db.api.User.builder().authUserId(userId).dayOfBirth(dto.getDayOfBirth().toInstant()).build());
+        ApiUser apiUser = apiUserDS.insert(//todo prepare an approach, how to work dates
+                ApiUser.builder().authUserId(userId).dayOfBirth(dto.getDayOfBirth().toInstant()).build());
 
         return beanMapper.map(apiUser, UserDTO.class);
     }

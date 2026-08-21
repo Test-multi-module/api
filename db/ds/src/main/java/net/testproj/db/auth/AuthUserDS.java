@@ -23,6 +23,14 @@ public class AuthUserDS {
         return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(id)).fetchInto(AuthUser.class).getFirst();
     }
 
+    public void update(AuthUser obj){
+        jooq.update(AUTH_USERS)
+                .set(jooq.newRecord(AUTH_USERS, obj))
+                .where(AUTH_USERS.ID.eq(obj.getId()))
+                .returning()
+                .fetchOneInto(AuthUser.class);
+    }
+
     public Boolean isProfileCompleted(UUID userId) {
        return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(userId))
                .fetchInto(AuthUser.class).getFirst()

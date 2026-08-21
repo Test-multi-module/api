@@ -13,7 +13,7 @@ import java.util.UUID;
 @Getter@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class ApiUser {
     private UUID id;
     private Instant dayOfBirth;
     private String nickName;
