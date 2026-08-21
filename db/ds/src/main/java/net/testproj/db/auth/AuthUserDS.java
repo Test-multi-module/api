@@ -4,9 +4,11 @@ import com.github.f4b6a3.uuid.UuidCreator;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
 import java.util.UUID;
 
 import static net.testproj.db.auth.tables.AuthUsers.AUTH_USERS;
+import static org.jooq.impl.DSL.lower;
 
 
 @Service
@@ -32,6 +34,7 @@ public class AuthUserDS {
     }
 
     public Boolean isProfileCompleted(UUID userId) {
+        //todo  а его точно именно так "вычислять"? пересмотреть !
        return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(userId))
                .fetchInto(AuthUser.class).getFirst()
                .getProfileCompleted();
@@ -40,4 +43,12 @@ public class AuthUserDS {
     public AuthUser getById(UUID id){//todo entityNotFound???? what if nothing was found?
         return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(id)).fetchOneInto(AuthUser.class);
     }
+
+    public AuthUser getByEmail(String email){//todo entityNotFound???? what if nothing was found?
+        return jooq.select().from(AUTH_USERS)
+                .where(lower(AUTH_USERS.EMAIL).eq(email.toLowerCase(Locale.ROOT)))//todo то должен быть ответственен за нормалицация мыла?
+                .fetchOneInto(AuthUser.class);
+    }
+
+    //todo: имеет ли смысл вообще искать спокой что бы нормализация мыла (toLowerCase) происходила на уровне БД в момент записи?
 }
