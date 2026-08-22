@@ -32,6 +32,11 @@ public class AuthRegisterController {
 
     @PostMapping
     public void register(@Valid @RequestBody RegistrationRequestDTO requestDTO) {
+        if(authUserDS.getByEmail(requestDTO.getEmail()) != null){
+            //todo: Api&Auth ControllerAdvice classes
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
+        }
+
         AuthUser authUser = AuthUser.builder()
                 .email(requestDTO.getEmail().toLowerCase(Locale.ROOT))//todo: анализ , где именно делать toLowerCase
                 .passwordHash(passwordEncoder.encode(requestDTO.getPassword()))
