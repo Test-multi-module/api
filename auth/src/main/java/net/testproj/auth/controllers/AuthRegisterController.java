@@ -19,7 +19,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Locale;
 import java.util.UUID;
 
+//todo: НИКОГДА НЕ ЛОГИРОВАТЬ ПАРОЛЬ
 //todo: правило ведения БД - никаких неявных установок значеник(дефолтов и т.д.)
+//todo:  где-то еще должен біть change password
 
 @RestController
 @RequestMapping("/auth/register")

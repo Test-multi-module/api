@@ -7,7 +7,8 @@
       <env name="DB_PASSWORD" value="24o62o!!" />
       <env name="DB_URL" value="jdbc:postgresql://localhost:5432/testproj_db" />
       <env name="DB_USER_NAME" value="adm" />
-      <env name="GMAIL_SENDER_PASSWORD" value="fjfD*3-w4hGK^" />
+      <env name="EMAIL_VERIFICATION_CODE_PEPPER" value="847560348poiuytrew857307586" />
+      <env name="GMAIL_SENDER_PASSWORD" value="zcaz vshi mgyb qqne" />
       <env name="GMAIL_SENDER_USERNAME" value="tereshenko24102000@gmail.com" />
       <env name="GOOGLE_CLIENT_ID" value="1013817045252-6eqovff35rlggkbagsj0a32o9hm0kor3.apps.googleusercontent.com" />
       <env name="GOOGLE_CLIENT_SECRET" value="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" />
@@ -19,7 +20,6 @@
       <env name="LOGIN_CODE_PEPPER" value="123456789poiuytrew987654321" />
       <env name="LOGIN_REDIRECT_URL" value="http://localhost:4200/auth/callback" />
       <env name="TRUST_STORE_PATH" value="classpath:keys/dev-truststore.p12" />
-      <env name="EMAIL_VERIFICATION_CODE_PEPPER" value="847560348poiuytrew857307586" />
     </envs>
     <module name="api" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="net.testproj.api.ApiApplication" />

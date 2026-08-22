@@ -32,6 +32,7 @@ public class AuthSecurityConfig {
                 )
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(
+                                "/auth/login",
                                 "/auth/exchange",
                                 "/auth/register",
                                 "/auth/register/**",
