@@ -33,6 +33,8 @@ public class AuthSecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(
                                 "/auth/exchange",
+                                "/auth/register",
+                                "/auth/register/**",
                                 "/oauth2/authorization/**",
                                 "/login/oauth2/code/**"
                         ).permitAll()
