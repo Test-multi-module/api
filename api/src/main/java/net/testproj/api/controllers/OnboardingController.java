@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.oauth2.jwt.Jwt;
 
+
 @RestController
 @RequestMapping("/api/private/onboarding")
-@AllArgsConstructor//todo swagger-documentation (whole project)
+@AllArgsConstructor
 public class OnboardingController {
 
     private final UserService userService;
@@ -23,7 +24,7 @@ public class OnboardingController {
     @PostMapping("/create-profile")
     public UserDTO createProfile(
             @Valid @RequestBody CreateProfileRequestDTO dto,
-            @AuthenticationPrincipal Jwt jwt) throws Exception {//todo: AdviceController?
+            @AuthenticationPrincipal Jwt jwt) throws Exception {
         return userService.createProfile(jwt, dto);
     }
 }

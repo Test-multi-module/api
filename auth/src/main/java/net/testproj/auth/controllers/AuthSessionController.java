@@ -18,15 +18,20 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Collections;
 import java.util.Locale;
 
+//todo: logout, forgot password/reset password - вообще в отдельном контроллере AuthPasswordController
+//todo: подумать, не хочу ли я хеши в отдельныю таблицу вынести
+//todo: (не)могу исп 1 и тот же DTO  запросе и ответе (когда могу не могу)
+//todo: разобраться как првильно возвращать ответы из контроллеров (использовать не исп обёртки, какие обертки, когда с, когда без)
+
 @RestController
-@RequestMapping("/auth/login")
+@RequestMapping("/auth")
 @AllArgsConstructor
-public class AuthLoginController {
+public class AuthSessionController {
     private final JwtService jwtService;
     private final AuthUserDS authUserDS;
     private final PasswordEncoder passwordEncoder;
 
-    @PostMapping
+    @PostMapping("/login")
     public LoginResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
 
         AuthUser user = authUserDS.getByEmail(loginRequestDTO.getEmail().toLowerCase(Locale.ROOT));
@@ -43,7 +48,4 @@ public class AuthLoginController {
         String accessToken = jwtService.issueAccessToken(user.getId(), Collections.emptyList());
         return new LoginResponseDTO(accessToken);
     }
-    //todo: подумать, не хочу ли я хеши в отдельныю таблицу вынести
-    //todo: (не)могу исп 1 и тот же DTO  запросе и ответе (когда могу не могу)
-    //todo: разобраться как првильно возвращать ответы из контроллеров (использовать не исп обёртки, какие обертки, когда с, когда без)
 }

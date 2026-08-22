@@ -10,6 +10,8 @@ import java.util.UUID;
 import static net.testproj.db.auth.tables.AuthUsers.AUTH_USERS;
 import static org.jooq.impl.DSL.lower;
 
+//todo: имеет ли смысл вообще искать спокой что бы нормализация мыла (toLowerCase) происходила на уровне БД в момент записи?
+
 
 @Service
 public class AuthUserDS {
@@ -40,15 +42,13 @@ public class AuthUserDS {
                .getProfileCompleted();
     }
 
-    public AuthUser getById(UUID id){//todo entityNotFound???? what if nothing was found?
+    public AuthUser getById(UUID id){//todo entityNotFound? if nothing was found?
         return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(id)).fetchOneInto(AuthUser.class);
     }
 
-    public AuthUser getByEmail(String email){//todo entityNotFound???? what if nothing was found?
+    public AuthUser getByEmail(String email){//todo entityNotFound? if nothing was found?
         return jooq.select().from(AUTH_USERS)
-                .where(lower(AUTH_USERS.EMAIL).eq(email.toLowerCase(Locale.ROOT)))//todo то должен быть ответственен за нормалицация мыла?
+                .where(lower(AUTH_USERS.EMAIL).eq(email.toLowerCase(Locale.ROOT)))
                 .fetchOneInto(AuthUser.class);
     }
-
-    //todo: имеет ли смысл вообще искать спокой что бы нормализация мыла (toLowerCase) происходила на уровне БД в момент записи?
 }

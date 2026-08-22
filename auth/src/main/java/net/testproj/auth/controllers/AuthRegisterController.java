@@ -22,6 +22,10 @@ import java.util.UUID;
 //todo: НИКОГДА НЕ ЛОГИРОВАТЬ ПАРОЛЬ
 //todo: правило ведения БД - никаких неявных установок значеник(дефолтов и т.д.)
 //todo:  где-то еще должен біть change password
+//todo: Api&Auth ControllerAdvice classes
+//todo: анализ , где именно делать toLowerCase мыла
+//todo: much more later + rename method and endpoint-path: /verify-email/resend
+//todo swagger-documentation (whole project)
 
 @RestController
 @RequestMapping("/auth/register")
@@ -35,7 +39,6 @@ public class AuthRegisterController {
     @PostMapping
     public void register(@Valid @RequestBody RegistrationRequestDTO requestDTO) {
         if(authUserDS.getByEmail(requestDTO.getEmail()) != null){
-            //todo: Api&Auth ControllerAdvice classes
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
         }
 
@@ -58,12 +61,5 @@ public class AuthRegisterController {
         AuthUser authUser = authUserDS.getById(userId);
         authUser.setEmailVerified(Boolean.TRUE);
         authUserDS.update(authUser);
-    }
-
-
-    @PostMapping("/verify-email/resend")
-    public void verifyEmailResend(@Valid @RequestBody Object todoRequestDTO) {
-        //todo: much more later + rename method and endpoint-path
-
     }
 }

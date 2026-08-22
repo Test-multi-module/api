@@ -23,7 +23,7 @@ public class OAuth2AccountDS {
                 .where(OAUTH2_ACCOUNTS.PROVIDER_USER_ID.eq(providerUserId)
                         .and(OAUTH2_ACCOUNTS.PROVIDER.eq(provider)))
                 .fetchInto(OAuth2Account.class);
-        return lst.isEmpty() ? null : lst.getFirst();//todo refactor
+        return lst.isEmpty() ? null : lst.getFirst();
     }
 
     public void insert(OAuth2Account obj){
@@ -42,6 +42,6 @@ public class OAuth2AccountDS {
     }
 }
 
-//todo анализ того как я юзаю методы jooq
+//todo анализ того как я юзаю методы jooq -вообще не воспринимать текущий код по работе с jooq  как качественный - нужно выработать подход-стиль
 //todo как генерить дату корректно
 //todo как на работке сделать table перпеменну, может даже AbstractDS-lalala
