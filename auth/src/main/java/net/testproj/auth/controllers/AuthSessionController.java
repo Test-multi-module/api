@@ -34,7 +34,7 @@ public class AuthSessionController {
     @PostMapping("/login")
     public LoginResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
 
-        AuthUser user = authUserDS.getByEmail(loginRequestDTO.getEmail().toLowerCase(Locale.ROOT));
+        AuthUser user = authUserDS.getByEmail(loginRequestDTO.getEmail());
         //todo: null-user case (пока не уверенна как это будет , мб вообще буду рассчитвать на enf из ds)
         //todo: ResponseStatusException - тоже пока не уверенна, как именно у меня будут выбрасываться ексепшны (из каких либ, буду ли создавать свои спец обьекты и тд)
         if (user == null || user.getPasswordHash() == null ||

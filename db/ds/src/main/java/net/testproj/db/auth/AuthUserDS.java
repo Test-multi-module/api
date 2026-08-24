@@ -1,17 +1,13 @@
 package net.testproj.db.auth;
 
 import com.github.f4b6a3.uuid.UuidCreator;
+import net.testproj.common.Normaliser;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
-
-import java.util.Locale;
 import java.util.UUID;
 
 import static net.testproj.db.auth.tables.AuthUsers.AUTH_USERS;
 import static org.jooq.impl.DSL.lower;
-
-//todo: имеет ли смысл вообще искать спокой что бы нормализация мыла (toLowerCase) происходила на уровне БД в момент записи?
-
 
 @Service
 public class AuthUserDS {
@@ -23,6 +19,7 @@ public class AuthUserDS {
     public AuthUser insert(AuthUser obj){
         UUID id = UuidCreator.getTimeOrderedEpoch();
         obj.setId(id);
+        obj.setEmail(Normaliser.normalizeEmail(obj.getEmail()));
         jooq.insertInto(AUTH_USERS).set(jooq.newRecord(AUTH_USERS, obj)).execute();
         return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(id)).fetchInto(AuthUser.class).getFirst();
     }
@@ -48,7 +45,7 @@ public class AuthUserDS {
 
     public AuthUser getByEmail(String email){//todo entityNotFound? if nothing was found?
         return jooq.select().from(AUTH_USERS)
-                .where(lower(AUTH_USERS.EMAIL).eq(email.toLowerCase(Locale.ROOT)))
+                .where(lower(AUTH_USERS.EMAIL).eq(Normaliser.normalizeEmail(email)))
                 .fetchOneInto(AuthUser.class);
     }
 }

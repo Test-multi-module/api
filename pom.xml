@@ -26,6 +26,7 @@
         <module>db</module>
         <module>api</module>
         <module>auth</module>
+        <module>common</module>
     </modules>
 
     <dependencyManagement>
@@ -90,6 +91,11 @@
             <dependency>
                 <groupId>net.testproj</groupId>
                 <artifactId>api</artifactId>
+                <version>${testproj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.testproj</groupId>
+                <artifactId>common</artifactId>
                 <version>${testproj.version}</version>
             </dependency>
         </dependencies>

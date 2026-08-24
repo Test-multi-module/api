@@ -8,6 +8,7 @@ CREATE TABLE auth_users (
 
 ALTER TABLE auth_users ADD CONSTRAINT auth_users_pkey PRIMARY KEY (id);
 CREATE UNIQUE INDEX auth_users_uq_email_lower ON auth_users (LOWER(email));
+ALTER TABLE auth_users ADD CONSTRAINT auth_users_email_lowercase_chk CHECK (email = lower(btrim(email)));
 
 CREATE TABLE oauth2_accounts(
     id uuid NOT NULL,

@@ -27,5 +27,9 @@
             <groupId>net.testproj.db</groupId>
             <artifactId>model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.testproj</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
     </dependencies>
 </project>

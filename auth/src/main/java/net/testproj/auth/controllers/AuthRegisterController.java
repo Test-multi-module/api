@@ -23,7 +23,6 @@ import java.util.UUID;
 //todo: правило ведения БД - никаких неявных установок значеник(дефолтов и т.д.)
 //todo:  где-то еще должен біть change password
 //todo: Api&Auth ControllerAdvice classes
-//todo: анализ , где именно делать toLowerCase мыла
 //todo: much more later + rename method and endpoint-path: /verify-email/resend
 //todo swagger-documentation (whole project)
 
@@ -43,13 +42,13 @@ public class AuthRegisterController {
         }
 
         AuthUser authUser = AuthUser.builder()
-                .email(requestDTO.getEmail().toLowerCase(Locale.ROOT))//todo: анализ , где именно делать toLowerCase
+                .email(requestDTO.getEmail())
                 .passwordHash(passwordEncoder.encode(requestDTO.getPassword()))
                 .profileCompleted(Boolean.FALSE)
                 .emailVerified(Boolean.FALSE).build();
         authUser = authUserDS.insert(authUser);
 
-        emailSenderService.sendEmailVerificationCode(requestDTO.getEmail(),
+        emailSenderService.sendEmailVerificationCode(authUser.getEmail(),
                 emailVerificationCodeService.issue(authUser.getId()));
     }
 
