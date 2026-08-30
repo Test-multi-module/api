@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum AuthorizationType {
     GOOGLE(1, "google");
 
-    private final int code;
+    private final Integer code;
     private final String registrationId;
 
     public static AuthorizationType fromRegistrationId(String id) {
