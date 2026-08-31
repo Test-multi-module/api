@@ -24,9 +24,7 @@ public class AuthExchangeController {
     @PostMapping
     public ExchangeResponseDTO exchange(@Valid @RequestBody ExchangeRequestDTO request) {
 
-        UUID userId = loginCodeService.consume(request.getExchangeCode())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid or expired code"));
-
+        UUID userId = loginCodeService.consume(request.getExchangeCode());
         String accessToken = jwtService.issueAccessToken(userId, Collections.emptyList());
 
         return new ExchangeResponseDTO(accessToken);

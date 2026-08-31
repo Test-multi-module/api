@@ -10,12 +10,12 @@ import java.util.Base64;
 public class CodeHashService {
     private static final Base64.Encoder B64 = Base64.getUrlEncoder().withoutPadding();
 
-    public String hashWithPepper(String code, String pepper) {
+    public String hashWithPepper(String verificationId, String pepper) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(pepper.getBytes(StandardCharsets.UTF_8));
             md.update((byte) ':');
-            md.update(code.getBytes(StandardCharsets.UTF_8));
+            md.update(verificationId.getBytes(StandardCharsets.UTF_8));
             byte[] digest = md.digest();
             return B64.encodeToString(digest);
         } catch (Exception e) {

@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.testproj.auth.DTOs.requests.EmailVerificationRequestDTO;
 import net.testproj.auth.DTOs.requests.RegistrationRequestDTO;
+import net.testproj.auth.DTOs.responses.RegistrationResponseDTO;
 import net.testproj.auth.services.AuthRegisterService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,10 +26,10 @@ public class AuthRegisterController {
     private final AuthRegisterService authRegisterService;
 
     @PostMapping
-    public void register(
+    public RegistrationResponseDTO register(
             @Valid @RequestBody RegistrationRequestDTO requestDTO
     ) {
-        authRegisterService.register(requestDTO);
+        return authRegisterService.register(requestDTO);
     }
 
     @PostMapping("/verify-email")

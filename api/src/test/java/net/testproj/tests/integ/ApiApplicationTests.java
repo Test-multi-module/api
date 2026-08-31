@@ -1,6 +1,7 @@
 package net.testproj.tests.integ;
 
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
+import net.testproj.auth.services.EmailVerificationCodeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -16,9 +17,21 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 
 class ApiApplicationTests extends IntegTestBase {
     @Autowired private CustomOAuth2SuccessHandler handler;
+    @Autowired private EmailVerificationCodeService emailVerificationCodeService;
+
+    @Test
+    void testCacheCaffeine() throws InterruptedException {
+       var code = emailVerificationCodeService.issue(UUID.randomUUID());
+       //Thread.sleep(5_000);
+      // var userid = emailVerificationCodeService.consume(code);
+       var i = 0;
+    }
+
 
     @Test
     void successHandlerLogic() throws IOException {

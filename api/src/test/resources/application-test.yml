@@ -10,6 +10,11 @@ api:
       audience: "testproj-api"
 auth:
   security:
+    email-verification:
+      code:
+        ttl-seconds: 300
+        pepper: "strongsecretpepperformail"
+        attempts: 5
     oauth2-login:
       redirect-url: "http://localhost:4200/auth/callback"
       exchange-code:

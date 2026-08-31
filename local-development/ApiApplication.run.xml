@@ -20,6 +20,7 @@
       <env name="LOGIN_CODE_PEPPER" value="123456789poiuytrew987654321" />
       <env name="LOGIN_REDIRECT_URL" value="http://localhost:4200/auth/callback" />
       <env name="TRUST_STORE_PATH" value="classpath:keys/dev-truststore.p12" />
+      <env name="EMAIL_VERIFICATION_CODE_ATTEMPTS" value="5" />
     </envs>
     <module name="api" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="net.testproj.api.ApiApplication" />

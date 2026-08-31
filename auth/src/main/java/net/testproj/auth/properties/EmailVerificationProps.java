@@ -20,4 +20,7 @@ public class EmailVerificationProps {
 
     @NotBlank
     private String pepper;
+
+    @NotNull
+    private Integer attempts;
 }

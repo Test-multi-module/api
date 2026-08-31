@@ -54,6 +54,7 @@ auth:
       code:
         ttl-seconds: 300
         pepper: ${EMAIL_VERIFICATION_CODE_PEPPER}
+        attempts: ${EMAIL_VERIFICATION_CODE_ATTEMPTS}
     cors:
       allowed-origins: ${CORS_ALLOWED_ORIGINS}
     jwt:

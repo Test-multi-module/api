@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,4 +14,7 @@ import lombok.Setter;
 public class EmailVerificationRequestDTO {
     //todo validations for the fields + @JsonProperty
     private String emailVerificationCode;
+
+    private UUID userId;
+
 }
