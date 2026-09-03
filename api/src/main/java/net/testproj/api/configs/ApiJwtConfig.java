@@ -3,68 +3,34 @@ package net.testproj.api.configs;
 import net.testproj.api.properties.JwtProps;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
-import java.io.InputStream;
-import java.security.KeyStore;
-import java.security.PublicKey;
-import java.security.cert.Certificate;
-import java.security.interfaces.RSAPublicKey;
 
 @Configuration
 public class ApiJwtConfig {
-    private final ResourceLoader resourceLoader;
-
-    public ApiJwtConfig(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
-
     @Bean
-    public JwtDecoder jwtDecoder(JwtProps props) throws Exception {
-        RSAPublicKey publicKey = loadRsaPublicKeyFromTruststore(props);
-        NimbusJwtDecoder decoder = NimbusJwtDecoder.withPublicKey(publicKey).build();
+    public JwtDecoder jwtDecoder(JwtProps props) {
+        NimbusJwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(props.getJwkSetUri()).build();
+        OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(props.getIssuer());
+        OAuth2TokenValidator<Jwt> withAudience = audienceValidator(props.getAudience());
 
-        String issuer = props.getIssuer();
-        if (issuer == null || issuer.isBlank()) {
-            throw new IllegalStateException("JWT issuer must be configured (api.security.jwt.issuer)");
-        }
-
-        OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
-        // todo audience
-
-        decoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(withIssuer));
+        decoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(withIssuer, withAudience));
         return decoder;
     }
 
-    private RSAPublicKey loadRsaPublicKeyFromTruststore(JwtProps props) throws Exception {
-        //todo check issuer and aud + хз может сонар куб подрубить к проекту
-        JwtProps.TrustStore ts = props.getTruststore();
-
-        KeyStore ks = KeyStore.getInstance(ts.getType());
-
-        Resource resource = resourceLoader.getResource(ts.getLocation());
-
-        try (InputStream is = resource.getInputStream()) {
-            ks.load(is, ts.getStorePassword().toCharArray());
-        }
-
-        Certificate cert = ks.getCertificate(ts.getAlias());
-
-        if (cert == null)
-            throw new IllegalStateException("No certificate for alias: " + ts.getAlias());
-
-        PublicKey pk = cert.getPublicKey();
-
-        if (!(pk instanceof RSAPublicKey rsa))
-            throw new IllegalStateException("Public key is not RSA. Actual: " + pk.getAlgorithm());
-
-        return rsa;
+    private OAuth2TokenValidator<Jwt> audienceValidator(String audience) {
+        return jwt -> {
+            if (jwt.getAudience().contains(audience)) {return OAuth2TokenValidatorResult.success();}
+            OAuth2Error error =
+                    new OAuth2Error("invalid_token", "The required audience is missing", null);
+            return OAuth2TokenValidatorResult.failure(error);
+        };
     }
 }

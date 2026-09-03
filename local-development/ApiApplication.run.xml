@@ -2,7 +2,6 @@
   <configuration default="false" name="ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <option name="ACTIVE_PROFILES" value="local" />
     <envs>
-      <env name="ALIAS" value="jwt-public-key" />
       <env name="CORS_ALLOWED_ORIGINS" value="http://localhost:4200" />
       <env name="DB_PASSWORD" value="24o62o!!" />
       <env name="DB_URL" value="jdbc:postgresql://localhost:5432/testproj_db" />
@@ -12,14 +11,13 @@
       <env name="GMAIL_SENDER_USERNAME" value="tereshenko24102000@gmail.com" />
       <env name="GOOGLE_CLIENT_ID" value="1013817045252-6eqovff35rlggkbagsj0a32o9hm0kor3.apps.googleusercontent.com" />
       <env name="GOOGLE_CLIENT_SECRET" value="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" />
+      <env name="JWK_SET_URI" value="http://localhost:8081/.well-known/jwks.json" />
       <env name="JWT_KEY_PASSWORD" value="dev-keystore" />
       <env name="JWT_KEYSTORE_PASSWORD" value="dev-keystore" />
-      <env name="JWT_TRUSTSTORE_PASSWORD" value="dev-truststore" />
       <env name="KEY_ALIAS" value="jwt-key-pair" />
       <env name="KEY_STORE_PATH" value="classpath:keys/dev-keystore.p12" />
       <env name="LOGIN_CODE_PEPPER" value="123456789poiuytrew987654321" />
       <env name="LOGIN_REDIRECT_URL" value="http://localhost:4200/auth/callback" />
-      <env name="TRUST_STORE_PATH" value="classpath:keys/dev-truststore.p12" />
       <env name="EMAIL_VERIFICATION_CODE_ATTEMPTS" value="5" />
     </envs>
     <module name="api" />

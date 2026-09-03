@@ -26,7 +26,7 @@ public class AuthJwtConfig {
     }
 
     @Bean
-    public JwtEncoder jwtEncoder(JwtProps props) throws Exception {
+    public JWKSet jwkSet(JwtProps props) throws Exception {
         JwtProps.KeystoreProps keystoreProps = props.getKeystore();
         String alias = keystoreProps.getKeyAlias();
         char[] keyPass = keystoreProps.getKeyPassword().toCharArray();
@@ -47,7 +47,12 @@ public class AuthJwtConfig {
                 .keyID("rsa-key-1")
                 .build();
 
-        var jwkSource = new ImmutableJWKSet<>(new JWKSet(rsaKey));
+        return new JWKSet(rsaKey);
+    }
+
+    @Bean
+    public JwtEncoder jwtEncoder(JWKSet jwkSet) {
+        var jwkSource = new ImmutableJWKSet<>(jwkSet);
         return new NimbusJwtEncoder(jwkSource);
     }
 }

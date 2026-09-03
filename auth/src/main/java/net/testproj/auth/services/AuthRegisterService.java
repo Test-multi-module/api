@@ -37,7 +37,7 @@ public class AuthRegisterService {
         EmailVerificationIssueResult issued = emailVerificationCodeService.issue(authUser.getId());
         emailSenderService.sendEmailVerificationCode(authUser.getEmail(), issued.code());
 
-        return RegistrationResponseDTO.builder().verificationId(issued.verificationId()).build();
+        return RegistrationResponseDTO.builder().userId(issued.userId()).build();
     }
 
     public void verifyEmail(EmailVerificationRequestDTO dto) {

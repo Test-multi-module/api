@@ -14,5 +14,5 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class RegistrationResponseDTO {
-    private UUID verificationId;
+    private UUID userId;
 }

@@ -31,17 +31,15 @@ public class JwtService {
 
         JwtClaimsSet.Builder claims = JwtClaimsSet.builder()
                 .issuer(props.getIssuer())
+                .audience(props.getAudience())
                 .subject(userId.toString())
                 .issuedAt(now)
                 .expiresAt(exp)
                 .id(UUID.randomUUID().toString());
 
-        // todo aud
-
         if (roles != null && !roles.isEmpty()) {claims.claim("roles", roles);}
 
-        JwsHeader jwsHeader = JwsHeader.with(SignatureAlgorithm.RS256).build();
-
+        JwsHeader jwsHeader = JwsHeader.with(SignatureAlgorithm.RS256).keyId("rsa-key-1").build();
         JwtEncoderParameters params = JwtEncoderParameters.from(jwsHeader, claims.build());
         return jwtEncoder.encode(params).getTokenValue();
     }
