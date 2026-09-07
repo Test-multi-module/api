@@ -1,11 +1,6 @@
 api:
   security:
     jwt:
-      truststore:
-        location: classpath:keys/test-truststore.p12
-        store-password: Test!123
-        type: PKCS12
-        alias: test-keypair
       issuer: "testproj-auth"
       audience: "testproj-api"
 auth:
