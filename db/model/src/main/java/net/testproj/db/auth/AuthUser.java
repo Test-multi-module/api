@@ -15,7 +15,6 @@ import java.util.UUID;
 public class AuthUser {//todo analise if smth like notNull annotations needed here to show that field is not null in db
 
     private UUID id;
-    private Boolean profileCompleted;
     private String email;
     private String passwordHash;
     private Boolean emailVerified;

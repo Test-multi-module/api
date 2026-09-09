@@ -42,13 +42,12 @@ public class ProfileCompletedFilter extends OncePerRequestFilter {
                     once the business access architecture becomes clear.""");
 
         UUID userId = UUID.fromString(authentication.getName());
-        Boolean profileCompleted = authUserDS.isProfileCompleted(userId);
 
-        if (!Boolean.TRUE.equals(profileCompleted)) {
+        if (authUserDS.getById(userId) == null) {
             response.setStatus(HttpStatus.FORBIDDEN.value());
             response.setContentType("application/json");
             response.getWriter().write("""
-        {"code":"USER_ONBOARDING_REQUIRED","message":"User profile must be completed"}
+        {"code":"USER_ONBOARDING_REQUIRED","message":"User profile must be created"}
         """);
             return;
         }

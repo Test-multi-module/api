@@ -32,13 +32,6 @@ public class AuthUserDS {
                 .fetchOneInto(AuthUser.class);
     }
 
-    public Boolean isProfileCompleted(UUID userId) {
-        //todo  а его точно именно так "вычислять"? пересмотреть !
-       return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(userId))
-               .fetchInto(AuthUser.class).getFirst()
-               .getProfileCompleted();
-    }
-
     public AuthUser getById(UUID id){//todo entityNotFound? if nothing was found?
         return jooq.select().from(AUTH_USERS).where(AUTH_USERS.ID.eq(id)).fetchOneInto(AuthUser.class);
     }

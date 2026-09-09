@@ -30,7 +30,6 @@ public class AuthRegisterService {
         AuthUser authUser = AuthUser.builder()
                 .email(requestDTO.getEmail())
                 .passwordHash(passwordEncoder.encode(requestDTO.getPassword()))
-                .profileCompleted(Boolean.FALSE)
                 .emailVerified(Boolean.FALSE).build();
         authUser = authUserDS.insert(authUser);
 

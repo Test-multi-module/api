@@ -59,7 +59,6 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             oAuth2AccountDS.update(oAuth2Account.getId(), email, givenName, familyName);
         } else {
             AuthUser authUser = AuthUser.builder()
-                    .profileCompleted(Boolean.FALSE)
                     .emailVerified(Boolean.TRUE)
                     .email(email)
                     .build();
@@ -78,6 +77,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         }
 
         String loginCode = loginCodeService.issue(oAuth2Account.getUserId());
+        //test-case: что происходит с "зависшим логином.регистрацией" (когда код необменян из-за ошибки - поможет ли повторный вход)
 
         String redirectUrl = UriComponentsBuilder
                 .fromUriString(oAuth2LoginProps.getRedirectUrl())

@@ -1,6 +1,5 @@
 CREATE TABLE auth_users (
     id uuid NOT NULL,
-    profile_completed boolean NOT NULL,
     email varchar(254) NOT NULL,
     password_hash varchar(255),
     email_verified boolean NOT NULL
