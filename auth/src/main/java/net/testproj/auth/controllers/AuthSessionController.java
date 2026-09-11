@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Locale;
 
 //todo: logout, forgot password/reset password - вообще в отдельном контроллере AuthPasswordController
+//todo: refresh-token и деталь работы с ним
 //todo: подумать, не хочу ли я хеши в отдельныю таблицу вынести
 //todo: (не)могу исп 1 и тот же DTO  запросе и ответе (когда могу не могу)
 //todo: разобраться как првильно возвращать ответы из контроллеров (использовать не исп обёртки, какие обертки, когда с, когда без)
