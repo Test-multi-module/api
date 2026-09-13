@@ -1,0 +1,50 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: testname
+    password: testpass
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope: openid, email, profile
+        provider:
+          google:
+            issuer-uri: https://accounts.google.com
+auth:
+  security:
+    oauth2-login:
+      redirect-url: "http://localhost:4200/auth/callback"
+      exchange-code:
+        ttl-seconds: 60
+        pepper: "strongsecretpepper"
+    email-verification:
+      code:
+        ttl-seconds: 300
+        pepper: "strongsecretpepperformail"
+        attempts: 5
+    cors:
+      allowed-origins: "http://some-mock-container-or-dyn-prop?"
+    jwt:
+      issuer: "testproj-auth"
+      audience:
+        - testproj-api
+      access-token:
+        audience: "testproj-api"
+        ttl-seconds: 900
+      keystore:
+        type: PKCS12
+        location: classpath:keys/test-keystore.p12
+        store-password: Test!123
+        key-alias: test-keypair
+        key-password: Test!123

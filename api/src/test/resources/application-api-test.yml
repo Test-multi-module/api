@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER_NAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+api:
+  security:
+    cors:
+      allowed-origins: "http://some-mock-container-or-dyn-prop?"
+    jwt:
+      issuer: "testproj-auth"
+      audience: "testproj-api"
+      jwk-set-uri: "http://some-jwk-url-or-dyn-prop?"

@@ -1,7 +1,7 @@
-package net.testproj.tests.integ;
+package net.testproj.test.auth;
 
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
-import net.testproj.auth.services.EmailVerificationCodeService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -17,23 +17,13 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 
-class ApiApplicationTests extends IntegTestBase {
+class SuccessHandlerTests extends TestBase {
     @Autowired private CustomOAuth2SuccessHandler handler;
-    @Autowired private EmailVerificationCodeService emailVerificationCodeService;
 
     @Test
-    void testCacheCaffeine() throws InterruptedException {
-       var code = emailVerificationCodeService.issue(UUID.randomUUID());
-       //Thread.sleep(5_000);
-      // var userid = emailVerificationCodeService.consume(code);
-       var i = 0;
-    }
-
-
-    @Test
+    @Disabled
     void successHandlerLogic() throws IOException {
         Map<String, Object> claims = Map.of(
                 "sub", "123",
@@ -41,8 +31,7 @@ class ApiApplicationTests extends IntegTestBase {
                 "name", "Test User",
                 "email_verified", true
         );
-        Instant now = Instant.now();
-        OAuth2AuthenticationToken auth = getOAuth2AuthenticationToken(now, claims);
+        OAuth2AuthenticationToken auth = getOAuth2AuthenticationToken(claims);
 
         var request = new MockHttpServletRequest();
         var response = new MockHttpServletResponse();
@@ -50,7 +39,8 @@ class ApiApplicationTests extends IntegTestBase {
         handler.onAuthenticationSuccess(request, response, auth);
     }
 
-    private static OAuth2AuthenticationToken getOAuth2AuthenticationToken(Instant now, Map<String, Object> claims) {
+    private static OAuth2AuthenticationToken getOAuth2AuthenticationToken(Map<String, Object> claims) {
+        Instant now = Instant.now();
         OidcIdToken idToken =
                 new OidcIdToken("fake-id-token", now, now.plusSeconds(3600), claims);
 

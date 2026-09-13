@@ -1,6 +1,5 @@
-package net.testproj.tests.integ;
+package net.testproj.test.auth;
 
-import net.testproj.api.ApiApplication;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,10 +10,10 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest(classes = ApiApplication.class)
-@ActiveProfiles("test")
+@SpringBootTest(classes = AuthTestApplication.class)
+@ActiveProfiles("auth-test")
 @Testcontainers
-public abstract class IntegTestBase {
+public abstract class TestBase {
 
     @Container
     @SuppressWarnings("resource")
@@ -25,9 +24,8 @@ public abstract class IntegTestBase {
                     .withPassword("qwerty");
 
     @BeforeAll
-    static void migrateBothSchemas(){
+    static void migrate(){
         migrateSchema("auth", "classpath:db/migration/auth");
-        migrateSchema("public", "classpath:db/migration/public");
     }
 
     private static void migrateSchema(String schema, String location) {
