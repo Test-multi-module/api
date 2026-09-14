@@ -35,7 +35,8 @@ public class AuthSecurityConfig {
                                 "/auth/login",
                                 "/auth/exchange",
                                 "/auth/register",
-                                "/auth/register/**",
+                                "/auth/register/verify-email",
+                                "/auth/.well-known/jwks.json",
                                 "/oauth2/authorization/**",
                                 "/login/oauth2/code/**"
                         ).permitAll()

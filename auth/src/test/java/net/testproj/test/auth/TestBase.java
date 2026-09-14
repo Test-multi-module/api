@@ -8,10 +8,12 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(classes = AuthTestApplication.class)
 @ActiveProfiles("auth-test")
+@AutoConfigureMockMvc
 @Testcontainers
 public abstract class TestBase {
 
