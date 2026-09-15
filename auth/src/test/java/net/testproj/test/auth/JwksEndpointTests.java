@@ -19,9 +19,6 @@ class JwksEndpointTests extends TestBase {
     @Autowired private CustomOAuth2SuccessHandler handler;
 
 
-    @Autowired
-    private MockMvc mockMvc;
-
     @Test
     void jwksEndpoint() throws Exception {
         mockMvc.perform(get("/auth/.well-known/jwks.json"))
