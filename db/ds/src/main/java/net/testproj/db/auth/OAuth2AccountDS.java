@@ -26,6 +26,12 @@ public class OAuth2AccountDS {
         return lst.isEmpty() ? null : lst.getFirst();
     }
 
+    public OAuth2Account getByUserID(UUID userId){
+        List<OAuth2Account> lst =  jooq.select().from(OAUTH2_ACCOUNTS)
+                .where(OAUTH2_ACCOUNTS.USER_ID.eq(userId)).fetchInto(OAuth2Account.class);
+        return lst.isEmpty() ? null : lst.getFirst();
+    }
+
     public void insert(OAuth2Account obj){
         obj.setId(UuidCreator.getTimeOrderedEpoch());
         jooq.insertInto(OAUTH2_ACCOUNTS).set(jooq.newRecord(OAUTH2_ACCOUNTS, obj)).execute();

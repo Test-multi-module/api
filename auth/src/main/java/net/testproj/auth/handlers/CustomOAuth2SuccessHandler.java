@@ -23,7 +23,6 @@ import java.io.IOException;
 public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final LoginCodeService loginCodeService;
-
     private final OAuth2AccountDS oAuth2AccountDS;
     private final AuthUserDS authUserDS;
     private final OAuth2LoginProps oAuth2LoginProps;
@@ -36,8 +35,6 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         if (!(authentication instanceof OAuth2AuthenticationToken token)) {
             throw new IllegalStateException("Expected OAuth2AuthenticationToken but got: " + authentication.getClass());
         }
-
-        String provider = token.getAuthorizedClientRegistrationId();
 
         OAuth2User oAuth2User = token.getPrincipal();
         if (!(oAuth2User instanceof OidcUser oidcUser)) {
@@ -54,6 +51,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         String givenName = oidcUser.getGivenName();
         String pictureUrl = oidcUser.getPicture();
 
+        String provider = token.getAuthorizedClientRegistrationId();
         OAuth2Account oAuth2Account = oAuth2AccountDS.getByProviderUserIdAndProvider(providerUserId, provider);
         if (oAuth2Account != null) {
             oAuth2AccountDS.update(oAuth2Account.getId(), email, givenName, familyName);

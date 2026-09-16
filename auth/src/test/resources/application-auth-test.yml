@@ -24,7 +24,7 @@ spring:
 auth:
   security:
     oauth2-login:
-      redirect-url: "http://localhost:4200/auth/callback"
+      redirect-url: "http://testlocalhost/auth/callback"
       exchange-code:
         ttl-seconds: 60
         pepper: "strongsecretpepper"

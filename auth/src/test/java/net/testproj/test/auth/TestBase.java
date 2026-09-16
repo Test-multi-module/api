@@ -1,5 +1,7 @@
 package net.testproj.test.auth;
 
+import net.testproj.db.auth.AuthUserDS;
+import net.testproj.db.auth.OAuth2AccountDS;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 public abstract class TestBase {
 
     @Autowired protected MockMvc mockMvc;
+    @Autowired protected OAuth2AccountDS oAuth2AccountDS;
+    @Autowired protected AuthUserDS authUserDS;
 
     @Container
     @SuppressWarnings("resource")
