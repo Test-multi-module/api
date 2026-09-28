@@ -22,7 +22,8 @@ public class AuthExchangeController {
     private final JwtService jwtService;
 
     @PostMapping
-    public ExchangeResponseDTO exchange(@Valid @RequestBody ExchangeRequestDTO request) {
+    public ExchangeResponseDTO exchange(
+            @Valid @RequestBody ExchangeRequestDTO request) {
 
         UUID userId = loginCodeService.consume(request.getExchangeCode());
         String accessToken = jwtService.issueAccessToken(userId, Collections.emptyList());
