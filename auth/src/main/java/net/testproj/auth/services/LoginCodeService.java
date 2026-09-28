@@ -31,11 +31,13 @@ public class LoginCodeService  {
         this.oAuth2LoginProps = oAuth2LoginProps;
     }
 
-
-    public String issue(UUID userId) {
+    public String generateCode(){
         byte[] buf = new byte[32];
         RANDOM.nextBytes(buf);
-        String code = B64.encodeToString(buf);
+        return B64.encodeToString(buf);
+    }
+    public String issue(UUID userId) {
+        String code = generateCode();
         String key = codeHashService.hashWithPepper(code, oAuth2LoginProps.getExchangeCode().getPepper());
         cache.put(key, userId);
         return code;

@@ -26,8 +26,9 @@ public class AuthExchangeController {
             @Valid @RequestBody ExchangeRequestDTO request) {
 
         UUID userId = loginCodeService.consume(request.getExchangeCode());
-        String accessToken = jwtService.issueAccessToken(userId, Collections.emptyList());
 
-        return new ExchangeResponseDTO(accessToken);
+        return ExchangeResponseDTO.builder()
+                .accessToken(jwtService.issueAccessToken(userId))
+                .build();
     }
 }

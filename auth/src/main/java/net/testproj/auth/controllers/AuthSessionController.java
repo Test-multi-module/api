@@ -46,7 +46,7 @@ public class AuthSessionController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Email is not verified");
         }
 
-        String accessToken = jwtService.issueAccessToken(user.getId(), Collections.emptyList());
+        String accessToken = jwtService.issueAccessToken(user.getId());
         return new LoginResponseDTO(accessToken);
     }
 }

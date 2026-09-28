@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 
@@ -23,9 +23,8 @@ public class JwtService {
     private final JwtEncoder jwtEncoder;
     private final JwtProps props;
 
-    public String issueAccessToken(UUID userId, Collection<String> roles) {
+    public String issueAccessToken(UUID userId) {
         long ttl = props.getAccessToken().getTtlSeconds();
-
         Instant now = Instant.now();
         Instant exp = now.plusSeconds(ttl);
 
@@ -37,7 +36,7 @@ public class JwtService {
                 .expiresAt(exp)
                 .id(UUID.randomUUID().toString());
 
-        if (roles != null && !roles.isEmpty()) {claims.claim("roles", roles);}
+        claims.claim("roles", Collections.emptyList());
 
         JwsHeader jwsHeader = JwsHeader.with(SignatureAlgorithm.RS256).keyId("rsa-key-1").build();
         JwtEncoderParameters params = JwtEncoderParameters.from(jwsHeader, claims.build());
