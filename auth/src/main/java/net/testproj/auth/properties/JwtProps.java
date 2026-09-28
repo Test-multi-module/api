@@ -34,9 +34,6 @@ public class JwtProps {
 
     @Getter@Setter
     public static class AccessTokenProps {
-        @NotBlank
-        private String audience;
-
         @NotNull
         @Positive
         private Long ttlSeconds;

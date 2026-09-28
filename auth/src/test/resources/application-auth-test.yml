@@ -40,7 +40,6 @@ auth:
       audience:
         - testproj-api
       access-token:
-        audience: "testproj-api"
         ttl-seconds: 900
       keystore:
         type: PKCS12
