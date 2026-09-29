@@ -17,7 +17,6 @@ import java.time.Duration;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 //todo: подход по обработке исключений(и логированию)
 //todo: подготовить инфру для тестов, что бы хорошо проверить процесс регистрации в разных сценариях (ретрофит?)
@@ -32,13 +31,13 @@ public class EmailVerificationCodeService {
     protected final Cache<UUID, EmailVerificationCacheEntry> cache;
 
 
-    public EmailVerificationCodeService(EmailVerificationProps emailVerificationProps, CodeHashService codeHashService) {
+    public EmailVerificationCodeService(CodeHashService codeHashService, EmailVerificationProps emailVerificationProps) {
+        this.codeHashService = codeHashService;
         cache = Caffeine.newBuilder()
                 .expireAfterWrite(Duration.ofSeconds(emailVerificationProps.getTtlSeconds()))
                 .maximumSize(200_000)
                 .build();
         this.emailVerificationProps = emailVerificationProps;
-        this.codeHashService = codeHashService;
     }
 
     public EmailVerificationIssueResult issue(@NotNull UUID userId) {
@@ -51,6 +50,7 @@ public class EmailVerificationCodeService {
     public UUID consume(@NotNull @Pattern(regexp = "\\d{6}") String code,
                         @NotNull UUID userId) {
         String hashedCode = codeHashService.hashWithPepper(code, emailVerificationProps.getPepper());
+        // TODO: Replace boolean verification flag with an enum result to distinguish expired/missing code, invalid code, attempts exceeded, and successful verification.
         AtomicBoolean verified = new AtomicBoolean(false);
 
         cache.asMap().computeIfPresent(userId, (key, entry) -> {
