@@ -23,7 +23,6 @@ import java.util.UUID;
 
 @Import(TestAuthJwtConfig.class)
 public class ExchangeEndpointTests extends TestBase{
-    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired private LoginCodeService loginCodeService;
     @Autowired private JwtDecoder testJwtDecoder;
     @Autowired private JwtProps props;

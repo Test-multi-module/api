@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,7 +28,7 @@ class OAuth2FlowTests extends TestBase {
     private ClientRegistrationRepository clientRegistrationRepository;
 
     @Test
-    void googleOAuth2ClientRegistrationUsesTestProperties() {
+    void googleOAuth2ClientRegistrationUsesAppProperties() {
         var googleRegistration = clientRegistrationRepository.findByRegistrationId("google");
         assertNotNull(googleRegistration);
         assertEquals("test-client-id", googleRegistration.getClientId());
@@ -58,10 +59,6 @@ class OAuth2FlowTests extends TestBase {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(header().string(HttpHeaders.LOCATION, not(containsString("/auth/callback"))));
 
-        verify(successHandler, never()).onAuthenticationSuccess(
-                org.mockito.ArgumentMatchers.any(),
-                org.mockito.ArgumentMatchers.any(),
-                org.mockito.ArgumentMatchers.any()
-        );
+        verify(successHandler, never()).onAuthenticationSuccess(any(), any(), any());
     }
 }

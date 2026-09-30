@@ -8,12 +8,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static net.testproj.auth.validation.AuthValidationPatterns.EXCHANGE_CODE_PATTERN;
+
 @Getter@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ExchangeRequestDTO {
     @NotBlank
-    @Pattern(regexp = "^[A-Za-z0-9_-]{43}$")
+    @Pattern(regexp = EXCHANGE_CODE_PATTERN)
     private String exchangeCode;
 }

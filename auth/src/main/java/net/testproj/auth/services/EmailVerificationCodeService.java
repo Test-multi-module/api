@@ -18,6 +18,8 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static net.testproj.auth.validation.AuthValidationPatterns.EMAIL_VERIFY_CODE_PATTERN;
+
 //todo: подход по обработке исключений(и логированию)
 //todo: подготовить инфру для тестов, что бы хорошо проверить процесс регистрации в разных сценариях (ретрофит?)
 
@@ -47,7 +49,7 @@ public class EmailVerificationCodeService {
         return new EmailVerificationIssueResult(userId, code);
     }
 
-    public UUID consume(@NotNull @Pattern(regexp = "\\d{6}") String code,
+    public UUID consume(@NotNull @Pattern(regexp = EMAIL_VERIFY_CODE_PATTERN) String code,
                         @NotNull UUID userId) {
         String hashedCode = codeHashService.hashWithPepper(code, emailVerificationProps.getPepper());
         // TODO: Replace boolean verification flag with an enum result to distinguish expired/missing code, invalid code, attempts exceeded, and successful verification.

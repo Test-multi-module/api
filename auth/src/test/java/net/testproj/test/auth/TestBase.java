@@ -1,5 +1,6 @@
 package net.testproj.test.auth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.testproj.db.auth.AuthUserDS;
 import net.testproj.db.auth.OAuth2AccountDS;
 import org.flywaydb.core.Flyway;
@@ -24,6 +25,8 @@ public abstract class TestBase {
     @Autowired protected MockMvc mockMvc;
     @Autowired protected OAuth2AccountDS oAuth2AccountDS;
     @Autowired protected AuthUserDS authUserDS;
+    protected final ObjectMapper objectMapper = new ObjectMapper();
+
 
     @Container
     @SuppressWarnings("resource")
