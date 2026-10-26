@@ -27,14 +27,14 @@ public class RegistrationFlowTests extends TestBase {
     //todo:  shoud be added rate-limit on issue/resend as issue email-verif-code set attempts to 0
     // TODO: New verification code invalidates previous ones; return a clear "invalid or expired code" message.
 
-    private final String testMail = "test@example.com";
-    private final String testPassword = "Pass!123";
     @Autowired private PasswordEncoder passwordEncoder;
     @MockitoBean private EmailSenderService emailSenderService;
     @MockitoSpyBean private EmailVerificationCodeService emailVerificationCodeService;
 
     @Test
     void successfulRegistrationAndDoubleRegisterAttempt() throws Exception {
+        String testPassword = "Pass!123";
+        String testMail = "test1@example.com";
         RegistrationRequestDTO registrationRequestDTO = RegistrationRequestDTO.builder()
                 .email(testMail)
                 .password(testPassword)

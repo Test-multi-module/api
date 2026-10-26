@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.testproj.db.auth.AuthUserDS;
 import net.testproj.db.auth.OAuth2AccountDS;
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -12,14 +11,11 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(classes = IntegrationTestApplication.class)
 @ActiveProfiles("integration-test")
 @AutoConfigureMockMvc
-@Testcontainers
 public abstract class TestBase {
 
     @Autowired protected MockMvc mockMvc;
@@ -28,7 +24,6 @@ public abstract class TestBase {
     protected final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    @Container
     @SuppressWarnings("resource")
     static final PostgreSQLContainer<?> postgres =
             new PostgreSQLContainer<>("postgres:16-alpine")
@@ -36,8 +31,10 @@ public abstract class TestBase {
                     .withUsername("adm")
                     .withPassword("qwerty");
 
-    @BeforeAll
-    static void migrate(){
+    // One PostgreSQL container is shared by all integration tests in this JVM process.
+    // Data persists across test classes: use unique test data and do not rely on test execution order.
+    static {
+        postgres.start();
         migrateSchema("auth", "classpath:db/migration/auth");
     }
 
