@@ -1,4 +1,4 @@
-package net.testproj.test.auth;
+package net.testproj.test.auth.integration;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -10,5 +10,5 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
         "net.testproj.test.auth.utils"
 })
 @ConfigurationPropertiesScan(basePackages = "net.testproj.auth.properties")
-public class AuthTestApplication {
+public class IntegrationTestApplication {
 }

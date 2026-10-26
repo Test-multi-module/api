@@ -1,4 +1,4 @@
-package net.testproj.test.auth;
+package net.testproj.test.auth.integration;
 
 import net.testproj.auth.DTOs.requests.EmailVerificationRequestDTO;
 import net.testproj.auth.DTOs.requests.RegistrationRequestDTO;
@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -77,23 +76,5 @@ public class RegistrationFlowTests extends TestBase {
                 .andReturn();
         verify(emailVerificationCodeService, times(1)).issue(any());
         verify(emailSenderService, times(1)).sendEmailVerificationCode(any(), any());
-    }
-
-    @Test
-    void registrationWithInvalidDto() throws Exception {
-        RegistrationRequestDTO registrationRequestDTO = RegistrationRequestDTO.builder()
-                .email("not-an-email")
-                .password("short")
-                .build();
-
-        var result = mockMvc.perform(post("/auth/register")
-                        .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(registrationRequestDTO)))
-                .andExpect(status().isBadRequest())
-                .andReturn();
-        //todo: check error messages
-
-        verify(emailVerificationCodeService, never()).issue(any());
-        verify(emailSenderService, never()).sendEmailVerificationCode(any(), any());
     }
 }

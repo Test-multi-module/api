@@ -1,4 +1,4 @@
-package net.testproj.test.auth;
+package net.testproj.test.auth.integration;
 
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import org.junit.jupiter.api.Test;

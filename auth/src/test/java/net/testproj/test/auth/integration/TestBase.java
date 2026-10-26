@@ -1,4 +1,4 @@
-package net.testproj.test.auth;
+package net.testproj.test.auth.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.testproj.db.auth.AuthUserDS;
@@ -16,8 +16,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest(classes = AuthTestApplication.class)
-@ActiveProfiles("auth-test")
+@SpringBootTest(classes = IntegrationTestApplication.class)
+@ActiveProfiles("integration-test")
 @AutoConfigureMockMvc
 @Testcontainers
 public abstract class TestBase {

@@ -1,4 +1,4 @@
-package net.testproj.test.auth;
+package net.testproj.test.auth.integration;
 
 import net.testproj.auth.DTOs.requests.ExchangeRequestDTO;
 import net.testproj.auth.DTOs.responses.ExchangeResponseDTO;
@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;

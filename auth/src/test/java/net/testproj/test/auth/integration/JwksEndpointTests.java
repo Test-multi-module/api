@@ -1,10 +1,9 @@
-package net.testproj.test.auth;
+package net.testproj.test.auth.integration;
 
 import net.testproj.auth.handlers.CustomOAuth2SuccessHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
