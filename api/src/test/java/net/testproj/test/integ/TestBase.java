@@ -23,7 +23,7 @@ public abstract class TestBase {
     static {
         postgres.start();
         migrateSchema("auth", "classpath:db/migration/auth");
-        migrateSchema("public", "classpath:db/migration/public");
+        migrateSchema("api", "classpath:db/migration/api");
     }
 
     private static void migrateSchema(String schema, String location) {
