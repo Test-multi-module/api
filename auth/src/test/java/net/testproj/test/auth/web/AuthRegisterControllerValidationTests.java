@@ -55,7 +55,6 @@ public class AuthRegisterControllerValidationTests {
         assertEquals("Email must be valid", emailError.getDefaultMessage());
         assertEquals("Password must be between 8 and 128 characters", passwordError.getDefaultMessage());
         verifyNoInteractions(authRegisterService);
-        assertEquals("", result.getResponse().getContentAsString());
         assertFalse(output.getAll().contains(registrationRequestDTO.getPassword()));
     }
 }

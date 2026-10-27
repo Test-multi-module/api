@@ -1,21 +1,16 @@
 package net.testproj.test.api;
 
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(classes = ApiTestApplication.class)
 @ActiveProfiles("api-test")
-@Testcontainers
 public abstract class TestBase {
 
-    @Container
     @SuppressWarnings("resource")
     static final PostgreSQLContainer<?> postgres =
             new PostgreSQLContainer<>("postgres:16-alpine")
@@ -23,8 +18,9 @@ public abstract class TestBase {
                     .withUsername("adm")
                     .withPassword("qwerty");
 
-    @BeforeAll
-    static void migrate(){
+    // Shared by all subclasses of this base in one test JVM; data persists across test classes.
+    static {
+        postgres.start();
         migrateSchema("api", "classpath:db/migration/api");
     }
 
