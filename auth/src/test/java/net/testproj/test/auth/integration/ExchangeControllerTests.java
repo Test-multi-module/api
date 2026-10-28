@@ -21,7 +21,7 @@ import java.time.Duration;
 import java.util.UUID;
 
 @Import(TestAuthJwtConfig.class)
-public class ExchangeEndpointTests extends TestBase{
+public class ExchangeControllerTests extends TestBase{
     @Autowired private LoginCodeService loginCodeService;
     @Autowired private JwtDecoder testJwtDecoder;
     @Autowired private JwtProps props;
