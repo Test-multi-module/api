@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
-import java.util.Locale;
-
 //todo: logout, forgot password/reset password - вообще в отдельном контроллере AuthPasswordController
 //todo: refresh-token и деталь работы с ним
 //todo: подумать, не хочу ли я хеши в отдельныю таблицу вынести

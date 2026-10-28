@@ -6,11 +6,8 @@ import net.testproj.auth.DTOs.requests.ExchangeRequestDTO;
 import net.testproj.auth.DTOs.responses.ExchangeResponseDTO;
 import net.testproj.auth.services.JwtService;
 import net.testproj.auth.services.LoginCodeService;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
 import java.util.UUID;
 
 @RestController

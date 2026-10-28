@@ -1,4 +1,4 @@
-package net.testproj.auth.controllers;
+package net.testproj.auth.controllers.advice;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
