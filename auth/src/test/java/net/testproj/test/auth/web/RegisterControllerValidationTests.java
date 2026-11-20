@@ -1,6 +1,7 @@
 package net.testproj.test.auth.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.testproj.auth.DTOs.requests.EmailVerificationRequestDTO;
 import net.testproj.auth.DTOs.requests.RegistrationRequestDTO;
 import net.testproj.auth.controllers.AuthRegisterController;
 import net.testproj.auth.services.AuthRegisterService;
@@ -20,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.stream.Stream;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -34,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = WebTestApplication.class)
 @ActiveProfiles("web-test")
 @ExtendWith(OutputCaptureExtension.class)
-public class AuthRegisterControllerValidationTests {
+public class RegisterControllerValidationTests {
     @Autowired private MockMvc mockMvc;
     @MockitoBean private AuthRegisterService authRegisterService;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -69,6 +71,38 @@ public class AuthRegisterControllerValidationTests {
                         "Password must be between 8 and 128 characters"),
                 Arguments.of("user@example.com", "x".repeat(129), "password",
                         "Password must be between 8 and 128 characters")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidVerificationRequests")
+    void invalidVerificationRequestIsRejectedBeforeServiceCall(
+            String code, UUID userId, String field, String message) throws Exception {
+        var result = mockMvc.perform(post("/auth/register/verify-email")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(
+                                new EmailVerificationRequestDTO(code, userId))))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        var error = assertInstanceOf(MethodArgumentNotValidException.class, result.getResolvedException());
+        assertTrue(error.getBindingResult().getFieldErrors(field).stream()
+                .anyMatch(fieldError -> message.equals(fieldError.getDefaultMessage())));
+        verifyNoInteractions(authRegisterService);
+    }
+
+    private static Stream<Arguments> invalidVerificationRequests() {
+        UUID userId = UUID.randomUUID();
+        return Stream.of(
+                Arguments.of(null, userId, "emailVerificationCode", "Verification code must not be blank"),
+                Arguments.of(" ", userId, "emailVerificationCode", "Verification code must not be blank"),
+                Arguments.of("12345", userId, "emailVerificationCode",
+                        "Verification code must contain exactly 6 digits"),
+                Arguments.of("1234567", userId, "emailVerificationCode",
+                        "Verification code must contain exactly 6 digits"),
+                Arguments.of("12a456", userId, "emailVerificationCode",
+                        "Verification code must contain exactly 6 digits"),
+                Arguments.of("123456", null, "userId", "User ID must not be null")
         );
     }
 

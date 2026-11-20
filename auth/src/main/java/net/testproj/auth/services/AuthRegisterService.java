@@ -26,6 +26,7 @@ public class AuthRegisterService {
         if(authUserDS.getByEmail(requestDTO.getEmail()) != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
         }
+        //todo: ask ai : что лучше - проверять, существует ли пользователь с таким email как в 26 строке, или сделать трай кетч при insert в БД и почему
 
         AuthUser authUser = AuthUser.builder()
                 .email(requestDTO.getEmail())
