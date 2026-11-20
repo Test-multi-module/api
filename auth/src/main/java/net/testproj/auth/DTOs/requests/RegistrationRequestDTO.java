@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RegistrationRequestDTO {//todo validations for the fields + @JsonProperty
+public class RegistrationRequestDTO {//todo  @JsonProperty for the fields (al dto)???
 
     @NotBlank(message = "Email must not be blank")
     @Email(message = "Email must be valid")
