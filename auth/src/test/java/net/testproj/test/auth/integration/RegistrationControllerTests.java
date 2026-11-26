@@ -1,17 +1,21 @@
 package net.testproj.test.auth.integration;
 
+import com.github.benmanes.caffeine.cache.Cache;
 import net.testproj.auth.DTOs.requests.EmailVerificationRequestDTO;
 import net.testproj.auth.DTOs.requests.RegistrationRequestDTO;
 import net.testproj.auth.DTOs.responses.RegistrationResponseDTO;
 import net.testproj.auth.services.EmailSenderService;
 import net.testproj.auth.services.EmailVerificationCodeService;
+import net.testproj.auth.properties.EmailVerificationProps;
 import net.testproj.db.auth.AuthUser;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import java.time.Duration;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -32,6 +36,7 @@ public class RegistrationControllerTests extends TestBase {
 
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private EmailVerificationCodeService emailVerificationCodeService;
+    @Autowired private EmailVerificationProps emailVerificationProps;
     @MockitoBean private EmailSenderService emailSenderService;
 
     @Test
@@ -93,6 +98,19 @@ public class RegistrationControllerTests extends TestBase {
     }
 
     @Test
+    void tooManyIncorrectCodesInvalidateTheIssuedCode() throws Exception {
+        AuthUser user = insertUnverifiedUser();
+        String code = emailVerificationCodeService.issue(user.getId()).code();
+
+        for (int attempt = 0; attempt < emailVerificationProps.getAttempts(); attempt++) {
+            verifyEmail(user.getId(), "000000", 401);
+        }
+        verifyEmail(user.getId(), code, 401);
+
+        assertFalse(authUserDS.getById(user.getId()).getEmailVerified());
+    }
+
+    @Test
     void codeIssuedForAnotherUserCannotVerifyEmail() throws Exception {
         AuthUser codeOwner = insertUnverifiedUser();
         AuthUser otherUser = insertUnverifiedUser();
@@ -110,6 +128,26 @@ public class RegistrationControllerTests extends TestBase {
 
         verifyEmail(user.getId(), code, 200);
         verifyEmail(user.getId(), code, 401);
+    }
+
+    @Test
+    void expiredCodeIsUnauthorizedAndLeavesEmailUnverified() throws Exception {
+        AuthUser user = insertUnverifiedUser();
+        String code = emailVerificationCodeService.issue(user.getId()).code();
+
+        Cache<?, ?> cache = (Cache<?, ?>) ReflectionTestUtils.getField(emailVerificationCodeService, "cache");
+        assertNotNull(cache);
+        var expiration = cache.policy().expireAfterWrite().orElseThrow();
+        Duration originalTtl = expiration.getExpiresAfter();
+
+        expiration.setExpiresAfter(Duration.ZERO);
+        try {
+            verifyEmail(user.getId(), code, 401);
+        } finally {
+            expiration.setExpiresAfter(originalTtl);
+        }
+
+        assertFalse(authUserDS.getById(user.getId()).getEmailVerified());
     }
 
     private AuthUser insertUnverifiedUser() {

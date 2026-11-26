@@ -1,5 +1,6 @@
 package net.testproj.test.auth.integration;
 
+import com.github.benmanes.caffeine.cache.Cache;
 import net.testproj.auth.DTOs.requests.ExchangeRequestDTO;
 import net.testproj.auth.DTOs.responses.ExchangeResponseDTO;
 import net.testproj.auth.properties.JwtProps;
@@ -16,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.context.annotation.Import;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.Duration;
 import java.util.UUID;
@@ -79,5 +81,25 @@ public class ExchangeControllerTests extends TestBase{
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(exchangeRequestDTO)))
                 .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void expiredOneTimeCodeIsUnauthorized() throws Exception {
+        String code = loginCodeService.issue(UUID.randomUUID());
+        Cache<?, ?> cache = (Cache<?, ?>) ReflectionTestUtils.getField(loginCodeService, "cache");
+        assertNotNull(cache);
+        var expiration = cache.policy().expireAfterWrite().orElseThrow();
+        Duration originalTtl = expiration.getExpiresAfter();
+
+        expiration.setExpiresAfter(Duration.ZERO);
+        try {
+            mockMvc.perform(post("/auth/exchange")
+                            .contentType("application/json")
+                            .content(objectMapper.writeValueAsString(
+                                    ExchangeRequestDTO.builder().exchangeCode(code).build())))
+                    .andExpect(status().isUnauthorized());
+        } finally {
+            expiration.setExpiresAfter(originalTtl);
+        }
     }
 }
