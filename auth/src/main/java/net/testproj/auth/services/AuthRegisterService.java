@@ -21,7 +21,7 @@ public class AuthRegisterService {
     private final PasswordEncoder passwordEncoder;
     private final EmailSenderService emailSenderService;
     private final EmailVerificationCodeService emailVerificationCodeService;
-
+///
     public RegistrationResponseDTO register(RegistrationRequestDTO requestDTO){
         if(authUserDS.getByEmail(requestDTO.getEmail()) != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
